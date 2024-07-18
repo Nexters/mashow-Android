@@ -1,22 +1,19 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
 }
 
 android {
-    namespace = "com.nexters.mashow"
+    namespace = "com.nexters.data"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.nexters.mashow"
         minSdk = 28
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -39,11 +36,7 @@ android {
 
 dependencies {
 
-    implementation(project(":data"))
     implementation(project(":domain"))
-    implementation(project(":presentation"))
-
-    implementation("androidx.core:core-ktx:1.9.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -53,7 +46,18 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${hiltVersion}")
     kapt("com.google.dagger:hilt-android-compiler:${hiltVersion}")
 
-    // FCM
-    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
-    implementation("com.google.firebase:firebase-messaging-ktx")
+    // retrofit
+    val retrofitVersion = "2.9.0"
+    api("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    api("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+
+    // okHttp
+    val okHttpVersion = "5.0.0-alpha.12"
+    api("com.squareup.okhttp3:okhttp:$okHttpVersion")
+    api("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
+    api("com.squareup.okhttp3:okhttp-urlconnection:$okHttpVersion")
+
+    // datastore preferences
+    api("androidx.datastore:datastore-preferences:1.0.0")
+    api("androidx.datastore:datastore-core:1.0.0")
 }

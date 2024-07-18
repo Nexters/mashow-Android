@@ -1,4 +1,4 @@
-package com.nexters.mashow
+package com.nexters.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
