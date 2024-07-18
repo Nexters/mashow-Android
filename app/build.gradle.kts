@@ -1,3 +1,7 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -9,6 +13,10 @@ android {
     namespace = "com.nexters.mashow"
     compileSdk = 34
 
+    Properties().apply {
+        load(FileInputStream("$rootDir/local.properties"))
+    }
+
     defaultConfig {
         applicationId = "com.nexters.mashow"
         minSdk = 28
@@ -17,6 +25,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_DEV_URL", getProperty("baseDevUrl"))
+        buildConfigField("String", "BASE_PROD_URL", getProperty("baseProdUrl"))
     }
 
     buildTypes {
@@ -35,6 +45,14 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        dataBinding = true
+        buildConfig = true
+    }
+}
+
+fun getProperty(propertyKey: String): String {
+    return gradleLocalProperties(rootDir).getProperty(propertyKey)
 }
 
 dependencies {
