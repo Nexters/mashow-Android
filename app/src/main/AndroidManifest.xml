@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mashow"
         tools:targetApi="31">
-        <activity
-            android:name="com.nexters.presentation.MainActivity"
+
+        <activity android:name="com.nexters.presentation.ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.nexters.presentation.ui.main.MainActivity"
+            android:exported="false">
+
+        </activity>
+
+        <activity android:name="com.nexters.presentation.ui.intro.IntroActivity"
+            android:exported="false"/>
+
     </application>
 
 </manifest>
