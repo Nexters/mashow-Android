@@ -9,4 +9,6 @@ class IntroActivity: BaseActivity<ActivityIntroBinding>(ActivityIntroBinding::in
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
+
 }

@@ -16,3 +16,6 @@ local.properties
 *.jks
 *.aab
 *.apk
+google-services.json
+
+
