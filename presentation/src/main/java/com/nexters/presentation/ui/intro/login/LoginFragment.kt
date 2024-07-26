@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -16,12 +17,29 @@ import com.nexters.presentation.R
 import com.nexters.presentation.base.BaseFragment
 import com.nexters.presentation.databinding.FragmentLoginBinding
 import com.nexters.presentation.util.Constants.TAG
+import dagger.hilt.android.AndroidEntryPoint
 
-class LoginFragment: BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
+@AndroidEntryPoint
+class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
+
+    private val viewModel: LoginViewModel by viewModels()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vm = viewModel
+        initEventObserve()
+    }
 
+    private fun initEventObserve() {
+        repeatOnStarted {
+            viewModel.event.collect {
+                when (it) {
+                    is LoginEvent.GoogleLogin -> googleLogin()
+                    is LoginEvent.KakaoLogin -> kakaoLogin()
+                }
+            }
+        }
     }
 
     private fun kakaoLogin() {

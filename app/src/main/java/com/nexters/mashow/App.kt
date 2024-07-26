@@ -28,8 +28,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-//        Log.d("debugging", "keyhash : ${Utility.getKeyHash(this)}")
-//        KakaoSdk.init(this, BuildConfig.KAKAO_APP_KEY)
+        Log.d("debugging", "keyhash : ${Utility.getKeyHash(this)}")
+        KakaoSdk.init(this, BuildConfig.KAKAO_APP_KEY)
     }
 
 }

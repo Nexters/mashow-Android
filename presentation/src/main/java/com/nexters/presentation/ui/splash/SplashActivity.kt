@@ -6,8 +6,10 @@ import com.nexters.presentation.base.BaseActivity
 import com.nexters.presentation.databinding.ActivitySplashBinding
 import com.nexters.presentation.ui.intro.IntroActivity
 import com.nexters.presentation.ui.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
