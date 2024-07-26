@@ -14,6 +14,8 @@ import javax.inject.Inject
 sealed class LoginEvent{
     data object KakaoLogin: LoginEvent()
     data object GoogleLogin: LoginEvent()
+    data object NavigateToSignup: LoginEvent()
+    data object NavigateToMain: LoginEvent()
 }
 
 @HiltViewModel
@@ -32,6 +34,13 @@ class LoginViewModel @Inject constructor(): ViewModel() {
     fun googleLogin(){
         viewModelScope.launch {
             _event.emit(LoginEvent.GoogleLogin)
+        }
+    }
+
+    fun login(token: String){
+        viewModelScope.launch {
+
+            _event.emit(LoginEvent.NavigateToSignup)
         }
     }
 

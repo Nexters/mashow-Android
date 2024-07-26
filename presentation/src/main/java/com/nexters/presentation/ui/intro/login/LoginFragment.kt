@@ -1,11 +1,14 @@
 package com.nexters.presentation.ui.intro.login
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -16,6 +19,7 @@ import com.kakao.sdk.user.UserApiClient
 import com.nexters.presentation.R
 import com.nexters.presentation.base.BaseFragment
 import com.nexters.presentation.databinding.FragmentLoginBinding
+import com.nexters.presentation.ui.main.MainActivity
 import com.nexters.presentation.util.Constants.TAG
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +41,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 when (it) {
                     is LoginEvent.GoogleLogin -> googleLogin()
                     is LoginEvent.KakaoLogin -> kakaoLogin()
+                    is LoginEvent.NavigateToSignup -> findNavController().toSignUp()
+                    is LoginEvent.NavigateToMain -> {
+                        val intent = Intent(requireContext(),MainActivity::class.java)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        startActivity(intent)
+                    }
                 }
             }
         }
@@ -64,7 +74,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 }
                 // 로그인 성공 부분
                 else if (token != null) {
-                    // 카카오 로그인 성공 부분
+                    viewModel.login(token.accessToken)
                 }
             }
         } else {
@@ -82,6 +92,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             Log.e(TAG, "이메일 로그인 실패 $error")
         } else if (token != null) {
             // 카카오 로그인 성공 부분
+            viewModel.login(token.accessToken)
         }
     }
 
@@ -105,4 +116,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
             }
         }
+
+    private fun NavController.toSignUp(){
+        val action = LoginFragmentDirections.actionLoginFragmentToSignupFragment()
+        navigate(action)
+    }
 }
