@@ -12,7 +12,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mashow.presentation"
+    namespace = "com.masshow.presentation"
     compileSdk = 34
 
     defaultConfig {

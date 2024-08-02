@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.mashow.presentation.ui.intro.login.LoginViewModel" />
+            type="com.masshow.presentation.ui.intro.login.LoginViewModel" />
 
     </data>
 
