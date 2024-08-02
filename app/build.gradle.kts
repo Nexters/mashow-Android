@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nexters.mashow"
+    namespace = "com.mashow.alchol"
     compileSdk = 34
 
     Properties().apply {

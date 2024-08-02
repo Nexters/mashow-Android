@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nexters.data"
+    namespace = "com.mashow.data"
     compileSdk = 34
 
     defaultConfig {

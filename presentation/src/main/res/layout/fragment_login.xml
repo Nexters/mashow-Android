@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.nexters.presentation.ui.intro.login.LoginViewModel" />
+            type="com.mashow.presentation.ui.intro.login.LoginViewModel" />
 
     </data>
 

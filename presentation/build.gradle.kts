@@ -1,3 +1,7 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -8,7 +12,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nexters.presentation"
+    namespace = "com.mashow.presentation"
     compileSdk = 34
 
     defaultConfig {
@@ -16,6 +20,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        buildConfigField("String", "GOOGLE_CLIENT_ID", getProperty("googleClientId"))
     }
 
     buildTypes {
@@ -37,11 +42,13 @@ android {
 
     buildFeatures {
         dataBinding = true
+        buildConfig = true
     }
 
-    viewBinding {
-        enable = true
-    }
+}
+
+fun getProperty(propertyKey: String): String {
+    return gradleLocalProperties(rootDir).getProperty(propertyKey)
 }
 
 dependencies {
@@ -74,5 +81,5 @@ dependencies {
 
     // google login
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation("com.google.android.gms:play-services-auth:19.2.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 }

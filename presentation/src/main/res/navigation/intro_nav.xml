@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.nexters.presentation.ui.intro.login.LoginFragment"
+        android:name="com.mashow.presentation.ui.intro.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
@@ -14,6 +14,6 @@
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.nexters.presentation.ui.intro.signup.SignupFragment"
+        android:name="com.mashow.presentation.ui.intro.signup.SignupFragment"
         android:label="SignupFragment" />
 </navigation>
