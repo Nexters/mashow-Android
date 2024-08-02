@@ -1,5 +1,6 @@
 package com.nexters.mashow.di
 
+import com.nexters.data.remote.AuthApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,9 +12,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-//    @Singleton
-//    @Provides
-//    fun provideAuthApi(@NetworkModule.BaseRetrofit retrofit: Retrofit): AuthApi =
-//        retrofit.create(AuthApi::class.java)
+    @Singleton
+    @Provides
+    fun provideAuthApi(@NetworkModule.BaseRetrofit retrofit: Retrofit): AuthApi =
+        retrofit.create(AuthApi::class.java)
 
 }
