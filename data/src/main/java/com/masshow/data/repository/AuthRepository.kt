@@ -8,5 +8,5 @@ interface AuthRepository {
 
     suspend fun login(
         body: LoginRequest
-    ): BaseState<LoginResponse>
+    ): BaseState<LoginResponse?>
 }

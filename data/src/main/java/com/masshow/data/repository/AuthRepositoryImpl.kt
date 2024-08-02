@@ -11,7 +11,7 @@ class AuthRepositoryImpl @Inject constructor(
     private val api: AuthApi
 ): AuthRepository {
 
-    override suspend fun login(body: LoginRequest): BaseState<LoginResponse> = runRemote {
+    override suspend fun login(body: LoginRequest): BaseState<LoginResponse?> = runRemote {
         api.login(body)
     }
 }

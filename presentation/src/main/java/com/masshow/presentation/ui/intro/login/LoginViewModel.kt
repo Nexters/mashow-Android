@@ -47,10 +47,15 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             repository.login(
                 LoginRequest(provider, token)
-            ).let{
-                when(it){
+            ).let {
+                when (it) {
                     is BaseState.Success -> {
-                        _event.emit(LoginEvent.NavigateToSignup)
+                        if (it.code == 100) {
+                            // 신규회원
+                            _event.emit(LoginEvent.NavigateToSignup)
+                        } else{
+                            _event.emit(LoginEvent.NavigateToMain)
+                        }
                     }
 
                     is BaseState.Error -> {
