@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.util.Utility
+import com.nexters.presentation.R
 import dagger.hilt.android.HiltAndroidApp
 
 
@@ -19,10 +20,11 @@ class App : Application() {
     }
 
     companion object {
-        private const val APP_NAME = "ModuTaxi"
+        private const val APP_NAME = "Mashow"
         lateinit var instance: App
         val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = APP_NAME)
         fun getContext(): Context = instance.applicationContext
+
     }
 
     override fun onCreate() {
