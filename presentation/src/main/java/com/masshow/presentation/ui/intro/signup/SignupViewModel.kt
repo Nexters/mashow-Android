@@ -57,6 +57,9 @@ class SignupViewModel @Inject constructor(
             ).let {
                 when (it) {
                     is BaseState.Success -> {
+                        it.data?.let{ data ->
+                            repository.putAccessToken(data.accessToken)
+                        }
                         _event.emit(SignupEvent.NavigateToMain)
                     }
 

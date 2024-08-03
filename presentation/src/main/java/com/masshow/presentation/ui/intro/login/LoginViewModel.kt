@@ -52,6 +52,9 @@ class LoginViewModel @Inject constructor(
                     is BaseState.Success -> {
                         if (it.code == 100) {
                             // 신규회원
+                            it.data?.let { data ->
+                                repository.putAccessToken(data.accessToken)
+                            }
                             _event.emit(LoginEvent.NavigateToSignup(token, provider))
                         } else {
                             _event.emit(LoginEvent.NavigateToMain)
