@@ -99,6 +99,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     fun googleLogin() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
             .build()
         val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
         val signInIntent = googleSignInClient.signInIntent
@@ -107,15 +108,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            // 로그인 유저정보 불러오기
 
-            if (result.resultCode == Activity.RESULT_OK) {
-                // 로그인 유저정보 불러오기
+            try{
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 val account = task.getResult(ApiException::class.java)
                 viewModel.login(account.serverAuthCode.toString(), GOOGLE)
-            } else {
-                Log.d(TAG,result.resultCode.toString())
+            } catch(e: ApiException){
+                Log.d(TAG,e.message.toString())
+                Log.d(TAG,e.status.toString())
+                Log.d(TAG,e.statusCode.toString())
             }
+
         }
 
     private fun NavController.toSignUp(){
