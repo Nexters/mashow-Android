@@ -2,6 +2,7 @@ package com.masshow.data.repository
 
 import com.masshow.data.model.BaseState
 import com.masshow.data.model.request.LoginRequest
+import com.masshow.data.model.request.SignupRequest
 import com.masshow.data.model.response.LoginResponse
 import com.masshow.data.model.runRemote
 import com.masshow.data.remote.AuthApi
@@ -13,5 +14,9 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun login(body: LoginRequest): BaseState<LoginResponse?> = runRemote {
         api.login(body)
+    }
+
+    override suspend fun signup(body: SignupRequest): BaseState<LoginResponse?> = runRemote {
+        api.signup(body)
     }
 }
