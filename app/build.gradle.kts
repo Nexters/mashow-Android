@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nexters.mashow"
+    namespace = "com.masshow.alchol"
     compileSdk = 34
 
     Properties().apply {
@@ -18,11 +18,11 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.nexters.mashow"
+        applicationId = "com.masshow.alchol"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_DEV_URL", getProperty("baseDevUrl"))
