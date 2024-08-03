@@ -15,5 +15,15 @@
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.masshow.presentation.ui.intro.signup.SignupFragment"
-        android:label="SignupFragment" />
+        android:label="SignupFragment" >
+
+        <argument
+            android:name="token"
+            app:argType="string"/>
+
+        <argument
+            android:name="provider"
+            app:argType="string"/>
+
+    </fragment>
 </navigation>

@@ -42,9 +42,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 when (it) {
                     is LoginEvent.GoogleLogin -> googleLogin()
                     is LoginEvent.KakaoLogin -> kakaoLogin()
-                    is LoginEvent.NavigateToSignup -> findNavController().toSignUp()
+                    is LoginEvent.NavigateToSignup -> findNavController().toSignUp(
+                        it.token,
+                        it.provider
+                    )
+
                     is LoginEvent.NavigateToMain -> {
-                        val intent = Intent(requireContext(),MainActivity::class.java)
+                        val intent = Intent(requireContext(), MainActivity::class.java)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(intent)
                     }
@@ -110,20 +114,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             // 로그인 유저정보 불러오기
 
-            try{
+            try {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 val account = task.getResult(ApiException::class.java)
                 viewModel.login(account.serverAuthCode.toString(), GOOGLE)
-            } catch(e: ApiException){
-                Log.d(TAG,e.message.toString())
-                Log.d(TAG,e.status.toString())
-                Log.d(TAG,e.statusCode.toString())
+            } catch (e: ApiException) {
+                Log.d(TAG, e.message.toString())
+                Log.d(TAG, e.status.toString())
+                Log.d(TAG, e.statusCode.toString())
             }
 
         }
 
-    private fun NavController.toSignUp(){
-        val action = LoginFragmentDirections.actionLoginFragmentToSignupFragment()
+    private fun NavController.toSignUp(token: String, provider: String) {
+        val action = LoginFragmentDirections.actionLoginFragmentToSignupFragment(
+            token = token,
+            provider = provider
+        )
         navigate(action)
     }
 }

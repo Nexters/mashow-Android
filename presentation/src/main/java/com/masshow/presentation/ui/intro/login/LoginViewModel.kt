@@ -17,7 +17,7 @@ import javax.inject.Inject
 sealed class LoginEvent {
     data object KakaoLogin : LoginEvent()
     data object GoogleLogin : LoginEvent()
-    data object NavigateToSignup : LoginEvent()
+    data class NavigateToSignup(val token: String, val provider: String) : LoginEvent()
     data object NavigateToMain : LoginEvent()
 }
 
@@ -52,8 +52,8 @@ class LoginViewModel @Inject constructor(
                     is BaseState.Success -> {
                         if (it.code == 100) {
                             // 신규회원
-                            _event.emit(LoginEvent.NavigateToSignup)
-                        } else{
+                            _event.emit(LoginEvent.NavigateToSignup(token, provider))
+                        } else {
                             _event.emit(LoginEvent.NavigateToMain)
                         }
                     }
