@@ -4,6 +4,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.masshow.presentation.ui.main.record.food.FoodRecordViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,8 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:lineSpacingExtra="4dp"
-            android:textColor="#F3F3F3"
             android:text="어떤 음식으로\n페어링을 했나요?"
+            android:textColor="#F3F3F3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_back" />
 
@@ -52,6 +56,7 @@
             android:background="@drawable/rect_grayfill_nostroke_50radius"
             android:drawableEnd="@drawable/icon_plus"
             android:drawablePadding="4dp"
+            android:onClick="@{() -> vm.navigateToFoodRecord()}"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
             android:text="안주 입력"
