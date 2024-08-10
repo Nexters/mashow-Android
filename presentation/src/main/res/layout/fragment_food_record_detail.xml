@@ -49,20 +49,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_back" />
 
-        <EditText
-            android:id="@+id/et_food"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_et_food"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rect_darkgrayfill_graystroke_14radius"
-            android:hint="이름 혹은 종류"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="16dp"
-            android:textColor="@color/white"
-            android:textColorHint="#66555555"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_announce" />
+            app:layout_constraintTop_toBottomOf="@id/tv_announce"
+            tools:listitem="@layout/item_et_food" />
+
+        <TextView
+            android:id="@+id/btn_add_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/icon_gray_plus"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="추가하기"
+            android:textColor="#A8B2BB"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_et_food" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_complete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rect_bluefill_nostroke_13radius"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:paddingVertical="16dp"
+            android:text="완료"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
