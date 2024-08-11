@@ -53,24 +53,14 @@
             android:id="@+id/rv_et_food"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="300dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_announce"
-            tools:listitem="@layout/item_et_food" />
-
-        <TextView
-            android:id="@+id/btn_add_food"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:drawableStart="@drawable/icon_gray_plus"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="추가하기"
-            android:textColor="#A8B2BB"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_et_food" />
+            app:list="@{vm.uiState.editFood}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_complete"

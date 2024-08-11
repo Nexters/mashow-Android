@@ -22,10 +22,21 @@
             android:paddingVertical="16dp"
             android:textColor="@color/white"
             android:textColorHint="#80F3F3F3"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/icon_fill_x"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/et_food"
+            app:layout_constraintEnd_toEndOf="@id/et_food"
+            app:layout_constraintTop_toTopOf="@id/et_food" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
