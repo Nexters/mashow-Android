@@ -27,7 +27,7 @@ class FoodRecordDetailViewModel @Inject constructor() : ViewModel() {
     private val _event = MutableSharedFlow<FoodRecordDetailEvent>()
     val event: SharedFlow<FoodRecordDetailEvent> = _event.asSharedFlow()
 
-    val foodList = mutableListOf<String>()
+    private val foodList = mutableListOf<String>()
 
     fun navigateBack() {
         viewModelScope.launch {
