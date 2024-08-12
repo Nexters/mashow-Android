@@ -17,11 +17,9 @@ import javax.inject.Inject
 sealed class FoodRecordDetailEvent {
     data object NavigateBack : FoodRecordDetailEvent()
     data object AddEditFood: FoodRecordDetailEvent()
+    data class CompleteEditFood(val list : List<String>): FoodRecordDetailEvent()
 }
 
-data class FoodRecordUiState(
-    val editFood : List<String> = emptyList()
-)
 
 @HiltViewModel
 class FoodRecordDetailViewModel @Inject constructor() : ViewModel() {
@@ -29,8 +27,7 @@ class FoodRecordDetailViewModel @Inject constructor() : ViewModel() {
     private val _event = MutableSharedFlow<FoodRecordDetailEvent>()
     val event: SharedFlow<FoodRecordDetailEvent> = _event.asSharedFlow()
 
-    private val _uiState = MutableStateFlow(FoodRecordUiState())
-    val uiState: StateFlow<FoodRecordUiState> = _uiState.asStateFlow()
+    val foodList = mutableListOf<String>()
 
     fun navigateBack() {
         viewModelScope.launch {
@@ -41,6 +38,23 @@ class FoodRecordDetailViewModel @Inject constructor() : ViewModel() {
     fun addEditFood() {
         viewModelScope.launch {
             _event.emit(FoodRecordDetailEvent.AddEditFood)
+        }
+    }
+
+    fun createFoodItem(){
+        foodList.add("")
+    }
+
+    fun addFoodList(food: String, index: Int){
+        foodList[index] = food
+    }
+
+    fun completeEditFood(){
+        val list = foodList.filter{
+            it.isNotBlank()
+        }
+        viewModelScope.launch {
+            _event.emit(FoodRecordDetailEvent.CompleteEditFood(list))
         }
     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
@@ -18,6 +19,8 @@ class FoodRecordDetailFragment :
     BaseFragment<FragmentFoodRecordDetailBinding>(R.layout.fragment_food_record_detail){
 
     private val viewModel: FoodRecordDetailViewModel by viewModels()
+
+    private var editTextId = -1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,6 +36,7 @@ class FoodRecordDetailFragment :
                 when (it) {
                     is FoodRecordDetailEvent.NavigateBack -> findNavController().navigateUp()
                     is FoodRecordDetailEvent.AddEditFood -> addEditFood()
+                    is FoodRecordDetailEvent.CompleteEditFood -> findNavController().navigateUp()
                 }
             }
         }
@@ -42,6 +46,12 @@ class FoodRecordDetailFragment :
         val newEditFood = LayoutInflater.from(requireContext()).inflate(R.layout.item_et_food, binding.layoutEditFood, false)
         val editFood = newEditFood.findViewById<EditText>(R.id.et_food)
         val deleteBtn = newEditFood.findViewById<ImageView>(R.id.btn_delete)
+        editTextId++
+        viewModel.createFoodItem()
+
+        editFood.doOnTextChanged { text, start, before, count ->
+            viewModel.addFoodList(text.toString(), editTextId)
+        }
 
         editFood.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
