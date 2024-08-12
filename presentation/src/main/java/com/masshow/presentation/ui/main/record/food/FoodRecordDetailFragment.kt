@@ -36,7 +36,10 @@ class FoodRecordDetailFragment :
                 when (it) {
                     is FoodRecordDetailEvent.NavigateBack -> findNavController().navigateUp()
                     is FoodRecordDetailEvent.AddEditFood -> addEditFood()
-                    is FoodRecordDetailEvent.CompleteEditFood -> findNavController().navigateUp()
+                    is FoodRecordDetailEvent.CompleteEditFood -> {
+                        FoodRecordData.foods = it.list
+                        findNavController().navigateUp()
+                    }
                 }
             }
         }

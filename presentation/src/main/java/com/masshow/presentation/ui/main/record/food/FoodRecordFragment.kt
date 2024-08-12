@@ -20,6 +20,7 @@ class FoodRecordFragment : BaseFragment<FragmentFoodRecordBinding>(R.layout.frag
 
         binding.vm = viewModel
         initEventObserve()
+        binding.tvFoods.text = FoodRecordData.foods.joinToString()
     }
 
     private fun initEventObserve() {
