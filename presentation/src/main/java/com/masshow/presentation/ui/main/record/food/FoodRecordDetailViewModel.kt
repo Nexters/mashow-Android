@@ -2,8 +2,6 @@ package com.masshow.presentation.ui.main.record.food
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.masshow.presentation.ui.main.record.food.model.UiRecordFood
-import com.masshow.presentation.util.Constants.ADD_FOOD
 import com.masshow.presentation.util.Constants.EDIT_FOOD
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,13 +16,11 @@ import javax.inject.Inject
 
 sealed class FoodRecordDetailEvent {
     data object NavigateBack : FoodRecordDetailEvent()
+    data object AddEditFood: FoodRecordDetailEvent()
 }
 
 data class FoodRecordUiState(
-    val editFood: List<UiRecordFood> = listOf(
-        UiRecordFood(EDIT_FOOD, ""),
-        UiRecordFood(ADD_FOOD, "")
-    )
+    val editFood : List<String> = emptyList()
 )
 
 @HiltViewModel
@@ -43,13 +39,8 @@ class FoodRecordDetailViewModel @Inject constructor() : ViewModel() {
     }
 
     fun addEditFood() {
-        val newList = mutableListOf<UiRecordFood>()
-        newList.addAll(uiState.value.editFood)
-        newList.add(uiState.value.editFood.size - 2, UiRecordFood(EDIT_FOOD, ""))
-        _uiState.update { state ->
-            state.copy(
-                editFood = newList
-            )
+        viewModelScope.launch {
+            _event.emit(FoodRecordDetailEvent.AddEditFood)
         }
     }
 

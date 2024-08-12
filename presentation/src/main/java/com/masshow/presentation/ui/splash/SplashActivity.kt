@@ -18,7 +18,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
         repeatOnStarted {
             delay(2000)
 //            viewModel.checkLoginType()
-            toIntroActivity()
+            toMainActivity()
         }
 //        repeatOnStarted {
 //            viewModel.event.collect {
