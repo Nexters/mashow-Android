@@ -5,4 +5,7 @@ object Constants {
 
     const val KAKAO = "KAKAO"
     const val GOOGLE = "GOOGLE"
+
+    const val EDIT_FOOD = -1
+    const val ADD_FOOD = 0
 }
