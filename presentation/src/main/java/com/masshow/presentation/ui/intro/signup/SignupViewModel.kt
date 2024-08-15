@@ -94,4 +94,8 @@ class SignupViewModel @Inject constructor(
         }
     }
 
+    fun deleteNick(){
+        nickname.value = ""
+    }
+
 }

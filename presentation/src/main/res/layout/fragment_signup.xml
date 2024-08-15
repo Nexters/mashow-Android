@@ -50,6 +50,8 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/rect_nofill_graystroke_14radius"
             android:hint="닉네임을 입력해주세요."
+            android:inputType="text"
+            android:maxLength="6"
             android:paddingHorizontal="12dp"
             android:paddingVertical="18dp"
             android:text="@={vm.nickname}"
@@ -63,11 +65,12 @@
             android:id="@+id/tv_nick_length"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="12dp"
             android:textColor="#4DF3F3F3"
             app:layout_constraintBottom_toBottomOf="@id/iv_delete"
             app:layout_constraintEnd_toStartOf="@id/iv_delete"
             app:layout_constraintTop_toTopOf="@id/iv_delete"
+            app:nickLength="@{vm.nickname.length()}"
             tools:text="0/6" />
 
         <ImageView
@@ -75,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:onClick="@{() -> vm.deleteNick()}"
             android:src="@drawable/icon_gray_exit"
             android:visibility="@{vm.uiState.warningState ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/et_nick"
