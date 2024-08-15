@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/foodRecordFragment">
+
+    <fragment
+        android:id="@+id/foodRecordFragment"
+        android:name="com.masshow.presentation.ui.main.record.food.FoodRecordFragment"
+        android:label="FoodRecordFragment" >
+        <action
+            android:id="@+id/action_foodRecordFragment_to_foodRecordDetailFragment"
+            app:destination="@id/foodRecordDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodRecordDetailFragment"
+        android:name="com.masshow.presentation.ui.main.record.food.FoodRecordDetailFragment"
+        android:label="FoodRecordDetailFragment" />
+</navigation>
