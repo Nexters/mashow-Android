@@ -24,13 +24,20 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
 
         binding.vm = viewModel
         viewModel.setInitData(provider, token)
+        binding.etNick.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                view.setBackgroundResource(R.drawable.rect_blackfill_graystroke_14radius)
+            } else {
+                view.setBackgroundResource(R.drawable.rect_nofill_graystroke_14radius)
+            }
+        }
         initObserveEvent()
     }
 
-    private fun initObserveEvent(){
+    private fun initObserveEvent() {
         repeatOnStarted {
-            viewModel.event.collect{
-                when(it){
+            viewModel.event.collect {
+                when (it) {
                     is SignUpEvent.NavigateToMain -> {
                         val intent = Intent(requireContext(), MainActivity::class.java)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
