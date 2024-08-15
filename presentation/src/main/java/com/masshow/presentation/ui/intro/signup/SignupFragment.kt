@@ -43,6 +43,8 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(intent)
                     }
+
+                    is SignUpEvent.ShowToastMessage -> showToastMessage(it.msg)
                 }
             }
         }

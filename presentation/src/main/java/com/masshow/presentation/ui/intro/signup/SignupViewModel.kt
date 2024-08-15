@@ -20,6 +20,7 @@ import javax.inject.Inject
 
 sealed class SignUpEvent {
     data object NavigateToMain : SignUpEvent()
+    data class ShowToastMessage(val msg: String): SignUpEvent()
 }
 
 data class SignUpUiState(
@@ -87,7 +88,7 @@ class SignupViewModel @Inject constructor(
                     }
 
                     is BaseState.Error -> {
-
+                        _event.emit(SignUpEvent.ShowToastMessage(it.message))
                     }
                 }
             }
