@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
 
         <variable
             name="vm"
@@ -12,8 +16,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#0A7BFF">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tv_head_comment"
@@ -45,16 +48,51 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/rect_grayfill_whitestroke_14radius"
-            android:hint="닉네임"
+            android:background="@drawable/rect_nofill_graystroke_14radius"
+            android:hint="닉네임을 입력해주세요."
             android:paddingHorizontal="12dp"
-            android:paddingVertical="12dp"
+            android:paddingVertical="18dp"
             android:text="@={vm.nickname}"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="#4DF3F3F3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_head_title" />
+
+        <TextView
+            android:id="@+id/tv_nick_length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:textColor="#4DF3F3F3"
+            app:layout_constraintBottom_toBottomOf="@id/iv_delete"
+            app:layout_constraintEnd_toStartOf="@id/iv_delete"
+            app:layout_constraintTop_toTopOf="@id/iv_delete"
+            tools:text="0/6" />
+
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/icon_gray_exit"
+            android:visibility="@{vm.uiState.warningState ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/et_nick"
+            app:layout_constraintEnd_toEndOf="@id/et_nick"
+            app:layout_constraintTop_toTopOf="@id/et_nick" />
+
+        <TextView
+            android:id="@+id/tv_warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="한글, 영소문자, 숫자만 사용해주세요."
+            android:textColor="#FF374F"
+            android:textSize="14dp"
+            android:visibility="@{vm.uiState.warningState ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="@id/et_nick"
+            app:layout_constraintTop_toBottomOf="@id/et_nick" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_signup"

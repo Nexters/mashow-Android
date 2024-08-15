@@ -31,7 +31,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
         repeatOnStarted {
             viewModel.event.collect{
                 when(it){
-                    is SignupEvent.NavigateToMain -> {
+                    is SignUpEvent.NavigateToMain -> {
                         val intent = Intent(requireContext(), MainActivity::class.java)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(intent)

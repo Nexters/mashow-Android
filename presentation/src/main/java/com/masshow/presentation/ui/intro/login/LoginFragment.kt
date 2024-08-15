@@ -48,9 +48,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     )
 
                     is LoginEvent.NavigateToMain -> {
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        startActivity(intent)
+                        findNavController().toSignUp(
+                            "it.token",
+                            "it.provider"
+                        )
+//                        val intent = Intent(requireContext(), MainActivity::class.java)
+//                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                        startActivity(intent)
                     }
                 }
             }
