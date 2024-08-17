@@ -10,6 +10,7 @@ import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentAlcoholSelectBinding
 import com.masshow.presentation.ui.main.record.alchol.adapter.AlcoholSelectAdapter
 import com.masshow.presentation.util.Constants.TAG
+import com.masshow.presentation.util.Constants.alcoholMap
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -57,8 +58,11 @@ class AlcoholSelectFragment :
         }
     }
 
-    val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+    private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            viewModel.setCurrentData(position)
+
             when(position){
                 0 -> binding.ivBackground.setImageResource(R.drawable.background_soju)
                 1 -> binding.ivBackground.setImageResource(R.drawable.background_yangju)
