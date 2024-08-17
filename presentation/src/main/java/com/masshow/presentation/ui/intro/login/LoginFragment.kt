@@ -1,6 +1,5 @@
 package com.masshow.presentation.ui.intro.login
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -48,13 +47,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     )
 
                     is LoginEvent.NavigateToMain -> {
-                        findNavController().toSignUp(
-                            "it.token",
-                            "it.provider"
-                        )
-//                        val intent = Intent(requireContext(), MainActivity::class.java)
-//                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//                        startActivity(intent)
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        startActivity(intent)
                     }
                 }
             }
@@ -122,7 +117,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             try {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 val account = task.getResult(ApiException::class.java)
-                Log.d(TAG,account.email.toString())
+                Log.d(TAG, account.email.toString())
                 viewModel.login(account.serverAuthCode.toString(), GOOGLE)
             } catch (e: ApiException) {
                 Log.d(TAG, e.message.toString())
