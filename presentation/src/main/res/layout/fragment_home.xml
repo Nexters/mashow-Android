@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.masshow.presentation.ui.main.home.HomeViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,12 +55,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/rect_homebtn_off_50radius"
+            android:background="@{vm.uiState.listView ? @drawable/rect_homebtn_off_50radius : @drawable/rect_homebtn_on_50radius}"
             android:fontFamily="@font/pretendard_semi_bold"
+            android:onClick="@{() -> vm.selectCardView()}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp"
             android:text="Card view"
-            android:textColor="#66FCFCFC"
+            android:textColor="@color/lightgray30"
             android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@id/btn_list_view"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -67,12 +72,13 @@
             android:id="@+id/btn_list_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rect_homebtn_on_50radius"
+            android:background="@{vm.uiState.listView ? @drawable/rect_homebtn_on_50radius : @drawable/rect_homebtn_off_50radius}"
             android:fontFamily="@font/pretendard_semi_bold"
+            android:onClick="@{() -> vm.selectListView()}"
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp"
             android:text="List view"
-            android:textColor="#FCFCFC"
+            android:textColor="@color/lightgray"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_card_view"
@@ -98,7 +104,6 @@
             app:layout_constraintEnd_toEndOf="@id/guide"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_card_view">
-
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
