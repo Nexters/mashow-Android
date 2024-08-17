@@ -16,4 +16,8 @@
         android:id="@+id/foodRecordDetailFragment"
         android:name="com.masshow.presentation.ui.main.record.food.FoodRecordDetailFragment"
         android:label="FoodRecordDetailFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.masshow.presentation.ui.main.home.HomeFragment"
+        android:label="HomeFragment" />
 </navigation>
