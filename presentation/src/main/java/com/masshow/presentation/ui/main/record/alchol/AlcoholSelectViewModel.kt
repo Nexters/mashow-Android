@@ -11,7 +11,8 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 data class AlcoholSelectUiState(
-    val alcoholData: List<UiAlcoholSelectItem> = emptyList()
+    val alcoholData: List<UiAlcoholSelectItem> = emptyList(),
+    val currentItem: String = "soju"
 )
 
 @HiltViewModel
@@ -28,14 +29,26 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
         _uiState.update { state ->
             state.copy(
                 alcoholData = listOf(
-                    UiAlcoholSelectItem(R.drawable.image_soju, R.drawable.text_soju),
-                    UiAlcoholSelectItem(R.drawable.image_liquor, R.drawable.text_liquor),
-                    UiAlcoholSelectItem(R.drawable.image_makguli, R.drawable.text_makguli),
-                    UiAlcoholSelectItem(R.drawable.image_sake, R.drawable.text_sake),
-                    UiAlcoholSelectItem(R.drawable.image_beer, R.drawable.text_beer),
-                    UiAlcoholSelectItem(R.drawable.image_wine, R.drawable.text_wine),
-                    UiAlcoholSelectItem(R.drawable.image_cocktail, R.drawable.text_cocktail),
-                    UiAlcoholSelectItem(R.drawable.image_highball, R.drawable.text_highball)
+                    UiAlcoholSelectItem("SOJU", R.drawable.image_soju, R.drawable.text_soju),
+                    UiAlcoholSelectItem("LIQUOR", R.drawable.image_liquor, R.drawable.text_liquor),
+                    UiAlcoholSelectItem(
+                        "MAKGULI",
+                        R.drawable.image_makguli,
+                        R.drawable.text_makguli
+                    ),
+                    UiAlcoholSelectItem("SAKE", R.drawable.image_sake, R.drawable.text_sake),
+                    UiAlcoholSelectItem("BEER", R.drawable.image_beer, R.drawable.text_beer),
+                    UiAlcoholSelectItem("WINE", R.drawable.image_wine, R.drawable.text_wine),
+                    UiAlcoholSelectItem(
+                        "COCKTAIL",
+                        R.drawable.image_cocktail,
+                        R.drawable.text_cocktail
+                    ),
+                    UiAlcoholSelectItem(
+                        "HIGHBALL",
+                        R.drawable.image_highball,
+                        R.drawable.text_highball
+                    )
                 )
             )
         }

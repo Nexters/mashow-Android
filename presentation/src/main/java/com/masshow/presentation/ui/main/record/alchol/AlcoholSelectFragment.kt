@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentAlcoholSelectBinding
@@ -23,6 +24,7 @@ class AlcoholSelectFragment :
 
         initViewPager()
         setBtnListener()
+        binding.vpAlcohol.registerOnPageChangeCallback(pageChangeCallback)
     }
 
     private fun initViewPager() {
@@ -31,7 +33,7 @@ class AlcoholSelectFragment :
                 if (it.alcoholData.isNotEmpty()) {
 
                     adapter = AlcoholSelectAdapter(it.alcoholData)
-                    binding.vpAlcohol.adapter = adapter
+                    binding.vpAlcohol!!.adapter = adapter
                 }
             }
         }
@@ -53,6 +55,25 @@ class AlcoholSelectFragment :
                 binding.vpAlcohol.setCurrentItem(nextItem, true)
             }
         }
+    }
+
+    val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            when(position){
+                0 -> binding.ivBackground.setImageResource(R.drawable.background_soju)
+                1 -> binding.ivBackground.setImageResource(R.drawable.background_yangju)
+                2 -> binding.ivBackground.setImageResource(R.drawable.background_makguli)
+                3 -> binding.ivBackground.setImageResource(R.drawable.background_sake)
+                4 -> binding.ivBackground.setImageResource(R.drawable.background_beer)
+                5 -> binding.ivBackground.setImageResource(R.drawable.background_wine)
+                6 -> binding.ivBackground.setImageResource(R.drawable.background_cocktail)
+                7 -> binding.ivBackground.setImageResource(R.drawable.background_highball)
+            }
+        }
+
+        override fun onPageSelected(position: Int) {}
+
+        override fun onPageScrollStateChanged(state: Int) {}
     }
 
 }
