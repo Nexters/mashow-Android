@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentHomeBinding
+import com.masshow.presentation.ui.main.record.alchol.AlcoholSelectFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +22,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         binding.vm = viewModel
         initStateObserve()
+        initEventObserve()
     }
 
     private fun initStateObserve() {
@@ -53,6 +57,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 }
             }
         }
+    }
+
+    private fun initEventObserve(){
+        repeatOnStarted {
+            viewModel.event.collect{
+                when(it){
+                    is HomeEvent.NavigateToRecord -> findNavController().toAlcoholSelect()
+                }
+            }
+        }
+    }
+
+    private fun NavController.toAlcoholSelect(){
+        val action = HomeFragmentDirections.actionHomeFragmentToAlcoholSelectFragment()
+        navigate(action)
     }
 
 }
