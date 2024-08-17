@@ -102,6 +102,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     fun googleLogin() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestServerAuthCode(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
@@ -118,7 +119,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 val account = task.getResult(ApiException::class.java)
                 Log.d(TAG, account.email.toString())
-                viewModel.login(account.serverAuthCode.toString(), GOOGLE)
+                viewModel.login(account.idToken.toString(), GOOGLE)
             } catch (e: ApiException) {
                 Log.d(TAG, e.message.toString())
                 Log.d(TAG, e.status.toString())
