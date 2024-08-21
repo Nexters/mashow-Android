@@ -1,7 +1,7 @@
 package com.masshow.presentation.ui.main.record.alchol
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
@@ -9,8 +9,7 @@ import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentAlcoholSelectBinding
 import com.masshow.presentation.ui.main.record.alchol.adapter.AlcoholSelectAdapter
-import com.masshow.presentation.util.Constants.TAG
-import com.masshow.presentation.util.Constants.alcoholMap
+import com.masshow.presentation.ui.main.record.alchol.adapter.SelectedAlcoholAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,18 +22,36 @@ class AlcoholSelectFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.vm = viewModel
         initViewPager()
+        initEventObserve()
         setBtnListener()
+        adapter = AlcoholSelectAdapter()
+        binding.vpAlcohol.adapter = adapter
+
+        binding.rvSelectedAlcohol.itemAnimator = null
+        binding.rvSelectedAlcohol.adapter = SelectedAlcoholAdapter()
         binding.vpAlcohol.registerOnPageChangeCallback(pageChangeCallback)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initViewPager() {
         repeatOnStarted {
-            viewModel.uiState.collect {
-                if (it.alcoholData.isNotEmpty()) {
+            viewModel.alcoholData.collect {
+                if (it.isNotEmpty()) {
+                    adapter?.updateItem(it)
+                }
+            }
+        }
+    }
 
-                    adapter = AlcoholSelectAdapter(it.alcoholData)
-                    binding.vpAlcohol!!.adapter = adapter
+    private fun initEventObserve(){
+        repeatOnStarted {
+            viewModel.event.collect{
+                when(it){
+                    is AlcoholSelectEvent.ChangeSelectedAlcohol -> {
+                        adapter?.updateItem(viewModel.alcoholData.value)
+                    }
                 }
             }
         }
@@ -59,11 +76,15 @@ class AlcoholSelectFragment :
     }
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
 
             viewModel.setCurrentData(position)
 
-            when(position){
+            when (position) {
                 0 -> binding.ivBackground.setImageResource(R.drawable.background_soju)
                 1 -> binding.ivBackground.setImageResource(R.drawable.background_yangju)
                 2 -> binding.ivBackground.setImageResource(R.drawable.background_makguli)
