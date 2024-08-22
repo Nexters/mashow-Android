@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_foodRecordFragment_to_foodRecordDetailFragment"
             app:destination="@id/foodRecordDetailFragment" />
+        <action
+            android:id="@+id/action_foodRecordFragment_to_memoFragment"
+            app:destination="@id/memoFragment" />
     </fragment>
     <fragment
         android:id="@+id/foodRecordDetailFragment"
@@ -19,5 +22,37 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.masshow.presentation.ui.main.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_alcoholSelectFragment"
+            app:destination="@id/alcoholSelectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memoFragment"
+        android:name="com.masshow.presentation.ui.main.record.memo.MemoFragment"
+        android:label="MemoFragment" />
+    <fragment
+        android:id="@+id/alcoholDetailFragment"
+        android:name="com.masshow.presentation.ui.main.record.alchol.AlcoholDetailFragment"
+        android:label="AlcoholDetailFragment" >
+        <action
+            android:id="@+id/action_alcoholDetailFragment_to_estimateFragment"
+            app:destination="@id/estimateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alcoholSelectFragment"
+        android:name="com.masshow.presentation.ui.main.record.alchol.AlcoholSelectFragment"
+        android:label="AlcoholSelectFragment" >
+        <action
+            android:id="@+id/action_alcoholSelectFragment_to_alcoholDetailFragment"
+            app:destination="@id/alcoholDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/estimateFragment"
+        android:name="com.masshow.presentation.ui.main.record.estimate.EstimateFragment"
+        android:label="EstimateFragment" >
+        <action
+            android:id="@+id/action_estimateFragment_to_foodRecordFragment"
+            app:destination="@id/foodRecordFragment" />
+    </fragment>
 </navigation>
