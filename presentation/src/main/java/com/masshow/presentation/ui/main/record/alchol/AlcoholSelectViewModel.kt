@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.masshow.presentation.R
 import com.masshow.presentation.ui.main.record.alchol.model.UiAlcoholSelectItem
 import com.masshow.presentation.ui.main.record.alchol.model.UiSelectedAlcoholItem
+import com.masshow.presentation.util.Constants
 import com.masshow.presentation.util.Constants.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -23,15 +24,17 @@ data class AlcoholSelectUiState(
     val selectedItemList: List<UiSelectedAlcoholItem> = emptyList()
 )
 
-sealed class AlcoholSelectEvent{
-    data object ChangeSelectedAlcohol: AlcoholSelectEvent()
+sealed class AlcoholSelectEvent {
+    data object ChangeSelectedAlcohol : AlcoholSelectEvent()
+    data class NavigateToAlcoholSelectDetail(val list: List<String>) :
+        AlcoholSelectEvent()
 }
 
 @HiltViewModel
 class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
 
     private val _event = MutableSharedFlow<AlcoholSelectEvent>()
-    val event : SharedFlow<AlcoholSelectEvent> = _event.asSharedFlow()
+    val event: SharedFlow<AlcoholSelectEvent> = _event.asSharedFlow()
 
     private val _uiState = MutableStateFlow(AlcoholSelectUiState())
     val uiState: StateFlow<AlcoholSelectUiState> = _uiState.asStateFlow()
@@ -125,7 +128,7 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun deleteSelected(position: Int) {
-        Log.d(TAG,position.toString())
+        Log.d(TAG, position.toString())
         _uiState.update { state ->
             state.copy(
                 selectedItemList = uiState.value.selectedItemList.filter {
@@ -156,6 +159,14 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
             state.copy(
                 currentItem = position
             )
+        }
+    }
+
+    fun navigateToAlcoholDetail() {
+        viewModelScope.launch {
+            _event.emit(AlcoholSelectEvent.NavigateToAlcoholSelectDetail(uiState.value.selectedItemList.map{
+                Constants.alcoholMap[it.position] ?: run{ "" }
+            }))
         }
     }
 

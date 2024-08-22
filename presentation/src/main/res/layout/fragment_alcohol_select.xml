@@ -105,11 +105,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal"
-            app:list="@{vm.uiState.selectedItemList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/btn_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:list="@{vm.uiState.selectedItemList}"
             tools:listitem="@layout/item_selected_alcohol" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -119,8 +119,10 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/rect_alcoholselect_next_13radius"
+            android:enabled="@{vm.uiState.selectedItemList.empty ? false : true }"
             android:fontFamily="@font/pretendard_semi_bold"
             android:gravity="center"
+            android:onClick="@{() -> vm.navigateToAlcoholDetail()}"
             android:paddingVertical="12dp"
             android:text="다음"
             android:textColor="@color/white"
