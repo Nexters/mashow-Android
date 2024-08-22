@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentFoodRecordBinding
+import com.masshow.presentation.ui.main.record.RecordFormData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +21,7 @@ class FoodRecordFragment : BaseFragment<FragmentFoodRecordBinding>(R.layout.frag
 
         binding.vm = viewModel
         initEventObserve()
-        binding.tvFoods.text = FoodRecordData.foods.joinToString()
+        binding.tvFoods.text = RecordFormData.foods.joinToString()
     }
 
     private fun initEventObserve() {

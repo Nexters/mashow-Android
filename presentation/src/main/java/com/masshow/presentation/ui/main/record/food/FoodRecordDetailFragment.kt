@@ -11,12 +11,13 @@ import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentFoodRecordDetailBinding
+import com.masshow.presentation.ui.main.record.RecordFormData
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class FoodRecordDetailFragment :
-    BaseFragment<FragmentFoodRecordDetailBinding>(R.layout.fragment_food_record_detail){
+    BaseFragment<FragmentFoodRecordDetailBinding>(R.layout.fragment_food_record_detail) {
 
     private val viewModel: FoodRecordDetailViewModel by viewModels()
 
@@ -37,7 +38,7 @@ class FoodRecordDetailFragment :
                     is FoodRecordDetailEvent.NavigateBack -> findNavController().navigateUp()
                     is FoodRecordDetailEvent.AddEditFood -> addEditFood()
                     is FoodRecordDetailEvent.CompleteEditFood -> {
-                        FoodRecordData.foods = it.list
+                        RecordFormData.foods = it.list
                         findNavController().navigateUp()
                     }
                 }
@@ -45,8 +46,9 @@ class FoodRecordDetailFragment :
         }
     }
 
-    private fun addEditFood(){
-        val newEditFood = LayoutInflater.from(requireContext()).inflate(R.layout.item_et_food, binding.layoutEditFood, false)
+    private fun addEditFood() {
+        val newEditFood = LayoutInflater.from(requireContext())
+            .inflate(R.layout.item_et_food, binding.layoutEditFood, false)
         val editFood = newEditFood.findViewById<EditText>(R.id.et_food)
         val deleteBtn = newEditFood.findViewById<ImageView>(R.id.btn_delete)
         editTextId++

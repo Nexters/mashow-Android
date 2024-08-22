@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
@@ -45,13 +47,14 @@ class AlcoholSelectFragment :
         }
     }
 
-    private fun initEventObserve(){
+    private fun initEventObserve() {
         repeatOnStarted {
-            viewModel.event.collect{
-                when(it){
+            viewModel.event.collect {
+                when (it) {
                     is AlcoholSelectEvent.ChangeSelectedAlcohol -> {
                         adapter?.updateItem(viewModel.alcoholData.value)
                     }
+                    is AlcoholSelectEvent.NavigateToAlcoholSelectDetail -> findNavController().toAlcoholDetail(it.list)
                 }
             }
         }
@@ -99,6 +102,12 @@ class AlcoholSelectFragment :
         override fun onPageSelected(position: Int) {}
 
         override fun onPageScrollStateChanged(state: Int) {}
+    }
+
+    fun NavController.toAlcoholDetail(list: List<String>) {
+        val action =
+            AlcoholSelectFragmentDirections.actionAlcoholSelectFragmentToAlcoholDetailFragment(list.toTypedArray())
+        navigate(action)
     }
 
 }
