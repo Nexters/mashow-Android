@@ -1,7 +1,6 @@
 package com.masshow.presentation.ui.main.record.alchol
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
@@ -10,11 +9,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentAlcoholDetailBinding
-import com.masshow.presentation.util.Constants.TAG
+import com.masshow.presentation.ui.main.record.RecordFormData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,23 +25,33 @@ class AlcoholDetailFragment :
     private val args: AlcoholDetailFragmentArgs by navArgs()
     val alcoholList by lazy { args.alcohollist }
 
-    private val viewModel : AlcoholDetailViewModel by viewModels()
+    private val viewModel: AlcoholDetailViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.vm = viewModel
 
         alcoholList.forEach {
             viewModel.setSelectedAlcohol(it)
             addAlcoholForm(it)
         }
 
-        binding.btnNext.setOnClickListener {
-            viewModel.selectedAlcoholMap.forEach {
-                Log.d(TAG,it.key)
-                Log.d(TAG,it.value.toString())
+        initEventObserve()
+    }
+
+    private fun initEventObserve() {
+        repeatOnStarted {
+            viewModel.event.collect {
+                when (it) {
+                    is AlcoholDetailEvent.NavigateToBack -> findNavController().navigateUp()
+                    is AlcoholDetailEvent.NavigateToEstimate -> {
+                        RecordFormData.selectedAlcoholMap = viewModel.selectedAlcoholMap
+                        findNavController().toEstimate()
+                    }
+                }
             }
         }
-
     }
 
     private fun addAlcoholForm(name: String) {
@@ -91,5 +102,10 @@ class AlcoholDetailFragment :
         }
 
         layout.addView(newEditAlcohol)
+    }
+
+    private fun NavController.toEstimate() {
+        val action = AlcoholDetailFragmentDirections.actionAlcoholDetailFragmentToEstimateFragment()
+        navigate(action)
     }
 }
