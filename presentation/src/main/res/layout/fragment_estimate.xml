@@ -83,6 +83,147 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
+
+        <ImageView
+            android:id="@+id/iv_estimate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:src="@drawable/ic_estimate_ruler"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_announce" />
+
+        <TextView
+            android:id="@+id/tv_awesome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="awesome"
+            android:textColor="#909090"
+            app:layout_constraintBottom_toTopOf="@id/tv_very_good"
+            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
+            app:layout_constraintTop_toTopOf="@id/iv_estimate"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <TextView
+            android:id="@+id/tv_very_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="very good!"
+            android:textColor="#909090"
+            app:layout_constraintBottom_toTopOf="@id/tv_good"
+            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
+            app:layout_constraintTop_toBottomOf="@id/tv_awesome" />
+
+        <TextView
+            android:id="@+id/tv_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="good"
+            android:textColor="#909090"
+            app:layout_constraintBottom_toTopOf="@id/tv_not_bad"
+            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
+            app:layout_constraintTop_toBottomOf="@id/tv_very_good" />
+
+        <TextView
+            android:id="@+id/tv_not_bad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="Not bad"
+            android:textColor="#909090"
+            app:layout_constraintBottom_toTopOf="@id/tv_umm"
+            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
+            app:layout_constraintTop_toBottomOf="@id/tv_good" />
+
+        <TextView
+            android:id="@+id/tv_umm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="umm.."
+            android:textColor="#909090"
+            app:layout_constraintBottom_toTopOf="@id/tv_empty"
+            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
+            app:layout_constraintTop_toBottomOf="@id/tv_not_bad" />
+
+        <TextView
+            android:id="@+id/tv_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
+            app:layout_constraintTop_toBottomOf="@id/tv_umm" />
+
+        <ImageView
+            android:id="@+id/iv_umm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_umm"
+            app:layout_constraintBottom_toBottomOf="@id/tv_umm"
+            app:layout_constraintEnd_toStartOf="@id/tv_umm"
+            app:layout_constraintTop_toTopOf="@id/tv_umm" />
+
+        <ImageView
+            android:id="@+id/iv_not_bad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_notbad"
+            app:layout_constraintBottom_toBottomOf="@id/tv_not_bad"
+            app:layout_constraintEnd_toStartOf="@id/tv_not_bad"
+            app:layout_constraintTop_toTopOf="@id/tv_not_bad" />
+
+        <ImageView
+            android:id="@+id/iv_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_good"
+            app:layout_constraintBottom_toBottomOf="@id/tv_good"
+            app:layout_constraintEnd_toStartOf="@id/tv_good"
+            app:layout_constraintTop_toTopOf="@id/tv_good" />
+
+        <ImageView
+            android:id="@+id/iv_very_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_verygood"
+            app:layout_constraintBottom_toBottomOf="@id/tv_very_good"
+            app:layout_constraintEnd_toStartOf="@id/tv_very_good"
+            app:layout_constraintTop_toTopOf="@id/tv_very_good" />
+
+        <ImageView
+            android:id="@+id/iv_awsome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_awesome"
+            app:layout_constraintBottom_toBottomOf="@id/tv_awesome"
+            app:layout_constraintEnd_toStartOf="@id/tv_awesome"
+            app:layout_constraintTop_toTopOf="@id/tv_awesome" />
+
+        <View
+            android:id="@+id/swipe_view"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:background="#80FFC6AD"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <ImageView
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"

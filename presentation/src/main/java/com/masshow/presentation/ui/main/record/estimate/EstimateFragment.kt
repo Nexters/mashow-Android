@@ -8,7 +8,12 @@ import com.masshow.presentation.databinding.FragmentEstimateBinding
 
 class EstimateFragment: BaseFragment<FragmentEstimateBinding>(R.layout.fragment_estimate) {
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
+
+
+
 }
