@@ -171,6 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_umm"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/tv_umm"
             app:layout_constraintEnd_toStartOf="@id/tv_umm"
             app:layout_constraintTop_toTopOf="@id/tv_umm" />
@@ -181,6 +182,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_notbad"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/tv_not_bad"
             app:layout_constraintEnd_toStartOf="@id/tv_not_bad"
             app:layout_constraintTop_toTopOf="@id/tv_not_bad" />
@@ -191,6 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_good"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/tv_good"
             app:layout_constraintEnd_toStartOf="@id/tv_good"
             app:layout_constraintTop_toTopOf="@id/tv_good" />
@@ -201,6 +204,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_verygood"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/tv_very_good"
             app:layout_constraintEnd_toStartOf="@id/tv_very_good"
             app:layout_constraintTop_toTopOf="@id/tv_very_good" />
@@ -211,6 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_awesome"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/tv_awesome"
             app:layout_constraintEnd_toStartOf="@id/tv_awesome"
             app:layout_constraintTop_toTopOf="@id/tv_awesome" />
