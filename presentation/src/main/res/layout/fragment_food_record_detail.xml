@@ -14,26 +14,61 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
-        android:paddingHorizontal="20dp">
+        android:background="@color/black">
 
         <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:onClick="@{() -> vm.navigateBack()}"
-            android:src="@drawable/icon_back"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_alcohol_detail"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/tv_exit"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_blur"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="취소"
+            android:textColor="#80FFFFFF"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:onClick="@{() -> vm.navigateBack()}"
-            android:src="@drawable/icon_exit"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:textColor="#CCFFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="7월 16일 화요일" />
+
+        <TextView
+            android:id="@+id/tv_store"
+            style="@style/TextMediumSemibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="저장"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,16 +77,18 @@
             style="@style/TextLargeSemibold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:lineSpacingExtra="4dp"
             android:text="먹은 음식 이름 또는 종류를\n적어주세요!"
             android:textColor="#F3F3F3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_back" />
+            app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="300dp"
@@ -94,19 +131,16 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageView
             android:id="@+id/btn_complete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/rect_bluefill_nostroke_13radius"
-            android:fontFamily="@font/pretendard_medium"
-            android:gravity="center"
             android:onClick="@{() -> vm.completeEditFood()}"
             android:paddingVertical="16dp"
-            android:text="완료"
-            android:textColor="@color/white"
-            android:textSize="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btn_complete_gradient"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
