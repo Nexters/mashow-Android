@@ -7,6 +7,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.constraintlayout.widget.ConstraintSet.Motion
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentEstimateBinding
@@ -31,6 +33,9 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
 //            height = initialHeight
 //        }
 
+        binding.btnNext.setOnClickListener {
+            findNavController().toFoodRecord()
+        }
 
         binding.viewSwipable.setOnTouchListener { v, event ->
             when (event.action) {
@@ -86,6 +91,11 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
             }
         }
 
+    }
+
+    private fun NavController.toFoodRecord(){
+        val action = EstimateFragmentDirections.actionEstimateFragmentToFoodRecordFragment()
+        navigate(action)
     }
 
 
