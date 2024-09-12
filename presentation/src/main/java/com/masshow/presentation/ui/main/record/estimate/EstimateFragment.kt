@@ -31,6 +31,7 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
 //            height = initialHeight
 //        }
 
+
         binding.viewSwipable.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -46,30 +47,35 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
                             height = (v.height - event.rawY).toInt() + 400
                         }
 
+                    val ummPoint = binding.root.height - binding.tvUmm.y.toInt()
+                    val notBadPoint = binding.root.height - binding.tvNotBad.y.toInt()
+                    val goodPoint = binding.root.height - binding.tvGood.y.toInt()
+                    val veryGoodPoint = binding.root.height - binding.tvVeryGood.y.toInt()
+                    val awesomePoint = binding.root.height - binding.tvAwesome.y.toInt()
+
                     val point = (v.height - event.rawY).toInt() + 400
 
-                    if (point in binding.root.height - binding.tvUmm.y.toInt()..binding.root.height - binding.tvNotBad.y.toInt()) {
+                    if (point in ummPoint..notBadPoint) {
                         binding.ivUmm.visibility = View.VISIBLE
                         binding.ivNotBad.visibility = View.INVISIBLE
-                    } else if (point in binding.root.height - binding.tvNotBad.y.toInt()..binding.root.height - binding.tvGood.y.toInt()) {
+                    } else if (point in notBadPoint..goodPoint) {
                         binding.ivUmm.visibility = View.INVISIBLE
                         binding.ivNotBad.visibility = View.VISIBLE
                         binding.ivGood.visibility = View.INVISIBLE
-                    } else if (point in binding.root.height - binding.tvGood.y.toInt()..binding.root.height - binding.tvVeryGood.y.toInt()) {
+                    } else if (point in goodPoint..veryGoodPoint) {
                         binding.ivNotBad.visibility = View.INVISIBLE
                         binding.ivGood.visibility = View.VISIBLE
                         binding.ivVeryGood.visibility = View.INVISIBLE
-                    } else if (point in binding.root.height - binding.tvVeryGood.y.toInt()..binding.root.height - binding.tvAwesome.y.toInt()) {
+                    } else if (point in veryGoodPoint..awesomePoint) {
                         binding.ivGood.visibility = View.INVISIBLE
                         binding.ivVeryGood.visibility = View.VISIBLE
                         binding.ivAwsome.visibility = View.INVISIBLE
-                    } else if (point >= binding.root.height - binding.tvAwesome.y.toInt()) {
+                    } else if (point >= awesomePoint) {
                         binding.ivVeryGood.visibility = View.INVISIBLE
                         binding.ivAwsome.visibility = View.VISIBLE
                     } else if (point < binding.root.height - binding.tvUmm.y.toInt()) {
                         binding.ivUmm.visibility = View.INVISIBLE
                     }
-
 
                     binding.swipeView.requestLayout()
                     true
