@@ -36,6 +36,7 @@ class FoodRecordFragment : BaseFragment<FragmentFoodRecordBinding>(R.layout.frag
             viewModel.event.collect {
                 when (it) {
                     is FoodRecordEvent.NavigateToFoodRecordDetail -> findNavController().toFoodRecordDetail()
+                    is FoodRecordEvent.NavigateToMemo -> findNavController().toMemo()
                 }
             }
         }
@@ -55,6 +56,11 @@ class FoodRecordFragment : BaseFragment<FragmentFoodRecordBinding>(R.layout.frag
         food.text = text
 
         binding.layoutFood.addView(newFood)
+    }
+
+    private fun NavController.toMemo(){
+        val action = FoodRecordFragmentDirections.actionFoodRecordFragmentToMemoFragment()
+        navigate(action)
     }
 
 
