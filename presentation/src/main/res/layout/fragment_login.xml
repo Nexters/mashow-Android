@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:onClick="@{() -> vm.googleLogin()}"
-            android:src="@drawable/btn_google_login"
+            android:src="@drawable/btn_other_login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
