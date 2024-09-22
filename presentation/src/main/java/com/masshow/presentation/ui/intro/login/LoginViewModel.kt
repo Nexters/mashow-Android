@@ -1,6 +1,5 @@
 package com.masshow.presentation.ui.intro.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.masshow.data.model.BaseState
@@ -19,6 +18,7 @@ sealed class LoginEvent {
     data object GoogleLogin : LoginEvent()
     data class NavigateToSignup(val token: String, val provider: String) : LoginEvent()
     data object NavigateToMain : LoginEvent()
+    data class ShowToastMessage(val msg: String) : LoginEvent()
 }
 
 @HiltViewModel
@@ -43,18 +43,17 @@ class LoginViewModel @Inject constructor(
     }
 
     fun login(token: String, provider: String) {
-        Log.d("debugging", token)
         viewModelScope.launch {
             repository.login(
                 LoginRequest(provider, token)
             ).let {
                 when (it) {
                     is BaseState.Success -> {
+                        it.data?.let { data ->
+                            repository.putAccessToken(data.accessToken)
+                        }
                         if (it.code == 100) {
                             // 신규회원
-                            it.data?.let { data ->
-                                repository.putAccessToken(data.accessToken)
-                            }
                             _event.emit(LoginEvent.NavigateToSignup(token, provider))
                         } else {
                             _event.emit(LoginEvent.NavigateToMain)
@@ -62,7 +61,8 @@ class LoginViewModel @Inject constructor(
                     }
 
                     is BaseState.Error -> {
-
+                        repository.deleteAccessToken()
+                        _event.emit(LoginEvent.ShowToastMessage("로그인 실패"))
                     }
                 }
             }

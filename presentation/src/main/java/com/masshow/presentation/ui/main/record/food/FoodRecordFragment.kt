@@ -26,7 +26,7 @@ class FoodRecordFragment : BaseFragment<FragmentFoodRecordBinding>(R.layout.frag
 
         binding.vm = viewModel
         initEventObserve()
-        RecordFormData.foods.forEach {
+        RecordFormData.sideDishes.forEach {
             addFood(it)
         }
     }

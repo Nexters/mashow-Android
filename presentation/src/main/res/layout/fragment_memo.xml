@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.masshow.presentation.ui.main.record.memo.MemoViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,6 +81,7 @@
             android:hint="자유롭게 메모해주세요"
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
+            android:text="@={vm.memo}"
             android:textColor="@color/white"
             android:textColorHint="#AEAEAE"
             android:textSize="16dp"
@@ -90,6 +95,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:onClick="@{() -> vm.record()}"
             android:src="@drawable/btn_complete_gradient"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
