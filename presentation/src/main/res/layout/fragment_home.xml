@@ -16,6 +16,16 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tv_nick"
             android:layout_width="wrap_content"
@@ -106,13 +116,14 @@
             app:layout_constraintTop_toBottomOf="@id/btn_card_view">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_soju"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
-                    android:id="@+id/btn_soju"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
@@ -122,14 +133,15 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_makguli"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
-                    android:id="@+id/btn_makguli"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
@@ -138,14 +150,15 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_beer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
-                    android:id="@+id/btn_beer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
@@ -154,14 +167,15 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_cocktail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
-                    android:id="@+id/btn_cocktail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
@@ -186,13 +200,14 @@
             app:layout_constraintTop_toBottomOf="@id/btn_card_view">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_yangju"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
-                    android:id="@+id/btn_yangju"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
@@ -201,14 +216,15 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_sakae"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
-                    android:id="@+id/btn_sakae"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
@@ -217,14 +233,15 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_wine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
-                    android:id="@+id/btn_wine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
@@ -233,14 +250,15 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_highboll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
-                    android:id="@+id/btn_highboll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"

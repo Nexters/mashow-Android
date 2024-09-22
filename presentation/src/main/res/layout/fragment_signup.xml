@@ -18,15 +18,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tv_head_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="30dp"
             android:text="술,\n끊지말고 잘 마시자"
+            android:fontFamily="@font/pretendard_semi_bold"
             android:textColor="#4DFFFFFF"
-            android:textSize="19dp"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,8 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="Ma실 준비 되셨나요?"
+            android:fontFamily="@font/pretendard_semi_bold"
             android:textColor="@color/white"
-            android:textSize="19dp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_head_comment" />
