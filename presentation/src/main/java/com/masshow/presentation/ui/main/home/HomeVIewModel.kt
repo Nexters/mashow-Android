@@ -16,17 +16,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class HomeUiState(
-    val isListView : Boolean = true,
+    val isListView: Boolean = true,
 )
 
-sealed class HomeEvent{
+sealed class HomeEvent {
     data object NavigateToRecord : HomeEvent()
+    data class NavigateToShowRecord(val alcohol: String) : HomeEvent()
 }
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: MainRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
@@ -36,12 +37,12 @@ class HomeViewModel @Inject constructor(
     private val _event = MutableSharedFlow<HomeEvent>()
     val event: SharedFlow<HomeEvent> = _event.asSharedFlow()
 
-    fun getExistRecordLiquor(){
+    fun getExistRecordLiquor() {
         viewModelScope.launch {
-            repository.recordExistLiquor().let{
-                when(it){
+            repository.recordExistLiquor().let {
+                when (it) {
                     is BaseState.Success -> {
-                        it.data?.let{ data ->
+                        it.data?.let { data ->
                             existRecordLiquor.update {
                                 data.liquorHistoryTypes
                             }
@@ -56,7 +57,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun selectListView(){
+    fun selectListView() {
         _uiState.update { state ->
             state.copy(
                 isListView = true
@@ -64,7 +65,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun selectCardView(){
+    fun selectCardView() {
         _uiState.update { state ->
             state.copy(
                 isListView = false
@@ -72,9 +73,17 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun navigateToRecord(){
+    fun navigateToRecord() {
         viewModelScope.launch {
             _event.emit(HomeEvent.NavigateToRecord)
+        }
+    }
+
+    fun navigateToShowRecord(alcohol: String) {
+        viewModelScope.launch {
+            if (existRecordLiquor.value.contains(alcohol)) {
+                _event.emit(HomeEvent.NavigateToShowRecord(alcohol))
+            }
         }
     }
 

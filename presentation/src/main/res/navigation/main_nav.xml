@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_homeFragment_to_alcoholSelectFragment"
             app:destination="@id/alcoholSelectFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_showAlcoholRecordFragment"
+            app:destination="@id/showAlcoholRecordFragment" />
     </fragment>
     <fragment
         android:id="@+id/memoFragment"
@@ -66,4 +69,21 @@
             android:id="@+id/action_estimateFragment_to_foodRecordFragment"
             app:destination="@id/foodRecordFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/showAlcoholRecordFragment"
+        android:name="com.masshow.presentation.ui.main.show.ShowAlcoholRecordFragment"
+        android:label="ShowAlcoholRecordFragment" >
+
+        <argument
+            app:argType="string"
+            android:name="alcohol"/>
+
+        <action
+            android:id="@+id/action_showAlcoholRecordFragment_to_showAlcoholRecordDetailFragment"
+            app:destination="@id/showAlcoholRecordDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showAlcoholRecordDetailFragment"
+        android:name="com.masshow.presentation.ui.main.show.ShowAlcoholRecordDetailFragment"
+        android:label="ShowAlcoholRecordDetailFragment" />
 </navigation>

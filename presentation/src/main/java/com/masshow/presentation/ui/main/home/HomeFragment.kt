@@ -84,6 +84,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             viewModel.event.collect {
                 when (it) {
                     is HomeEvent.NavigateToRecord -> findNavController().toAlcoholSelect()
+                    is HomeEvent.NavigateToShowRecord -> findNavController().toShowAlcohol(it.alcohol)
                 }
             }
         }
@@ -91,6 +92,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun NavController.toAlcoholSelect() {
         val action = HomeFragmentDirections.actionHomeFragmentToAlcoholSelectFragment()
+        navigate(action)
+    }
+
+    private fun NavController.toShowAlcohol(alcohol: String){
+        val action = HomeFragmentDirections.actionHomeFragmentToShowAlcoholRecordFragment(alcohol)
         navigate(action)
     }
 

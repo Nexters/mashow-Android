@@ -121,6 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:alpha="0.3"
+                android:onClick="@{() -> vm.navigateToShowRecord(`SOJU`)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -138,6 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:onClick="@{() -> vm.navigateToShowRecord(`MAKGEOLLI`)}"
                 android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
@@ -155,6 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:onClick="@{() -> vm.navigateToShowRecord(`BEER`)}"
                 android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
@@ -171,6 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:onClick="@{() -> vm.navigateToShowRecord(`COCKTAIL`)}"
                 android:layout_weight="1"
                 android:alpha="0.3"
                 app:cardCornerRadius="8dp">
@@ -204,6 +208,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="@{() -> vm.navigateToShowRecord(`LIQUOR`)}"
                 android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
@@ -221,6 +226,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:onClick="@{() -> vm.navigateToShowRecord(`SAKE`)}"
                 android:alpha="0.3"
                 app:cardCornerRadius="8dp">
 
@@ -237,6 +243,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:onClick="@{() -> vm.navigateToShowRecord(`WINE`)}"
                 android:layout_weight="1"
                 android:alpha="0.3"
                 app:cardCornerRadius="8dp">
@@ -254,6 +261,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:onClick="@{() -> vm.navigateToShowRecord(`HIGHBALL`)}"
                 android:layout_weight="1"
                 android:alpha="0.3"
                 app:cardCornerRadius="8dp">
