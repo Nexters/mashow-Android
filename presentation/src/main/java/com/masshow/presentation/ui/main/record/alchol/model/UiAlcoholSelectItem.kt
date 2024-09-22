@@ -1,9 +1,9 @@
 package com.masshow.presentation.ui.main.record.alchol.model
 
+import com.masshow.presentation.util.Alcohol
+
 data class UiAlcoholSelectItem(
-    val name: String,
-    val alcoholImage: Int,
-    val alcoholText: Int,
+    val alcohol: Alcohol,
     val isSelected: Boolean,
     val adding : (Int) -> Unit
 )

@@ -38,7 +38,7 @@ class FoodRecordDetailFragment :
                     is FoodRecordDetailEvent.NavigateBack -> findNavController().navigateUp()
                     is FoodRecordDetailEvent.AddEditFood -> addEditFood()
                     is FoodRecordDetailEvent.CompleteEditFood -> {
-                        RecordFormData.foods = it.list
+                        RecordFormData.sideDishes = it.list
                         findNavController().navigateUp()
                     }
                 }

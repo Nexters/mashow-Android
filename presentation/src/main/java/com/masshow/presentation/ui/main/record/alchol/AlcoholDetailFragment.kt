@@ -16,6 +16,7 @@ import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentAlcoholDetailBinding
 import com.masshow.presentation.ui.main.record.RecordFormData
+import com.masshow.presentation.util.Alcohol
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,7 +47,10 @@ class AlcoholDetailFragment :
                 when (it) {
                     is AlcoholDetailEvent.NavigateToBack -> findNavController().navigateUp()
                     is AlcoholDetailEvent.NavigateToEstimate -> {
-                        RecordFormData.selectedAlcoholMap = viewModel.selectedAlcoholMap
+                        RecordFormData.selectedAlcoholMap =
+                            viewModel.selectedAlcoholMap.entries.map { data ->
+                                Pair(Alcohol.displayNameToEnum(data.key).toString(), data.value)
+                            }
                         findNavController().toEstimate()
                     }
                 }

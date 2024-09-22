@@ -7,9 +7,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.constraintlayout.widget.ConstraintSet.Motion
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentEstimateBinding
+import com.masshow.presentation.ui.main.record.RecordFormData
 import com.masshow.presentation.util.Constants.TAG
 import kotlin.math.max
 import kotlin.math.min
@@ -31,6 +34,9 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
 //            height = initialHeight
 //        }
 
+        binding.btnNext.setOnClickListener {
+            findNavController().toFoodRecord()
+        }
 
         binding.viewSwipable.setOnTouchListener { v, event ->
             when (event.action) {
@@ -58,21 +64,26 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
                     if (point in ummPoint..notBadPoint) {
                         binding.ivUmm.visibility = View.VISIBLE
                         binding.ivNotBad.visibility = View.INVISIBLE
+                        RecordFormData.rating = 1
                     } else if (point in notBadPoint..goodPoint) {
                         binding.ivUmm.visibility = View.INVISIBLE
                         binding.ivNotBad.visibility = View.VISIBLE
                         binding.ivGood.visibility = View.INVISIBLE
+                        RecordFormData.rating = 2
                     } else if (point in goodPoint..veryGoodPoint) {
                         binding.ivNotBad.visibility = View.INVISIBLE
                         binding.ivGood.visibility = View.VISIBLE
                         binding.ivVeryGood.visibility = View.INVISIBLE
+                        RecordFormData.rating = 3
                     } else if (point in veryGoodPoint..awesomePoint) {
                         binding.ivGood.visibility = View.INVISIBLE
                         binding.ivVeryGood.visibility = View.VISIBLE
                         binding.ivAwsome.visibility = View.INVISIBLE
+                        RecordFormData.rating = 4
                     } else if (point >= awesomePoint) {
                         binding.ivVeryGood.visibility = View.INVISIBLE
                         binding.ivAwsome.visibility = View.VISIBLE
+                        RecordFormData.rating = 5
                     } else if (point < binding.root.height - binding.tvUmm.y.toInt()) {
                         binding.ivUmm.visibility = View.INVISIBLE
                     }
@@ -86,6 +97,11 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
             }
         }
 
+    }
+
+    private fun NavController.toFoodRecord() {
+        val action = EstimateFragmentDirections.actionEstimateFragmentToFoodRecordFragment()
+        navigate(action)
     }
 
 

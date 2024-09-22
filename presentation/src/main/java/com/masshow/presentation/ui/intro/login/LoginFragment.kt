@@ -51,6 +51,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(intent)
                     }
+
+                    is LoginEvent.ShowToastMessage -> showToastMessage(it.msg)
                 }
             }
         }

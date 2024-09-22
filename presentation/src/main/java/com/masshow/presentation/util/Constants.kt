@@ -1,7 +1,5 @@
 package com.masshow.presentation.util
 
-import com.masshow.presentation.R
-
 object Constants {
     const val TAG = "debugging"
 
@@ -20,16 +18,5 @@ object Constants {
         5 to "와인",
         6 to "칵테일",
         7 to "하이볼"
-    )
-
-    val alcoholAddBtnMap = hashMapOf<String, Int>(
-        "소주" to R.drawable.btn_soju_added,
-        "양주" to R.drawable.btn_liquor_added,
-        "막걸리" to R.drawable.btn_makguli_added,
-        "사케" to R.drawable.btn_sake_added,
-        "맥주" to R.drawable.btn_beer_added,
-        "와인" to R.drawable.btn_wine_added,
-        "칵테일" to R.drawable.btn_cocktail_added,
-        "하이볼" to R.drawable.btn_highball_added
     )
 }

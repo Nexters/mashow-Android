@@ -11,6 +11,7 @@ import javax.inject.Inject
 
 sealed class FoodRecordEvent{
     data object NavigateToFoodRecordDetail: FoodRecordEvent()
+    data object NavigateToMemo: FoodRecordEvent()
 }
 
 @HiltViewModel
@@ -22,6 +23,12 @@ class FoodRecordViewModel @Inject constructor(): ViewModel() {
     fun navigateToFoodRecord(){
         viewModelScope.launch {
             _event.emit(FoodRecordEvent.NavigateToFoodRecordDetail)
+        }
+    }
+
+    fun navigateToMemo(){
+        viewModelScope.launch {
+            _event.emit(FoodRecordEvent.NavigateToMemo)
         }
     }
 

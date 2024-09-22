@@ -1,6 +1,7 @@
 package com.masshow.alchol.di
 
 import com.masshow.data.remote.AuthApi
+import com.masshow.data.remote.MainApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +17,11 @@ object ApiModule {
     @Provides
     fun provideAuthApi(@NetworkModule.BaseRetrofit retrofit: Retrofit): AuthApi =
         retrofit.create(AuthApi::class.java)
+
+
+    @Singleton
+    @Provides
+    fun provideMainApi(@NetworkModule.BaseRetrofit retrofit: Retrofit): MainApi =
+        retrofit.create(MainApi::class.java)
 
 }

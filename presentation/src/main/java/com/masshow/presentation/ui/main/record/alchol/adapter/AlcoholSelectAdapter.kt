@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.masshow.presentation.R
 import com.masshow.presentation.databinding.ItemAlcoholBinding
 import com.masshow.presentation.ui.main.record.alchol.model.UiAlcoholSelectItem
-import com.masshow.presentation.util.Constants
 import com.masshow.presentation.util.Constants.TAG
-import com.masshow.presentation.util.Constants.alcoholAddBtnMap
 
 class AlcoholSelectAdapter() :
     RecyclerView.Adapter<AlcoholSelectViewHolder>() {
@@ -29,8 +27,8 @@ class AlcoholSelectAdapter() :
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateItem(list: List<UiAlcoholSelectItem>){
-        Log.d(TAG,"update")
+    fun updateItem(list: List<UiAlcoholSelectItem>) {
+        Log.d(TAG, "update")
         data = list
         notifyDataSetChanged()
     }
@@ -43,22 +41,20 @@ class AlcoholSelectViewHolder(private val binding: ItemAlcoholBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: UiAlcoholSelectItem) {
-        if(item.isSelected){
-            alcoholAddBtnMap[item.name]?.let { resource ->
-                binding.btnAddAlcohol.setImageResource(resource)
-            }
+        if (item.isSelected) {
+            binding.btnAddAlcohol.setImageResource(item.alcohol.btnResource)
         } else {
             binding.btnAddAlcohol.setImageResource(R.drawable.btn_add_alcohol)
         }
 
         binding.btnAddAlcohol.setOnClickListener {
-            if(!item.isSelected){
+            if (!item.isSelected) {
                 item.adding(adapterPosition)
             }
         }
 
-        binding.tvAlcoholText.setImageResource(item.alcoholText)
-        binding.ivAlcohol.setImageResource(item.alcoholImage)
+        binding.tvAlcoholText.setImageResource(item.alcohol.textResource)
+        binding.ivAlcohol.setImageResource(item.alcohol.imageResource)
     }
 
 }

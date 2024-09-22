@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.masshow.presentation.R
 import com.masshow.presentation.ui.main.record.alchol.model.UiAlcoholSelectItem
 import com.masshow.presentation.ui.main.record.alchol.model.UiSelectedAlcoholItem
+import com.masshow.presentation.util.Alcohol
 import com.masshow.presentation.util.Constants
 import com.masshow.presentation.util.Constants.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -49,49 +50,33 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
         alcoholData.update {
             listOf(
                 UiAlcoholSelectItem(
-                    "소주",
-                    R.drawable.image_soju,
-                    R.drawable.text_soju, false,
+                    Alcohol.SOJU, false,
                     ::addAlcohol
                 ),
                 UiAlcoholSelectItem(
-                    "양주",
-                    R.drawable.image_liquor,
-                    R.drawable.text_liquor, false,
+                    Alcohol.LIQUOR, false,
                     ::addAlcohol
                 ),
                 UiAlcoholSelectItem(
-                    "막걸리",
-                    R.drawable.image_makguli,
-                    R.drawable.text_makguli, false, ::addAlcohol
+                    Alcohol.MAKGEOLLI, false, ::addAlcohol
                 ),
                 UiAlcoholSelectItem(
-                    "사케",
-                    R.drawable.image_sake,
-                    R.drawable.text_sake, false,
+                    Alcohol.SAKE, false,
                     ::addAlcohol
                 ),
                 UiAlcoholSelectItem(
-                    "맥주",
-                    R.drawable.image_beer,
-                    R.drawable.text_beer, false,
+                    Alcohol.BEER, false,
                     ::addAlcohol
                 ),
                 UiAlcoholSelectItem(
-                    "와인",
-                    R.drawable.image_wine,
-                    R.drawable.text_wine, false,
+                    Alcohol.WINE, false,
                     ::addAlcohol
                 ),
                 UiAlcoholSelectItem(
-                    "칵테일",
-                    R.drawable.image_cocktail,
-                    R.drawable.text_cocktail, false, ::addAlcohol
+                    Alcohol.COCKTAIL, false, ::addAlcohol
                 ),
                 UiAlcoholSelectItem(
-                    "하이볼",
-                    R.drawable.image_highball,
-                    R.drawable.text_highball, false, ::addAlcohol
+                    Alcohol.HIGHBALL, false, ::addAlcohol
                 )
             )
         }
