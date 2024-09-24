@@ -9,6 +9,7 @@ import com.masshow.data.model.request.RecordRequest
 import com.masshow.data.model.request.SideDishItem
 import com.masshow.data.repository.MainRepository
 import com.masshow.presentation.ui.main.record.RecordFormData
+import com.masshow.presentation.util.getTodayDateWithDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,6 +31,8 @@ class MemoViewModel @Inject constructor(
     val events: SharedFlow<MemoEvents> = _events.asSharedFlow()
 
     val memo = MutableStateFlow("")
+
+    val date = getTodayDateWithDay()
 
     fun record(){
         viewModelScope.launch {

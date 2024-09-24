@@ -14,6 +14,7 @@ import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentEstimateBinding
 import com.masshow.presentation.ui.main.record.RecordFormData
 import com.masshow.presentation.util.Constants.TAG
+import com.masshow.presentation.util.getTodayDateWithDay
 import kotlin.math.max
 import kotlin.math.min
 
@@ -33,6 +34,8 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
 //        binding.viewSwipable.layoutParams = binding.viewSwipable.layoutParams.apply{
 //            height = initialHeight
 //        }
+
+        binding.tvDate.text = getTodayDateWithDay()
 
         binding.btnNext.setOnClickListener {
             findNavController().toFoodRecord()

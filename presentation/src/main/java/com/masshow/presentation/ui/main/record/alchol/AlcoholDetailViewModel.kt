@@ -2,6 +2,7 @@ package com.masshow.presentation.ui.main.record.alchol
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.masshow.presentation.util.getTodayDateWithDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -21,6 +22,8 @@ class AlcoholDetailViewModel @Inject constructor() : ViewModel() {
     val event: SharedFlow<AlcoholDetailEvent> = _event.asSharedFlow()
 
     val selectedAlcoholMap = hashMapOf<String, MutableList<String>>()
+
+    val date = getTodayDateWithDay()
 
     fun setSelectedAlcohol(name: String) {
         selectedAlcoholMap[name] = mutableListOf()

@@ -9,6 +9,7 @@
             name="vm"
             type="com.masshow.presentation.ui.main.record.alchol.AlcoholDetailViewModel" />
 
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/pretendard_semi_bold"
+            android:text="@{vm.date}"
             android:textColor="#CCFFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

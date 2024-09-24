@@ -3,12 +3,12 @@ package com.masshow.presentation.ui.main.record.alchol
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.masshow.presentation.R
 import com.masshow.presentation.ui.main.record.alchol.model.UiAlcoholSelectItem
 import com.masshow.presentation.ui.main.record.alchol.model.UiSelectedAlcoholItem
 import com.masshow.presentation.util.Alcohol
 import com.masshow.presentation.util.Constants
 import com.masshow.presentation.util.Constants.TAG
+import com.masshow.presentation.util.getTodayDateWithDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,6 +39,8 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
 
     private val _uiState = MutableStateFlow(AlcoholSelectUiState())
     val uiState: StateFlow<AlcoholSelectUiState> = _uiState.asStateFlow()
+
+    val date = getTodayDateWithDay()
 
     val alcoholData = MutableStateFlow<List<UiAlcoholSelectItem>>(emptyList())
 

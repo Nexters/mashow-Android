@@ -3,6 +3,7 @@ package com.masshow.presentation.ui.main.record.food
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.masshow.presentation.util.Constants.EDIT_FOOD
+import com.masshow.presentation.util.getTodayDateWithDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,6 +29,8 @@ class FoodRecordDetailViewModel @Inject constructor() : ViewModel() {
     val event: SharedFlow<FoodRecordDetailEvent> = _event.asSharedFlow()
 
     private val foodList = mutableListOf<String>()
+
+    val date = getTodayDateWithDay()
 
     fun navigateBack() {
         viewModelScope.launch {
