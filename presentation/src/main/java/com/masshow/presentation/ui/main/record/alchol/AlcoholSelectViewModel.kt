@@ -7,7 +7,6 @@ import com.masshow.presentation.ui.main.record.RecordFormData
 import com.masshow.presentation.ui.main.record.alchol.model.UiAlcoholSelectItem
 import com.masshow.presentation.ui.main.record.alchol.model.UiSelectedAlcoholItem
 import com.masshow.presentation.util.Alcohol
-import com.masshow.presentation.util.Constants
 import com.masshow.presentation.util.Constants.TAG
 import com.masshow.presentation.util.getTodayDateWithDay
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,9 +27,9 @@ data class AlcoholSelectUiState(
 
 sealed class AlcoholSelectEvent {
     data object ChangeSelectedAlcohol : AlcoholSelectEvent()
-    data class NavigateToAlcoholSelectDetail(val list: List<String>) :
-        AlcoholSelectEvent()
-    data object NavigateToBack: AlcoholSelectEvent()
+    data object NavigateToAlcoholSelectDetail : AlcoholSelectEvent()
+    data object NavigateToBack : AlcoholSelectEvent()
+    data object FinishRecord : AlcoholSelectEvent()
 }
 
 @HiltViewModel
@@ -45,6 +44,19 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
     val date = getTodayDateWithDay()
 
     val alcoholData = MutableStateFlow<List<UiAlcoholSelectItem>>(emptyList())
+
+    companion object{
+        val alcoholMap = hashMapOf(
+            0 to "소주",
+            1 to "양주",
+            2 to "막걸리",
+            3 to "사케",
+            4 to "맥주",
+            5 to "와인",
+            6 to "칵테일",
+            7 to "하이볼"
+        )
+    }
 
     init {
         setAlcoholData()
@@ -88,7 +100,11 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
 
     private fun addAlcohol(position: Int) {
         if (uiState.value.selectedItemList.size != 3) {
-            val item = UiSelectedAlcoholItem(position, ::deleteSelected)
+            val item = UiSelectedAlcoholItem(
+                position,
+                Alcohol.displayNameToEnum(alcoholMap[position]!!),
+                ::deleteSelected
+            )
             if (!uiState.value.selectedItemList.contains(item)) {
                 _uiState.update { state ->
                     state.copy(
@@ -108,6 +124,13 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
                     }
                 }
             }
+
+            RecordFormData.selectedAlcoholList.add(
+                Pair(
+                    item.alcohol,
+                    mutableListOf()
+                )
+            )
 
             viewModelScope.launch {
                 _event.emit(AlcoholSelectEvent.ChangeSelectedAlcohol)
@@ -153,16 +176,20 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
 
     fun navigateToAlcoholDetail() {
         viewModelScope.launch {
-            _event.emit(AlcoholSelectEvent.NavigateToAlcoholSelectDetail(uiState.value.selectedItemList.map{
-                Constants.alcoholMap[it.position] ?: run{ "" }
-            }))
+            _event.emit(AlcoholSelectEvent.NavigateToAlcoholSelectDetail)
         }
     }
 
-    fun cancelRecord(){
+    fun cancelRecord() {
         viewModelScope.launch {
             RecordFormData.clear()
             _event.emit(AlcoholSelectEvent.NavigateToBack)
+        }
+    }
+
+    fun finishRecord() {
+        viewModelScope.launch {
+            _event.emit(AlcoholSelectEvent.FinishRecord)
         }
     }
 

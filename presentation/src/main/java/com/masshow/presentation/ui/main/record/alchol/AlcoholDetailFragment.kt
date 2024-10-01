@@ -11,7 +11,6 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentAlcoholDetailBinding
@@ -23,8 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class AlcoholDetailFragment :
     BaseFragment<FragmentAlcoholDetailBinding>(R.layout.fragment_alcohol_detail) {
 
-    private val args: AlcoholDetailFragmentArgs by navArgs()
-    val alcoholList by lazy { args.alcohollist }
 
     private val viewModel: AlcoholDetailViewModel by viewModels()
 
@@ -32,13 +29,10 @@ class AlcoholDetailFragment :
         super.onViewCreated(view, savedInstanceState)
 
         binding.vm = viewModel
-
-        alcoholList.forEach {
-            viewModel.setSelectedAlcohol(it)
-            addAlcoholForm(it)
-        }
-
         initEventObserve()
+        RecordFormData.selectedAlcoholList.forEach {
+            addAlcoholForm(it.first)
+        }
     }
 
     private fun initEventObserve() {
@@ -47,19 +41,16 @@ class AlcoholDetailFragment :
                 when (it) {
                     is AlcoholDetailEvent.NavigateToBack -> findNavController().navigateUp()
                     is AlcoholDetailEvent.NavigateToEstimate -> {
-                        RecordFormData.selectedAlcoholMap =
-                            viewModel.selectedAlcoholMap.entries.map { data ->
-                                Pair(Alcohol.displayNameToEnum(data.key).toString(), data.value)
-                            }
                         findNavController().toEstimate()
                     }
+
                     is AlcoholDetailEvent.NavigateToHome -> findNavController().toHome()
                 }
             }
         }
     }
 
-    private fun addAlcoholForm(name: String) {
+    private fun addAlcoholForm(alcohol: Alcohol) {
         val newAlcoholForm = LayoutInflater.from(requireContext())
             .inflate(R.layout.item_layout_et_alcohol, binding.layoutEditAlcohol, false)
 
@@ -67,29 +58,28 @@ class AlcoholDetailFragment :
         val addBtn = newAlcoholForm.findViewById<TextView>(R.id.btn_add_alcohol)
         val layoutEditAlcohol = newAlcoholForm.findViewById<LinearLayout>(R.id.layout_edit_alcohol)
 
-        alcoholName.text = name
+        alcoholName.text = alcohol.displayName
         var count = 0
 
         addBtn.setOnClickListener {
             count++
-            viewModel.addCustomAlcoholName(name)
-            addEditAlcohol(layoutEditAlcohol, name, count)
+            viewModel.addCustomAlcoholName(alcohol)
+            addEditAlcohol(layoutEditAlcohol, alcohol, count)
         }
 
-        viewModel.addCustomAlcoholName(name)
-        addEditAlcohol(layoutEditAlcohol, name, count)
-
+        viewModel.addCustomAlcoholName(alcohol)
+        addEditAlcohol(layoutEditAlcohol, alcohol, count)
         binding.layoutEditAlcohol.addView(newAlcoholForm)
     }
 
-    private fun addEditAlcohol(layout: LinearLayout, name: String, position: Int) {
+    private fun addEditAlcohol(layout: LinearLayout, alcohol: Alcohol, position: Int) {
         val newEditAlcohol =
             LayoutInflater.from(requireContext()).inflate(R.layout.item_et_food, layout, false)
         val editAlcohol = newEditAlcohol.findViewById<EditText>(R.id.et_food)
         val deleteBtn = newEditAlcohol.findViewById<ImageView>(R.id.btn_delete)
 
-        editAlcohol.doOnTextChanged { detailName, start, before, count ->
-            viewModel.editCustomAlcoholName(name, detailName.toString(), position)
+        editAlcohol.doOnTextChanged { detailName, _, _, _ ->
+            viewModel.editCustomAlcoholName(alcohol, detailName.toString(), position)
         }
 
         editAlcohol.setOnFocusChangeListener { v, hasFocus ->
@@ -114,7 +104,7 @@ class AlcoholDetailFragment :
         navigate(action)
     }
 
-    private fun NavController.toHome(){
+    private fun NavController.toHome() {
         val action = AlcoholDetailFragmentDirections.actionAlcoholDetailFragmentToHomeFragment()
         navigate(action)
     }

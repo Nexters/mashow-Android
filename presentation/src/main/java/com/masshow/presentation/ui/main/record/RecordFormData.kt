@@ -1,15 +1,17 @@
 package com.masshow.presentation.ui.main.record
 
+import com.masshow.presentation.util.Alcohol
+
 object RecordFormData {
-    var selectedAlcoholMap = listOf<Pair<String, MutableList<String>>>()
+    var selectedAlcoholList = mutableListOf<Pair<Alcohol, MutableList<String>>>()
     var rating: Int = 0
     var sideDishes = listOf<String>()
     var memo: String = ""
 
     fun clear(){
-        selectedAlcoholMap = listOf<Pair<String, MutableList<String>>>()
+        selectedAlcoholList = mutableListOf()
         rating = 0
-        sideDishes = listOf<String>()
+        sideDishes = listOf()
         memo = ""
     }
 }

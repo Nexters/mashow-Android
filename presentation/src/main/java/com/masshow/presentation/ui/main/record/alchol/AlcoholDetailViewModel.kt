@@ -3,6 +3,7 @@ package com.masshow.presentation.ui.main.record.alchol
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.masshow.presentation.ui.main.record.RecordFormData
+import com.masshow.presentation.util.Alcohol
 import com.masshow.presentation.util.getTodayDateWithDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -23,21 +24,19 @@ class AlcoholDetailViewModel @Inject constructor() : ViewModel() {
     private val _event = MutableSharedFlow<AlcoholDetailEvent>()
     val event: SharedFlow<AlcoholDetailEvent> = _event.asSharedFlow()
 
-    val selectedAlcoholMap = hashMapOf<String, MutableList<String>>()
-
     val date = getTodayDateWithDay()
 
-    fun setSelectedAlcohol(name: String) {
-        selectedAlcoholMap[name] = mutableListOf()
+    fun addCustomAlcoholName(alcohol: Alcohol){
+        RecordFormData.selectedAlcoholList.forEach {
+            if(it.first == alcohol) it.second.add("")
+        }
     }
 
-    fun addCustomAlcoholName(name: String){
-        selectedAlcoholMap[name]?.add("")
-    }
-
-    fun editCustomAlcoholName(name: String, detailName: String, position: Int){
-        selectedAlcoholMap[name]?.let{ list ->
-            list[position] = detailName
+    fun editCustomAlcoholName(alcohol: Alcohol, detailName: String, position: Int){
+        RecordFormData.selectedAlcoholList.forEach {
+            if(it.first == alcohol){
+                it.second[position] = detailName
+            }
         }
     }
 

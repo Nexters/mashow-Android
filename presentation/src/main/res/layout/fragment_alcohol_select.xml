@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:onClick="@{() -> vm.finishRecord()}"
             android:fontFamily="@font/pretendard_semi_bold"
             android:text="저장"
             android:textColor="@color/white"

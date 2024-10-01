@@ -1,4 +1,4 @@
-package com.masshow.presentation.ui.main.record.memo
+package com.masshow.presentation.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,36 +9,31 @@ import com.masshow.data.model.request.RecordRequest
 import com.masshow.data.model.request.SideDishItem
 import com.masshow.data.repository.MainRepository
 import com.masshow.presentation.ui.main.record.RecordFormData
-import com.masshow.presentation.util.getTodayDateWithDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed class MemoEvents {
-    data object FinishRecord : MemoEvents()
+sealed class MainEvent{
 }
 
 @HiltViewModel
-class MemoViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val repository: MainRepository
-) : ViewModel() {
+): ViewModel() {
 
-    private val _events = MutableSharedFlow<MemoEvents>()
-    val events: SharedFlow<MemoEvents> = _events.asSharedFlow()
+    private val _event = MutableSharedFlow<MainEvent>()
+    val event: SharedFlow<MainEvent> = _event.asSharedFlow()
 
-    val memo = MutableStateFlow("")
+    val finishRecord = MutableSharedFlow<String>()
 
-    val date = getTodayDateWithDay()
-
-    fun record() {
+    fun record(){
         viewModelScope.launch {
             repository.record(
                 RecordRequest(
-                    liquors = RecordFormData.selectedAlcoholList.map {
+                    liquors = RecordFormData.selectedAlcoholList.map{
                         LiquorItem(
                             it.first.toString(),
                             it.second
@@ -46,14 +41,14 @@ class MemoViewModel @Inject constructor(
                     },
                     memos = listOf(MemoItem(description = RecordFormData.memo)),
                     rating = RecordFormData.rating,
-                    sideDishes = RecordFormData.sideDishes.map {
+                    sideDishes = RecordFormData.sideDishes.map{
                         SideDishItem(it)
                     }
                 )
-            ).let {
-                when (it) {
+            ).let{
+                when(it){
                     is BaseState.Success -> {
-                        _events.emit(MemoEvents.FinishRecord)
+                        finishRecord.emit("기록을 완료했습니다")
                     }
 
                     is BaseState.Error -> {

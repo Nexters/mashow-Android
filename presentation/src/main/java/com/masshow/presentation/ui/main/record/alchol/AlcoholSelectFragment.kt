@@ -3,6 +3,7 @@ package com.masshow.presentation.ui.main.record.alchol
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -10,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentAlcoholSelectBinding
+import com.masshow.presentation.ui.main.MainViewModel
 import com.masshow.presentation.ui.main.record.alchol.adapter.AlcoholSelectAdapter
 import com.masshow.presentation.ui.main.record.alchol.adapter.SelectedAlcoholAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AlcoholSelectFragment :
     BaseFragment<FragmentAlcoholSelectBinding>(R.layout.fragment_alcohol_select) {
 
+        private val parentViewModel : MainViewModel by activityViewModels()
     private val viewModel: AlcoholSelectViewModel by viewModels()
     private var adapter: AlcoholSelectAdapter? = null
 
@@ -54,9 +57,17 @@ class AlcoholSelectFragment :
                     is AlcoholSelectEvent.ChangeSelectedAlcohol -> {
                         adapter?.updateItem(viewModel.alcoholData.value)
                     }
-                    is AlcoholSelectEvent.NavigateToAlcoholSelectDetail -> findNavController().toAlcoholDetail(it.list)
+                    is AlcoholSelectEvent.NavigateToAlcoholSelectDetail -> findNavController().toAlcoholDetail()
                     is AlcoholSelectEvent.NavigateToBack -> findNavController().navigateUp()
+                    is AlcoholSelectEvent.FinishRecord -> parentViewModel.record()
                 }
+            }
+        }
+
+        repeatOnStarted {
+            parentViewModel.finishRecord.collect{
+                showToastMessage(it)
+                findNavController().navigateUp()
             }
         }
     }
@@ -105,9 +116,8 @@ class AlcoholSelectFragment :
         override fun onPageScrollStateChanged(state: Int) {}
     }
 
-    fun NavController.toAlcoholDetail(list: List<String>) {
-        val action =
-            AlcoholSelectFragmentDirections.actionAlcoholSelectFragmentToAlcoholDetailFragment(list.toTypedArray())
+    fun NavController.toAlcoholDetail() {
+        val action = AlcoholSelectFragmentDirections.actionAlcoholSelectFragmentToAlcoholDetailFragment()
         navigate(action)
     }
 

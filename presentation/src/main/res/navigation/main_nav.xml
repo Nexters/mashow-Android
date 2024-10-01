@@ -50,10 +50,6 @@
         android:name="com.masshow.presentation.ui.main.record.alchol.AlcoholDetailFragment"
         android:label="AlcoholDetailFragment">
 
-        <argument
-            android:name="alcohollist"
-            app:argType="string[]" />
-
         <action
             android:id="@+id/action_alcoholDetailFragment_to_estimateFragment"
             app:destination="@id/estimateFragment" />

@@ -6,7 +6,7 @@ enum class Alcohol(
     val displayName: String,
     val textResource: Int,
     val imageResource: Int,
-    val btnResource: Int
+    val btnResource: Int,
 ) {
     SOJU("소주", R.drawable.text_soju, R.drawable.image_soju, R.drawable.btn_soju_added),
     LIQUOR("양주", R.drawable.text_liquor, R.drawable.image_liquor, R.drawable.btn_liquor_added),
