@@ -9,9 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="24dp"
-        android:background="#333333">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
 
         <TextView
             android:id="@+id/tv_date"
@@ -53,7 +52,7 @@
             android:id="@+id/rv_record_preview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
@@ -61,7 +60,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line" />
+            app:layout_constraintTop_toBottomOf="@id/line"
+            tools:listitem="@layout/item_alcohol_record_preview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
