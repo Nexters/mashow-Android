@@ -14,6 +14,8 @@ sealed class FoodRecordEvent{
     data object NavigateToFoodRecordDetail: FoodRecordEvent()
     data object NavigateToMemo: FoodRecordEvent()
     data object NavigateToHome: FoodRecordEvent()
+    data object FinishRecord: FoodRecordEvent()
+    data object NavigateToBack: FoodRecordEvent()
 }
 
 @HiltViewModel
@@ -39,6 +41,18 @@ class FoodRecordViewModel @Inject constructor(): ViewModel() {
     fun cancelRecord(){
         viewModelScope.launch {
             _event.emit(FoodRecordEvent.NavigateToHome)
+        }
+    }
+
+    fun finishRecord(){
+        viewModelScope.launch {
+            _event.emit(FoodRecordEvent.FinishRecord)
+        }
+    }
+
+    fun navigateToBack(){
+        viewModelScope.launch {
+            _event.emit(FoodRecordEvent.NavigateToBack)
         }
     }
 

@@ -35,7 +35,7 @@ class SelectedAlcoholViewHolder(private val binding: ItemSelectedAlcoholBinding)
         AlcoholSelectViewModel.alcoholMap[item.position]?.let {
             binding.tvAlcohol.text = it
         }
-        binding.btnDelete.setOnClickListener {
+        binding.btnErase.setOnClickListener {
             item.deleteSelect(item.position)
         }
     }

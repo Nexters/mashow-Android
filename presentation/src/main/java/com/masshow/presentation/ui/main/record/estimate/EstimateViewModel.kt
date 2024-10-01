@@ -14,6 +14,8 @@ import javax.inject.Inject
 sealed class EstimateEvent {
     data object NavigateToFoodRecord : EstimateEvent()
     data object NavigateToHome : EstimateEvent()
+    data object FinishRecord : EstimateEvent()
+    data object NavigateToBack: EstimateEvent()
 }
 
 @HiltViewModel
@@ -34,6 +36,18 @@ class EstimateViewModel @Inject constructor() : ViewModel() {
         viewModelScope.launch {
             RecordFormData.clear()
             _event.emit(EstimateEvent.NavigateToHome)
+        }
+    }
+
+    fun finishRecord() {
+        viewModelScope.launch {
+            _event.emit(EstimateEvent.FinishRecord)
+        }
+    }
+
+    fun navigateToBack(){
+        viewModelScope.launch {
+            _event.emit(EstimateEvent.NavigateToBack)
         }
     }
 

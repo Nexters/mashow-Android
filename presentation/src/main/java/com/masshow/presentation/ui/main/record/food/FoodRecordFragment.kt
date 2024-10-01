@@ -7,18 +7,21 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentFoodRecordBinding
+import com.masshow.presentation.ui.main.MainViewModel
 import com.masshow.presentation.ui.main.record.RecordFormData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FoodRecordFragment : BaseFragment<FragmentFoodRecordBinding>(R.layout.fragment_food_record) {
 
+    private val parentViewModel: MainViewModel by activityViewModels()
     private val viewModel: FoodRecordViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +41,16 @@ class FoodRecordFragment : BaseFragment<FragmentFoodRecordBinding>(R.layout.frag
                     is FoodRecordEvent.NavigateToFoodRecordDetail -> findNavController().toFoodRecordDetail()
                     is FoodRecordEvent.NavigateToMemo -> findNavController().toMemo()
                     is FoodRecordEvent.NavigateToHome -> findNavController().toHome()
+                    is FoodRecordEvent.FinishRecord -> parentViewModel.finishRecord
+                    is FoodRecordEvent.NavigateToBack -> findNavController().navigateUp()
                 }
+            }
+        }
+
+        repeatOnStarted {
+            parentViewModel.finishRecord.collect{
+                showToastMessage(it)
+                findNavController().toHome()
             }
         }
     }

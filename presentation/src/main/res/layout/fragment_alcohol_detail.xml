@@ -27,6 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/background_blur"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -70,6 +71,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/pretendard_semi_bold"
+            android:onClick="@{() -> vm.finishRecord()}"
             android:text="저장"
             android:textColor="@color/white"
             android:textSize="16dp"
@@ -91,14 +93,16 @@
             app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/layout_scroll"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_announce">
+            app:layout_constraintTop_toBottomOf="@id/tv_announce"
+            app:layout_constraintBottom_toTopOf="@id/btn_back">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

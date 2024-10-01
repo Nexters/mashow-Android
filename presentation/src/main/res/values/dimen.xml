@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="edit_detail_padding">44dp</dimen>
+    <dimen name="edit_detail_focus_padding">16dp</dimen>
+</resources>

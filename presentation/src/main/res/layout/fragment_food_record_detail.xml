@@ -27,6 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/background_blur"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -41,8 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:onClick="@{() -> vm.navigateBack()}"
             android:layout_marginTop="20dp"
+            android:onClick="@{() -> vm.navigateBack()}"
             android:src="@drawable/ic_exit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -61,12 +62,14 @@
             app:layout_constraintTop_toBottomOf="@id/tv_cancel" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/layout_scroll"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="20dp"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="300dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_complete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_announce">

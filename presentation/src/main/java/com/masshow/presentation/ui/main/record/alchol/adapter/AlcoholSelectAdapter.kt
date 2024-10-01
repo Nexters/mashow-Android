@@ -3,6 +3,7 @@ package com.masshow.presentation.ui.main.record.alchol.adapter
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.masshow.presentation.R
@@ -48,9 +49,17 @@ class AlcoholSelectViewHolder(private val binding: ItemAlcoholBinding) :
         }
 
         binding.btnAddAlcohol.setOnClickListener {
-            if (!item.isSelected) {
+            if (item.isSelected) {
+                item.delete(adapterPosition)
+            }else{
                 item.adding(adapterPosition)
             }
+        }
+
+        if(item.hideAddBtn){
+            binding.btnAddAlcohol.visibility = View.GONE
+        } else {
+            binding.btnAddAlcohol.visibility = View.VISIBLE
         }
 
         binding.tvAlcoholText.setImageResource(item.alcohol.textResource)
