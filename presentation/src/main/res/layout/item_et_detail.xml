@@ -12,14 +12,16 @@
 
 
         <EditText
-            android:id="@+id/et_food"
+            android:id="@+id/et_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/rect_darkgrayfill_graystroke_14radius"
             android:hint="이름 혹은 종류"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="16dp"
+            android:paddingHorizontal="@dimen/edit_detail_focus_padding"
+            android:paddingVertical="@dimen/edit_detail_focus_padding"
+            android:inputType="text"
+            android:maxLength="12"
             android:textColor="@color/white"
             android:textColorHint="#80F3F3F3"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,14 +31,24 @@
 
         <ImageView
             android:id="@+id/btn_delete"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_fill_minus"
+            app:layout_constraintStart_toStartOf="@id/et_detail"
+            app:layout_constraintTop_toTopOf="@id/et_detail"
+            app:layout_constraintBottom_toBottomOf="@id/et_detail"
+            android:layout_marginStart="12dp"/>
+
+        <ImageView
+            android:id="@+id/btn_erase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/icon_fill_x"
+            android:src="@drawable/ic_fill_x"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/et_food"
-            app:layout_constraintEnd_toEndOf="@id/et_food"
-            app:layout_constraintTop_toTopOf="@id/et_food" />
+            app:layout_constraintBottom_toBottomOf="@id/et_detail"
+            app:layout_constraintEnd_toEndOf="@id/et_detail"
+            app:layout_constraintTop_toTopOf="@id/et_detail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

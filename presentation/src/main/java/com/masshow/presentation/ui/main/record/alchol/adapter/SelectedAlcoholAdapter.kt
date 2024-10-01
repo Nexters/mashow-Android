@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.masshow.presentation.databinding.ItemSelectedAlcoholBinding
+import com.masshow.presentation.ui.main.record.alchol.AlcoholSelectViewModel
 import com.masshow.presentation.ui.main.record.alchol.model.UiSelectedAlcoholItem
-import com.masshow.presentation.util.Constants
 import com.masshow.presentation.util.DefaultDiffUtil
 
 class SelectedAlcoholAdapter() : ListAdapter<UiSelectedAlcoholItem, SelectedAlcoholViewHolder>(
@@ -33,10 +32,10 @@ class SelectedAlcoholViewHolder(private val binding: ItemSelectedAlcoholBinding)
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: UiSelectedAlcoholItem) {
-        Constants.alcoholMap[item.position]?.let {
+        AlcoholSelectViewModel.alcoholMap[item.position]?.let {
             binding.tvAlcohol.text = it
         }
-        binding.btnDelete.setOnClickListener {
+        binding.btnErase.setOnClickListener {
             item.deleteSelect(item.position)
         }
     }

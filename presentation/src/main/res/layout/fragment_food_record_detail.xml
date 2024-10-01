@@ -27,6 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/background_blur"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -36,40 +37,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <ImageView
             android:id="@+id/tv_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/pretendard_semi_bold"
-            android:text="취소"
-            android:textColor="#80FFFFFF"
-            android:textSize="16dp"
+            android:onClick="@{() -> vm.navigateBack()}"
+            android:src="@drawable/ic_exit"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/pretendard_semi_bold"
-            android:textColor="#CCFFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="7월 16일 화요일" />
-
-        <TextView
-            android:id="@+id/tv_store"
-            style="@style/TextMediumSemibold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:text="저장"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -83,15 +59,17 @@
             android:text="먹은 음식 이름 또는 종류를\n적어주세요!"
             android:textColor="#F3F3F3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_date" />
+            app:layout_constraintTop_toBottomOf="@id/tv_cancel" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/layout_scroll"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="20dp"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="300dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_complete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_announce">
@@ -116,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:drawableStart="@drawable/icon_gray_plus"
+                    android:drawableStart="@drawable/ic_gray_plus"
                     android:drawablePadding="8dp"
                     android:fontFamily="@font/pretendard_regular"
                     android:gravity="center"

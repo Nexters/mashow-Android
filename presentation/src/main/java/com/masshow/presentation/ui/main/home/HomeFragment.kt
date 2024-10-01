@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentHomeBinding
-import com.masshow.presentation.ui.main.record.alchol.AlcoholSelectFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +22,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.vm = viewModel
         initStateObserve()
         initEventObserve()
+        viewModel.getExistRecord()
     }
 
     private fun initStateObserve() {
@@ -57,20 +57,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 }
             }
         }
-    }
 
-    private fun initEventObserve(){
         repeatOnStarted {
-            viewModel.event.collect{
-                when(it){
-                    is HomeEvent.NavigateToRecord -> findNavController().toAlcoholSelect()
+            viewModel.existRecordLiquor.collect {
+                it.forEach { data ->
+                    when (data) {
+                        "SOJU" -> binding.btnSoju.alpha = 1F
+                        "LIQUOR" -> binding.btnYangju.alpha = 1F
+                        "SAKE" -> binding.btnSakae.alpha = 1F
+                        "BEER" -> binding.btnBeer.alpha = 1F
+                        "HIGHBALL" -> binding.btnHighboll.alpha = 1F
+                        "COCKTAIL" -> binding.btnCocktail.alpha = 1F
+                        "WINE" -> binding.btnWine.alpha = 1F
+                        "MAKGEOLLI" -> binding.btnMakguli.alpha = 1F
+                    }
                 }
             }
         }
     }
 
-    private fun NavController.toAlcoholSelect(){
+    private fun initEventObserve() {
+        repeatOnStarted {
+            viewModel.event.collect {
+                when (it) {
+                    is HomeEvent.NavigateToRecord -> findNavController().toAlcoholSelect()
+                    is HomeEvent.NavigateToShowRecord -> findNavController().toShowAlcohol(it.alcohol)
+                }
+            }
+        }
+    }
+
+    private fun NavController.toAlcoholSelect() {
         val action = HomeFragmentDirections.actionHomeFragmentToAlcoholSelectFragment()
+        navigate(action)
+    }
+
+    private fun NavController.toShowAlcohol(alcohol: String){
+        val action = HomeFragmentDirections.actionHomeFragmentToShowAlcoholRecordFragment(alcohol)
         navigate(action)
     }
 

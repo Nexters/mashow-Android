@@ -1,14 +1,12 @@
 package com.masshow.presentation.ui.main.record.alchol
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.masshow.presentation.R
+import com.masshow.presentation.ui.main.record.RecordFormData
 import com.masshow.presentation.ui.main.record.alchol.model.UiAlcoholSelectItem
 import com.masshow.presentation.ui.main.record.alchol.model.UiSelectedAlcoholItem
 import com.masshow.presentation.util.Alcohol
-import com.masshow.presentation.util.Constants
-import com.masshow.presentation.util.Constants.TAG
+import com.masshow.presentation.util.getTodayDateWithDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,8 +25,9 @@ data class AlcoholSelectUiState(
 
 sealed class AlcoholSelectEvent {
     data object ChangeSelectedAlcohol : AlcoholSelectEvent()
-    data class NavigateToAlcoholSelectDetail(val list: List<String>) :
-        AlcoholSelectEvent()
+    data object NavigateToAlcoholSelectDetail : AlcoholSelectEvent()
+    data object NavigateToBack : AlcoholSelectEvent()
+    data object FinishRecord : AlcoholSelectEvent()
 }
 
 @HiltViewModel
@@ -40,7 +39,22 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
     private val _uiState = MutableStateFlow(AlcoholSelectUiState())
     val uiState: StateFlow<AlcoholSelectUiState> = _uiState.asStateFlow()
 
+    val date = getTodayDateWithDay()
+
     val alcoholData = MutableStateFlow<List<UiAlcoholSelectItem>>(emptyList())
+
+    companion object {
+        val alcoholMap = hashMapOf(
+            0 to "소주",
+            1 to "양주",
+            2 to "막걸리",
+            3 to "사케",
+            4 to "맥주",
+            5 to "와인",
+            6 to "칵테일",
+            7 to "하이볼"
+        )
+    }
 
     init {
         setAlcoholData()
@@ -50,41 +64,54 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
         alcoholData.update {
             listOf(
                 UiAlcoholSelectItem(
-                    Alcohol.SOJU, false,
-                    ::addAlcohol
+                    Alcohol.SOJU, false, false,
+                    ::addAlcohol,
+                    ::deleteSelected
                 ),
                 UiAlcoholSelectItem(
-                    Alcohol.LIQUOR, false,
-                    ::addAlcohol
+                    Alcohol.LIQUOR, false, false,
+                    ::addAlcohol,
+                    ::deleteSelected
                 ),
                 UiAlcoholSelectItem(
-                    Alcohol.MAKGEOLLI, false, ::addAlcohol
+                    Alcohol.MAKGEOLLI, false, false, ::addAlcohol,
+                    ::deleteSelected
                 ),
                 UiAlcoholSelectItem(
-                    Alcohol.SAKE, false,
-                    ::addAlcohol
+                    Alcohol.SAKE, false, false,
+                    ::addAlcohol,
+                    ::deleteSelected
                 ),
                 UiAlcoholSelectItem(
-                    Alcohol.BEER, false,
-                    ::addAlcohol
+                    Alcohol.BEER, false, false,
+                    ::addAlcohol,
+                    ::deleteSelected
                 ),
                 UiAlcoholSelectItem(
-                    Alcohol.WINE, false,
-                    ::addAlcohol
+                    Alcohol.WINE, false, false,
+                    ::addAlcohol,
+                    ::deleteSelected
                 ),
                 UiAlcoholSelectItem(
-                    Alcohol.COCKTAIL, false, ::addAlcohol
+                    Alcohol.COCKTAIL, false, false, ::addAlcohol,
+                    ::deleteSelected
                 ),
                 UiAlcoholSelectItem(
-                    Alcohol.HIGHBALL, false, ::addAlcohol
+                    Alcohol.HIGHBALL, false, false, ::addAlcohol,
+                    ::deleteSelected
                 )
             )
         }
     }
 
     private fun addAlcohol(position: Int) {
-        if (uiState.value.selectedItemList.size != 3) {
-            val item = UiSelectedAlcoholItem(position, ::deleteSelected)
+
+        if (uiState.value.selectedItemList.size != 1) {
+            val item = UiSelectedAlcoholItem(
+                position,
+                Alcohol.displayNameToEnum(alcoholMap[position]!!),
+                ::deleteSelected
+            )
             if (!uiState.value.selectedItemList.contains(item)) {
                 _uiState.update { state ->
                     state.copy(
@@ -105,15 +132,42 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
                 }
             }
 
+            var state = true
+            RecordFormData.selectedAlcoholList.forEach {
+                if (it.first == item.alcohol) state = false
+            }
+            if (state) {
+                RecordFormData.selectedAlcoholList.add(
+                    Pair(
+                        item.alcohol,
+                        mutableListOf()
+                    )
+                )
+            }
+
             viewModelScope.launch {
                 _event.emit(AlcoholSelectEvent.ChangeSelectedAlcohol)
+            }
+        }
+
+        if(uiState.value.selectedItemList.size == 1){
+            alcoholData.update {
+                it.map { data ->
+                    if(!data.isSelected){
+                        data.copy(
+                            hideAddBtn = true
+                        )
+                    } else {
+                        data.copy()
+                    }
+                }
             }
         }
 
     }
 
     private fun deleteSelected(position: Int) {
-        Log.d(TAG, position.toString())
+
         _uiState.update { state ->
             state.copy(
                 selectedItemList = uiState.value.selectedItemList.filter {
@@ -134,6 +188,24 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
             }
         }
 
+        RecordFormData.selectedAlcoholList = RecordFormData.selectedAlcoholList.filter {
+            it.first != Alcohol.displayNameToEnum(alcoholMap[position]!!)
+        }.toMutableList()
+
+        if(uiState.value.selectedItemList.size != 1){
+            alcoholData.update {
+                it.map { data ->
+                    if(!data.isSelected){
+                        data.copy(
+                            hideAddBtn = false
+                        )
+                    } else {
+                        data.copy()
+                    }
+                }
+            }
+        }
+
         viewModelScope.launch {
             _event.emit(AlcoholSelectEvent.ChangeSelectedAlcohol)
         }
@@ -149,9 +221,20 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
 
     fun navigateToAlcoholDetail() {
         viewModelScope.launch {
-            _event.emit(AlcoholSelectEvent.NavigateToAlcoholSelectDetail(uiState.value.selectedItemList.map{
-                Constants.alcoholMap[it.position] ?: run{ "" }
-            }))
+            _event.emit(AlcoholSelectEvent.NavigateToAlcoholSelectDetail)
+        }
+    }
+
+    fun cancelRecord() {
+        viewModelScope.launch {
+            RecordFormData.clear()
+            _event.emit(AlcoholSelectEvent.NavigateToBack)
+        }
+    }
+
+    fun finishRecord() {
+        viewModelScope.launch {
+            _event.emit(AlcoholSelectEvent.FinishRecord)
         }
     }
 

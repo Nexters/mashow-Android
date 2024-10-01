@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.masshow.presentation.ui.main.record.estimate.EstimateViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,6 +42,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/pretendard_semi_bold"
+            android:onClick="@{() -> vm.cancelRecord()}"
             android:text="취소"
             android:textColor="#80FFFFFF"
             android:textSize="16dp"
@@ -50,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/pretendard_semi_bold"
+            android:text="@{vm.date}"
             android:textColor="#CCFFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,8 +69,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/pretendard_semi_bold"
+            android:onClick="@{() -> vm.finishRecord()}"
             android:text="저장"
-            android:textColor="#80FFFFFF"
+            android:textColor="@color/white"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -224,7 +231,7 @@
             android:id="@+id/swipe_view"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="#80FFC6AD"
+            android:background="#4DFFE3D4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -244,6 +251,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="20dp"
+            android:onClick="@{() -> vm.navigateToBack()}"
             android:src="@drawable/btn_text_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_next"
@@ -255,6 +263,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:onClick="@{() -> vm.navigateToFoodRecord()}"
             android:src="@drawable/btn_text_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

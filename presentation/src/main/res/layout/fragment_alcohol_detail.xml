@@ -9,6 +9,7 @@
             name="vm"
             type="com.masshow.presentation.ui.main.record.alchol.AlcoholDetailViewModel" />
 
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/background_blur"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -42,6 +44,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/pretendard_semi_bold"
+            android:onClick="@{() -> vm.cancelRecord()}"
             android:text="취소"
             android:textColor="#80FFFFFF"
             android:textSize="16dp"
@@ -54,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/pretendard_semi_bold"
+            android:text="@{vm.date}"
             android:textColor="#CCFFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,8 +71,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/pretendard_semi_bold"
+            android:onClick="@{() -> vm.finishRecord()}"
             android:text="저장"
-            android:textColor="#80FFFFFF"
+            android:textColor="@color/white"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -88,14 +93,16 @@
             app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/layout_scroll"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_announce">
+            app:layout_constraintTop_toBottomOf="@id/tv_announce"
+            app:layout_constraintBottom_toTopOf="@id/btn_back">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -123,8 +130,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/btn_text_back"
             android:onClick="@{() -> vm.navigateToBack()}"
+            android:src="@drawable/btn_text_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_next"
             app:layout_constraintHorizontal_chainStyle="packed"

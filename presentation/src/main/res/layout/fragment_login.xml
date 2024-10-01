@@ -15,13 +15,26 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="150dp"
-            android:src="@drawable/icon_login_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="술,\n끊지 말고 잘 마시자"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:textColor="#4DFFFFFF"
+            android:textSize="20dp"/>
 
         <ImageView
             android:id="@+id/btn_kakao_login"
@@ -40,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:onClick="@{() -> vm.googleLogin()}"
-            android:src="@drawable/btn_google_login"
+            android:src="@drawable/btn_other_login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

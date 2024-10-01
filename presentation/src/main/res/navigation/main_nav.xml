@@ -14,6 +14,11 @@
         <action
             android:id="@+id/action_foodRecordFragment_to_memoFragment"
             app:destination="@id/memoFragment" />
+        <action
+            android:id="@+id/action_foodRecordFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/foodRecordDetailFragment"
@@ -26,6 +31,9 @@
         <action
             android:id="@+id/action_homeFragment_to_alcoholSelectFragment"
             app:destination="@id/alcoholSelectFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_showAlcoholRecordFragment"
+            app:destination="@id/showAlcoholRecordFragment" />
     </fragment>
     <fragment
         android:id="@+id/memoFragment"
@@ -42,13 +50,14 @@
         android:name="com.masshow.presentation.ui.main.record.alchol.AlcoholDetailFragment"
         android:label="AlcoholDetailFragment">
 
-        <argument
-            android:name="alcohollist"
-            app:argType="string[]" />
-
         <action
             android:id="@+id/action_alcoholDetailFragment_to_estimateFragment"
             app:destination="@id/estimateFragment" />
+        <action
+            android:id="@+id/action_alcoholDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/alcoholSelectFragment"
@@ -65,5 +74,27 @@
         <action
             android:id="@+id/action_estimateFragment_to_foodRecordFragment"
             app:destination="@id/foodRecordFragment" />
+        <action
+            android:id="@+id/action_estimateFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
+    <fragment
+        android:id="@+id/showAlcoholRecordFragment"
+        android:name="com.masshow.presentation.ui.main.show.ShowAlcoholRecordFragment"
+        android:label="ShowAlcoholRecordFragment" >
+
+        <argument
+            app:argType="string"
+            android:name="alcohol"/>
+
+        <action
+            android:id="@+id/action_showAlcoholRecordFragment_to_showAlcoholRecordDetailFragment"
+            app:destination="@id/showAlcoholRecordDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showAlcoholRecordDetailFragment"
+        android:name="com.masshow.presentation.ui.main.show.ShowAlcoholRecordDetailFragment"
+        android:label="ShowAlcoholRecordDetailFragment" />
 </navigation>

@@ -2,42 +2,60 @@ package com.masshow.presentation.ui.main.record.estimate
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup.LayoutParams
-import androidx.constraintlayout.widget.ConstraintSet.Motion
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentEstimateBinding
+import com.masshow.presentation.ui.main.MainViewModel
 import com.masshow.presentation.ui.main.record.RecordFormData
-import com.masshow.presentation.util.Constants.TAG
-import kotlin.math.max
-import kotlin.math.min
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment_estimate) {
+
+    private val parentViewModel: MainViewModel by activityViewModels()
+    private val viewModel: EstimateViewModel by viewModels()
 
     private var initialY = 0f
     private var initialHeight = 0
 
-    @SuppressLint("ClickableViewAccessibility")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//
-//        val initialHeightDp = 200
-//        val displayMetrics = resources.displayMetrics
-//        initialHeight = (initialHeightDp * displayMetrics.density).toInt()
-//
-//        binding.viewSwipable.layoutParams = binding.viewSwipable.layoutParams.apply{
-//            height = initialHeight
-//        }
 
-        binding.btnNext.setOnClickListener {
-            findNavController().toFoodRecord()
+        binding.vm = viewModel
+        initEventObserve()
+        setSwipeListener()
+    }
+
+    private fun initEventObserve() {
+        repeatOnStarted {
+            viewModel.event.collect {
+                when (it) {
+                    is EstimateEvent.NavigateToHome -> findNavController().toHome()
+                    is EstimateEvent.NavigateToFoodRecord -> findNavController().toFoodRecord()
+                    is EstimateEvent.FinishRecord -> parentViewModel.record()
+                    is EstimateEvent.NavigateToBack -> findNavController().navigateUp()
+                }
+            }
         }
 
+        repeatOnStarted {
+            parentViewModel.finishRecord.collect {
+                showToastMessage(it)
+                findNavController().toHome()
+            }
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setSwipeListener() {
         binding.viewSwipable.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -96,7 +114,6 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
                 else -> false
             }
         }
-
     }
 
     private fun NavController.toFoodRecord() {
@@ -104,5 +121,9 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
         navigate(action)
     }
 
+    private fun NavController.toHome() {
+        val action = EstimateFragmentDirections.actionEstimateFragmentToHomeFragment()
+        navigate(action)
+    }
 
 }

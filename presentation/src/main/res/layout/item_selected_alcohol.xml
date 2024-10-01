@@ -29,11 +29,11 @@
             tools:text="막걸리" />
 
         <ImageView
-            android:id="@+id/btn_delete"
+            android:id="@+id/btn_erase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:src="@drawable/icon_exit"
+            android:src="@drawable/ic_exit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_alcohol"
