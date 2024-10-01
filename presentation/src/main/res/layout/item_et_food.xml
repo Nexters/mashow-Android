@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/icon_fill_x"
+            android:src="@drawable/ic_fill_x"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/et_food"
             app:layout_constraintEnd_toEndOf="@id/et_food"

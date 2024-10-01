@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(
     private val _event = MutableSharedFlow<HomeEvent>()
     val event: SharedFlow<HomeEvent> = _event.asSharedFlow()
 
-    fun getExistRecordLiquor() {
+    fun getExistRecord() {
         viewModelScope.launch {
             repository.recordExistLiquor().let {
                 when (it) {

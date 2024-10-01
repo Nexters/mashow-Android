@@ -117,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:drawableStart="@drawable/icon_gray_plus"
+                    android:drawableStart="@drawable/ic_gray_plus"
                     android:drawablePadding="8dp"
                     android:fontFamily="@font/pretendard_regular"
                     android:gravity="center"

@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/rect_grayfill_nostroke_50radius"
-            android:drawableEnd="@drawable/icon_plus"
+            android:drawableEnd="@drawable/ic_plus"
             android:drawablePadding="4dp"
             android:onClick="@{() -> vm.navigateToFoodRecord()}"
             android:paddingHorizontal="20dp"

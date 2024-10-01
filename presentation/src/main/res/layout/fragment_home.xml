@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.masshow.presentation.ui.main.home.HomeViewModel" />
@@ -54,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/icon_lab"
+            android:src="@drawable/ic_lab"
             app:layout_constraintBottom_toBottomOf="@id/tv_nick"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_nick" />
@@ -101,6 +103,17 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
+        <ImageView
+            android:id="@+id/iv_empty_record"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/image_empty_card"
+            android:visibility="@{vm.existRecordLiquor.empty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@id/btn_add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_card_view" />
+
         <LinearLayout
             android:id="@+id/layout_left_card"
             android:layout_width="0dp"
@@ -110,6 +123,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
+            android:visibility="@{vm.existRecordLiquor.empty ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/btn_add"
             app:layout_constraintEnd_toEndOf="@id/guide"
             app:layout_constraintStart_toStartOf="parent"
@@ -139,8 +153,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:onClick="@{() -> vm.navigateToShowRecord(`MAKGEOLLI`)}"
                 android:alpha="0.3"
+                android:onClick="@{() -> vm.navigateToShowRecord(`MAKGEOLLI`)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -157,8 +171,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:onClick="@{() -> vm.navigateToShowRecord(`BEER`)}"
                 android:alpha="0.3"
+                android:onClick="@{() -> vm.navigateToShowRecord(`BEER`)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -174,9 +188,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:onClick="@{() -> vm.navigateToShowRecord(`COCKTAIL`)}"
                 android:layout_weight="1"
                 android:alpha="0.3"
+                android:onClick="@{() -> vm.navigateToShowRecord(`COCKTAIL`)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -198,6 +212,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
+            android:visibility="@{vm.existRecordLiquor.empty ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/btn_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guide"
@@ -208,8 +223,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="@{() -> vm.navigateToShowRecord(`LIQUOR`)}"
                 android:alpha="0.3"
+                android:onClick="@{() -> vm.navigateToShowRecord(`LIQUOR`)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -226,8 +241,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:onClick="@{() -> vm.navigateToShowRecord(`SAKE`)}"
                 android:alpha="0.3"
+                android:onClick="@{() -> vm.navigateToShowRecord(`SAKE`)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -243,9 +258,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:onClick="@{() -> vm.navigateToShowRecord(`WINE`)}"
                 android:layout_weight="1"
                 android:alpha="0.3"
+                android:onClick="@{() -> vm.navigateToShowRecord(`WINE`)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -261,9 +276,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:onClick="@{() -> vm.navigateToShowRecord(`HIGHBALL`)}"
                 android:layout_weight="1"
                 android:alpha="0.3"
+                android:onClick="@{() -> vm.navigateToShowRecord(`HIGHBALL`)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -282,7 +297,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:onClick="@{() -> vm.navigateToRecord()}"
-            android:src="@drawable/icon_add"
+            android:src="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

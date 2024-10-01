@@ -1,7 +1,6 @@
 package com.masshow.presentation.ui.main.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -10,8 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentHomeBinding
-import com.masshow.presentation.ui.main.record.alchol.AlcoholSelectFragmentDirections
-import com.masshow.presentation.util.Constants.TAG
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +22,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.vm = viewModel
         initStateObserve()
         initEventObserve()
-        viewModel.getExistRecordLiquor()
+        viewModel.getExistRecord()
     }
 
     private fun initStateObserve() {
