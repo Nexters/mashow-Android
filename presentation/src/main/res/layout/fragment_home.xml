@@ -148,7 +148,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_makguli"
+                android:id="@+id/btn_makgeolli"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -161,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/card_makguli" />
+                    android:src="@drawable/card_makgeolli" />
 
             </androidx.cardview.widget.CardView>
 
@@ -219,7 +219,7 @@
             app:layout_constraintTop_toBottomOf="@id/btn_card_view">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_yangju"
+                android:id="@+id/btn_liquor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -231,12 +231,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/card_yangju" />
+                    android:src="@drawable/card_liquor" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_sakae"
+                android:id="@+id/btn_sake"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -249,7 +249,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/card_sakae" />
+                    android:src="@drawable/card_sake" />
 
             </androidx.cardview.widget.CardView>
 
@@ -272,7 +272,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_highboll"
+                android:id="@+id/btn_highball"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -285,7 +285,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/card_highboll" />
+                    android:src="@drawable/card_highball" />
 
             </androidx.cardview.widget.CardView>
 
