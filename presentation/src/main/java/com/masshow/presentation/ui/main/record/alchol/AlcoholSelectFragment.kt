@@ -55,6 +55,7 @@ class AlcoholSelectFragment :
                         adapter?.updateItem(viewModel.alcoholData.value)
                     }
                     is AlcoholSelectEvent.NavigateToAlcoholSelectDetail -> findNavController().toAlcoholDetail(it.list)
+                    is AlcoholSelectEvent.NavigateToBack -> findNavController().navigateUp()
                 }
             }
         }

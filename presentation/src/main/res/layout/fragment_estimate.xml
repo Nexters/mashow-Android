@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.masshow.presentation.ui.main.record.estimate.EstimateViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:onClick="@{() -> vm.cancelRecord()}"
             android:fontFamily="@font/pretendard_semi_bold"
             android:text="취소"
             android:textColor="#80FFFFFF"
@@ -49,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:text="@{vm.date}"
             android:fontFamily="@font/pretendard_semi_bold"
             android:textColor="#CCFFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +70,7 @@
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/pretendard_semi_bold"
             android:text="저장"
-            android:textColor="#80FFFFFF"
+            android:textColor="@color/white"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -256,6 +262,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:src="@drawable/btn_text_next"
+            android:onClick="@{() -> vm.navigateToFoodRecord()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_back" />

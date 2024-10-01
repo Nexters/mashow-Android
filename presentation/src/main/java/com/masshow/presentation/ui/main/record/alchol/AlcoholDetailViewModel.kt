@@ -2,6 +2,7 @@ package com.masshow.presentation.ui.main.record.alchol
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.masshow.presentation.ui.main.record.RecordFormData
 import com.masshow.presentation.util.getTodayDateWithDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -13,6 +14,7 @@ import javax.inject.Inject
 sealed class AlcoholDetailEvent{
     data object NavigateToEstimate: AlcoholDetailEvent()
     data object NavigateToBack: AlcoholDetailEvent()
+    data object NavigateToHome: AlcoholDetailEvent()
 }
 
 @HiltViewModel
@@ -48,6 +50,13 @@ class AlcoholDetailViewModel @Inject constructor() : ViewModel() {
     fun navigateToBack(){
         viewModelScope.launch {
             _event.emit(AlcoholDetailEvent.NavigateToBack)
+        }
+    }
+
+    fun cancelRecord(){
+        viewModelScope.launch {
+            RecordFormData.clear()
+            _event.emit(AlcoholDetailEvent.NavigateToHome)
         }
     }
 }

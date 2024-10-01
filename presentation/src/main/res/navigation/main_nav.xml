@@ -14,6 +14,11 @@
         <action
             android:id="@+id/action_foodRecordFragment_to_memoFragment"
             app:destination="@id/memoFragment" />
+        <action
+            android:id="@+id/action_foodRecordFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/foodRecordDetailFragment"
@@ -52,6 +57,11 @@
         <action
             android:id="@+id/action_alcoholDetailFragment_to_estimateFragment"
             app:destination="@id/estimateFragment" />
+        <action
+            android:id="@+id/action_alcoholDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/alcoholSelectFragment"
@@ -68,6 +78,11 @@
         <action
             android:id="@+id/action_estimateFragment_to_foodRecordFragment"
             app:destination="@id/foodRecordFragment" />
+        <action
+            android:id="@+id/action_estimateFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/showAlcoholRecordFragment"

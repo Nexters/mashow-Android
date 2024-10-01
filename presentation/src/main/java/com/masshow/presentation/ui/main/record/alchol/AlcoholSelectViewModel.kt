@@ -3,6 +3,7 @@ package com.masshow.presentation.ui.main.record.alchol
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.masshow.presentation.ui.main.record.RecordFormData
 import com.masshow.presentation.ui.main.record.alchol.model.UiAlcoholSelectItem
 import com.masshow.presentation.ui.main.record.alchol.model.UiSelectedAlcoholItem
 import com.masshow.presentation.util.Alcohol
@@ -29,6 +30,7 @@ sealed class AlcoholSelectEvent {
     data object ChangeSelectedAlcohol : AlcoholSelectEvent()
     data class NavigateToAlcoholSelectDetail(val list: List<String>) :
         AlcoholSelectEvent()
+    data object NavigateToBack: AlcoholSelectEvent()
 }
 
 @HiltViewModel
@@ -154,6 +156,13 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
             _event.emit(AlcoholSelectEvent.NavigateToAlcoholSelectDetail(uiState.value.selectedItemList.map{
                 Constants.alcoholMap[it.position] ?: run{ "" }
             }))
+        }
+    }
+
+    fun cancelRecord(){
+        viewModelScope.launch {
+            RecordFormData.clear()
+            _event.emit(AlcoholSelectEvent.NavigateToBack)
         }
     }
 

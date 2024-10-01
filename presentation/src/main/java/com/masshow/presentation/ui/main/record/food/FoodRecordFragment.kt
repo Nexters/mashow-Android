@@ -37,6 +37,7 @@ class FoodRecordFragment : BaseFragment<FragmentFoodRecordBinding>(R.layout.frag
                 when (it) {
                     is FoodRecordEvent.NavigateToFoodRecordDetail -> findNavController().toFoodRecordDetail()
                     is FoodRecordEvent.NavigateToMemo -> findNavController().toMemo()
+                    is FoodRecordEvent.NavigateToHome -> findNavController().toHome()
                 }
             }
         }
@@ -60,6 +61,11 @@ class FoodRecordFragment : BaseFragment<FragmentFoodRecordBinding>(R.layout.frag
 
     private fun NavController.toMemo(){
         val action = FoodRecordFragmentDirections.actionFoodRecordFragmentToMemoFragment()
+        navigate(action)
+    }
+
+    private fun NavController.toHome(){
+        val action = FoodRecordFragmentDirections.actionFoodRecordFragmentToHomeFragment()
         navigate(action)
     }
 

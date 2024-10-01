@@ -53,6 +53,7 @@ class AlcoholDetailFragment :
                             }
                         findNavController().toEstimate()
                     }
+                    is AlcoholDetailEvent.NavigateToHome -> findNavController().toHome()
                 }
             }
         }
@@ -110,6 +111,11 @@ class AlcoholDetailFragment :
 
     private fun NavController.toEstimate() {
         val action = AlcoholDetailFragmentDirections.actionAlcoholDetailFragmentToEstimateFragment()
+        navigate(action)
+    }
+
+    private fun NavController.toHome(){
+        val action = AlcoholDetailFragmentDirections.actionAlcoholDetailFragmentToHomeFragment()
         navigate(action)
     }
 }
