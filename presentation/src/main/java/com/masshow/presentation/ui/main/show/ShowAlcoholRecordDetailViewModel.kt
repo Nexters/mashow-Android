@@ -7,6 +7,7 @@ import com.masshow.data.repository.MainRepository
 import com.masshow.presentation.util.Alcohol
 import com.masshow.presentation.util.formatDateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -21,12 +22,15 @@ data class ShowAlcoholRecordDetailUiState(
     val memo: String = "",
     val foods: String = "",
     val alcohols: String = "",
-    val date: String = ""
+    val date: String = "",
+    val showView: Boolean = false
 )
 
 sealed class ShowAlcoholRecordDetailEvent {
-    data object NavigateToBack: ShowAlcoholRecordDetailEvent()
+    data object NavigateToBack : ShowAlcoholRecordDetailEvent()
     data class ShowToastMessage(val msg: String) : ShowAlcoholRecordDetailEvent()
+    data object ShowLoading : ShowAlcoholRecordDetailEvent()
+    data object DismissLoading : ShowAlcoholRecordDetailEvent()
 }
 
 @HiltViewModel
@@ -52,17 +56,19 @@ class ShowAlcoholRecordDetailViewModel @Inject constructor(
 
     private fun getRecordDetail() {
         viewModelScope.launch {
-            repository.getRecordDetail(historyId).let{
-                when(it){
+            _event.emit(ShowAlcoholRecordDetailEvent.ShowLoading)
+            repository.getRecordDetail(historyId).let {
+                when (it) {
                     is BaseState.Success -> {
-                        it.data?.let{ data ->
+                        it.data?.let { data ->
                             _uiState.update { state ->
                                 state.copy(
                                     date = formatDateTime(data.drankAt),
-                                    memo = if(data.memos.isNotEmpty()) data.memos.first().description else "",
-                                    foods = if(data.sideDishes.isNotEmpty()) data.sideDishes.first().names else "",
+                                    memo = if (data.memos.isNotEmpty()) data.memos.first().description else "",
+                                    foods = if (data.sideDishes.isNotEmpty()) data.sideDishes.first().names else "",
                                     alcohols = data.liquors.joinToString(" ") { item ->
-                                        val alcohol = Alcohol.nameToEnum(item.liquorType).displayName
+                                        val alcohol =
+                                            Alcohol.nameToEnum(item.liquorType).displayName
                                         item.details.joinToString(" ") { item2 ->
                                             alcohol + "_" + item2.names
                                         }
@@ -77,36 +83,44 @@ class ShowAlcoholRecordDetailViewModel @Inject constructor(
                     }
 
                     is BaseState.Error -> {
-
+                        _event.emit(ShowAlcoholRecordDetailEvent.ShowToastMessage(it.message))
                     }
                 }
+
+                delay(50)
+                _uiState.update { state ->
+                    state.copy(
+                        showView = true
+                    )
+                }
+
+                _event.emit(ShowAlcoholRecordDetailEvent.DismissLoading)
             }
         }
     }
 
-    fun deleteRecord(){
+    fun deleteRecord() {
         viewModelScope.launch {
             repository.deleteRecord(historyId).let {
-                when(it){
+                when (it) {
                     is BaseState.Success -> {
                         _event.emit(ShowAlcoholRecordDetailEvent.ShowToastMessage("기록 삭제 성공"))
                         _event.emit(ShowAlcoholRecordDetailEvent.NavigateToBack)
                     }
 
                     is BaseState.Error -> {
-
+                        _event.emit(ShowAlcoholRecordDetailEvent.ShowToastMessage(it.message))
                     }
                 }
             }
         }
     }
 
-    fun navigateToBack(){
+    fun navigateToBack() {
         viewModelScope.launch {
             _event.emit(ShowAlcoholRecordDetailEvent.NavigateToBack)
         }
     }
-
 
 
 }

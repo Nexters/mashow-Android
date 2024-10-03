@@ -45,7 +45,6 @@ class ShowAlcoholRecordFragment :
         setSpinner()
         initEventObserve()
         initStateObserve()
-        setRvListener()
     }
 
     private fun initEventObserve() {
@@ -56,9 +55,11 @@ class ShowAlcoholRecordFragment :
                     is ShowAlcoholRecordEvent.NavigateToDetail -> findNavController().toShowAlcoholRecordDetail(
                         it.id
                     )
+
                     is ShowAlcoholRecordEvent.NavigateToRecord -> findNavController().toRecord()
                     is ShowAlcoholRecordEvent.ShowLoading -> showLoading(requireContext())
                     is ShowAlcoholRecordEvent.DismissLoading -> dismissLoading()
+                    is ShowAlcoholRecordEvent.ShowToastMessage -> showToastMessage(it.msg)
                 }
 
             }
@@ -73,22 +74,6 @@ class ShowAlcoholRecordFragment :
         }
     }
 
-    private fun setRvListener() {
-        binding.rvRecord.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                val lastVisibleItemPosition =
-                    (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                val itemTotalCount = recyclerView.adapter?.itemCount?.minus(1)
-
-                if (lastVisibleItemPosition == itemTotalCount) {
-                    viewModel.getMonthlyRecord()
-                }
-            }
-        })
-    }
 
     private fun setSpinner() {
         val position = homeViewModel.existRecordLiquor.value.indexOf(alcohol)
@@ -114,6 +99,24 @@ class ShowAlcoholRecordFragment :
         }
 
         binding.spinner.setSelection(position)
+        setRvListener()
+    }
+
+    private fun setRvListener() {
+        binding.rvRecord.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val lastVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                val itemTotalCount = recyclerView.adapter?.itemCount?.minus(1)
+
+                if (lastVisibleItemPosition == itemTotalCount) {
+                    viewModel.getMonthlyRecord()
+                }
+            }
+        })
     }
 
     private fun setSpannableText(alcohol: Alcohol) {

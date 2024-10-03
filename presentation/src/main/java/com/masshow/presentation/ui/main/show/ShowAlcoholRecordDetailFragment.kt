@@ -34,6 +34,8 @@ class ShowAlcoholRecordDetailFragment :
                 when (it) {
                     is ShowAlcoholRecordDetailEvent.NavigateToBack -> findNavController().navigateUp()
                     is ShowAlcoholRecordDetailEvent.ShowToastMessage -> showToastMessage(it.msg)
+                    is ShowAlcoholRecordDetailEvent.ShowLoading -> showLoading(requireContext())
+                    is ShowAlcoholRecordDetailEvent.DismissLoading -> dismissLoading()
                 }
             }
         }

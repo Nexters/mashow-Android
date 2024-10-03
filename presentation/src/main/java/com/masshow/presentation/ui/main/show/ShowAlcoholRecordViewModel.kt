@@ -40,6 +40,7 @@ sealed class ShowAlcoholRecordEvent {
     data object NavigateToRecord : ShowAlcoholRecordEvent()
     data object ShowLoading : ShowAlcoholRecordEvent()
     data object DismissLoading : ShowAlcoholRecordEvent()
+    data class ShowToastMessage(val msg: String) : ShowAlcoholRecordEvent()
 }
 
 @HiltViewModel
@@ -55,6 +56,8 @@ class ShowAlcoholRecordViewModel @Inject constructor(
     val uiState: StateFlow<ShowAlcoholRecordUiState> = _uiState.asStateFlow()
 
     var selectedAlcohol = MutableStateFlow(Alcohol.SOJU)
+    var pendingRecord = false
+    var pendingStatic = false
 
     var nick = ""
     private var userId = 0L
@@ -74,6 +77,7 @@ class ShowAlcoholRecordViewModel @Inject constructor(
     }
 
     fun changeAlcohol(alcohol: Alcohol) {
+
         _uiState.update { state ->
             state.copy(
                 hasNext = true,
@@ -91,8 +95,6 @@ class ShowAlcoholRecordViewModel @Inject constructor(
             _event.emit(ShowAlcoholRecordEvent.ShowLoading)
             staticJob?.join()
             recordJob?.join()
-
-
             delay(50)
             _uiState.update { state ->
                 state.copy(
@@ -105,37 +107,44 @@ class ShowAlcoholRecordViewModel @Inject constructor(
 
     private fun getStatistic(alcohol: Alcohol) {
         staticJob = viewModelScope.launch {
-            repository.getAlcoholStatistic(listOf(alcohol.toString())).let {
-                when (it) {
-                    is BaseState.Success -> {
-                        it.data?.let { data ->
-                            _uiState.update { state ->
-                                state.copy(
-                                    percent = data.frequencyPercentage.toString() + "%",
-                                    recordAlcoholDetailList = data.names.map { item ->
-                                        UiRecordAlcoholDetailNameItem(
-                                            item.name,
-                                            item.count.toString(),
-                                            selectedAlcohol.value.colorResource
-                                        )
-                                    }
-                                )
+            if (!pendingStatic) {
+                pendingStatic = true
+                repository.getAlcoholStatistic(listOf(alcohol.toString())).let {
+                    when (it) {
+                        is BaseState.Success -> {
+                            it.data?.let { data ->
+                                _uiState.update { state ->
+                                    state.copy(
+                                        percent = data.frequencyPercentage.toString() + "%",
+                                        recordAlcoholDetailList = data.names.map { item ->
+                                            UiRecordAlcoholDetailNameItem(
+                                                item.name,
+                                                item.count.toString(),
+                                                selectedAlcohol.value.colorResource
+                                            )
+                                        }
+                                    )
+                                }
                             }
+
                         }
 
+                        is BaseState.Error -> {
+                            _event.emit(ShowAlcoholRecordEvent.ShowToastMessage(it.message))
+                        }
                     }
-
-                    is BaseState.Error -> {
-
-                    }
+                    pendingStatic = false
                 }
+
             }
+
         }
     }
 
     fun getMonthlyRecord() {
         recordJob = viewModelScope.launch {
-            if (uiState.value.hasNext) {
+            if (uiState.value.hasNext && !pendingRecord) {
+                pendingRecord = true
                 repository.getRecordMonthly(
                     MonthlyRecordRequest(
                         listOf(selectedAlcohol.value.toString()),
@@ -172,9 +181,10 @@ class ShowAlcoholRecordViewModel @Inject constructor(
                         }
 
                         is BaseState.Error -> {
-
+                            _event.emit(ShowAlcoholRecordEvent.ShowToastMessage(it.message))
                         }
                     }
+                    pendingRecord = false
                 }
             }
         }
