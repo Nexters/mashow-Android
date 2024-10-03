@@ -53,6 +53,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     }
 
                     is LoginEvent.ShowToastMessage -> showToastMessage(it.msg)
+                    is LoginEvent.ShowLoading -> showLoading(requireContext())
+                    is LoginEvent.DismissLoading -> dismissLoading()
                 }
             }
         }

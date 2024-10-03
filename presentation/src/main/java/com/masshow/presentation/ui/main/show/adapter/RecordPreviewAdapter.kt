@@ -2,6 +2,7 @@ package com.masshow.presentation.ui.main.show.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.masshow.presentation.databinding.ItemAlcoholRecordPreviewBinding
@@ -32,6 +33,7 @@ class RecordPreviewViewHolder(private val binding: ItemAlcoholRecordPreviewBindi
 
     fun bind(item: UiRecordChip) {
         binding.tvDate.text = item.date
+        binding.tvDate.setTextColor(ContextCompat.getColor(binding.root.context, item.color))
         binding.root.setOnClickListener {
             item.navigateToDetail(item.id)
         }

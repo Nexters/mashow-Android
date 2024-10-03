@@ -9,5 +9,6 @@ data class UiRecordItem(
 data class UiRecordChip(
     val id: Long,
     val date: String,
+    val color: Int,
     val navigateToDetail: (Long) -> Unit
 )

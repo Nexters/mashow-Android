@@ -29,7 +29,7 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(R.layout.fragment_memo) {
         repeatOnStarted {
             viewModel.events.collect {
                 when (it) {
-                    is MemoEvents.FinishRecord -> parentViewModel.finishRecord
+                    is MemoEvents.FinishRecord -> parentViewModel.record()
                     is MemoEvents.NavigateToBack -> findNavController().navigateUp()
                 }
             }
