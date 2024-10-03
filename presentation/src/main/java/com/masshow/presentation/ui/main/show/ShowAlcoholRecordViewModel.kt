@@ -13,6 +13,8 @@ import com.masshow.presentation.ui.main.show.model.UiRecordItem
 import com.masshow.presentation.util.Alcohol
 import com.masshow.presentation.util.formatDate
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -28,13 +30,16 @@ data class ShowAlcoholRecordUiState(
     val page: Int = 1,
     val hasNext: Boolean = true,
     val recordAlcoholDetailList: List<UiRecordAlcoholDetailNameItem> = emptyList(),
-    val recordPreviewList: List<UiRecordItem> = emptyList()
+    val recordPreviewList: List<UiRecordItem> = emptyList(),
+    val showView: Boolean = false
 )
 
 sealed class ShowAlcoholRecordEvent {
     data object NavigateToBack : ShowAlcoholRecordEvent()
     data class NavigateToDetail(val id: Long) : ShowAlcoholRecordEvent()
-    data object NavigateToRecord: ShowAlcoholRecordEvent()
+    data object NavigateToRecord : ShowAlcoholRecordEvent()
+    data object ShowLoading : ShowAlcoholRecordEvent()
+    data object DismissLoading : ShowAlcoholRecordEvent()
 }
 
 @HiltViewModel
@@ -54,6 +59,9 @@ class ShowAlcoholRecordViewModel @Inject constructor(
     var nick = ""
     private var userId = 0L
 
+    private var staticJob: Job? = null
+    private var recordJob: Job? = null
+
     init {
         getUserInfo()
     }
@@ -66,13 +74,37 @@ class ShowAlcoholRecordViewModel @Inject constructor(
     }
 
     fun changeAlcohol(alcohol: Alcohol) {
+        _uiState.update { state ->
+            state.copy(
+                hasNext = true,
+                page = 1,
+                recordPreviewList = emptyList(),
+                showView = false
+            )
+        }
         selectedAlcohol.value = alcohol
+
         getStatistic(alcohol)
         getMonthlyRecord()
+
+        viewModelScope.launch {
+            _event.emit(ShowAlcoholRecordEvent.ShowLoading)
+            staticJob?.join()
+            recordJob?.join()
+
+
+            delay(50)
+            _uiState.update { state ->
+                state.copy(
+                    showView = true
+                )
+            }
+            _event.emit(ShowAlcoholRecordEvent.DismissLoading)
+        }
     }
 
     private fun getStatistic(alcohol: Alcohol) {
-        viewModelScope.launch {
+        staticJob = viewModelScope.launch {
             repository.getAlcoholStatistic(listOf(alcohol.toString())).let {
                 when (it) {
                     is BaseState.Success -> {
@@ -102,7 +134,7 @@ class ShowAlcoholRecordViewModel @Inject constructor(
     }
 
     fun getMonthlyRecord() {
-        viewModelScope.launch {
+        recordJob = viewModelScope.launch {
             if (uiState.value.hasNext) {
                 repository.getRecordMonthly(
                     MonthlyRecordRequest(
@@ -120,7 +152,7 @@ class ShowAlcoholRecordViewModel @Inject constructor(
                                     state.copy(
                                         page = data.currentPageIndex + 1,
                                         hasNext = !data.isLastPage,
-                                        recordPreviewList = data.contents.map { item ->
+                                        recordPreviewList = uiState.value.recordPreviewList + data.contents.map { item ->
                                             UiRecordItem(
                                                 date = "${item.year}년 ${item.month}월",
                                                 count = item.histories.size.toString(),
@@ -160,7 +192,7 @@ class ShowAlcoholRecordViewModel @Inject constructor(
         }
     }
 
-    fun navigateToRecord(){
+    fun navigateToRecord() {
         viewModelScope.launch {
             _event.emit(ShowAlcoholRecordEvent.NavigateToRecord)
         }

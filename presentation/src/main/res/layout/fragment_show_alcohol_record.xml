@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.masshow.presentation.ui.main.show.ShowAlcoholRecordViewModel" />
@@ -76,6 +78,7 @@
             android:fontFamily="@font/pretendard_bold"
             android:textColor="@color/white"
             android:textSize="28dp"
+            android:visibility="@{vm.uiState.showView ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_nick"
             tools:text="혈중 소주 농도" />
@@ -89,6 +92,7 @@
             android:text="@{vm.uiState.percent}"
             android:textColor="@color/white"
             android:textSize="28dp"
+            android:visibility="@{vm.uiState.showView ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/tv_announce"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_announce"
@@ -103,6 +107,7 @@
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:paddingEnd="50dp"
+            android:visibility="@{vm.uiState.showView ? View.VISIBLE : View.INVISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,6 +123,7 @@
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="200dp"
+            android:visibility="@{vm.uiState.showView ? View.VISIBLE : View.INVISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

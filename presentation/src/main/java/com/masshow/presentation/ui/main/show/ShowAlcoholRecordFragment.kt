@@ -17,9 +17,9 @@ import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentShowAlcoholRecordBinding
 import com.masshow.presentation.ui.main.home.HomeViewModel
-import com.masshow.presentation.ui.main.show.adapter.RecordAlcoholDetailNameAdapter
 import com.masshow.presentation.ui.main.show.adapter.AlcoholSpinnerAdapter
 import com.masshow.presentation.ui.main.show.adapter.RecordAdapter
+import com.masshow.presentation.ui.main.show.adapter.RecordAlcoholDetailNameAdapter
 import com.masshow.presentation.util.Alcohol
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,7 +46,6 @@ class ShowAlcoholRecordFragment :
         initEventObserve()
         initStateObserve()
         setRvListener()
-
     }
 
     private fun initEventObserve() {
@@ -57,8 +56,9 @@ class ShowAlcoholRecordFragment :
                     is ShowAlcoholRecordEvent.NavigateToDetail -> findNavController().toShowAlcoholRecordDetail(
                         it.id
                     )
-
                     is ShowAlcoholRecordEvent.NavigateToRecord -> findNavController().toRecord()
+                    is ShowAlcoholRecordEvent.ShowLoading -> showLoading(requireContext())
+                    is ShowAlcoholRecordEvent.DismissLoading -> dismissLoading()
                 }
 
             }
@@ -73,16 +73,17 @@ class ShowAlcoholRecordFragment :
         }
     }
 
-    private fun setRvListener(){
-        binding.rvRecord.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+    private fun setRvListener() {
+        binding.rvRecord.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                val lastVisibleItemPosition = (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                val lastVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                 val itemTotalCount = recyclerView.adapter?.itemCount?.minus(1)
 
-                if(lastVisibleItemPosition == itemTotalCount){
+                if (lastVisibleItemPosition == itemTotalCount) {
                     viewModel.getMonthlyRecord()
                 }
             }
