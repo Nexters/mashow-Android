@@ -34,6 +34,7 @@ data class ShowAlcoholRecordUiState(
 sealed class ShowAlcoholRecordEvent {
     data object NavigateToBack : ShowAlcoholRecordEvent()
     data class NavigateToDetail(val id: Long) : ShowAlcoholRecordEvent()
+    data object NavigateToRecord: ShowAlcoholRecordEvent()
 }
 
 @HiltViewModel
@@ -152,9 +153,15 @@ class ShowAlcoholRecordViewModel @Inject constructor(
         }
     }
 
-    fun navigateToDetail(id: Long) {
+    private fun navigateToDetail(id: Long) {
         viewModelScope.launch {
+            _event.emit(ShowAlcoholRecordEvent.NavigateToDetail(id))
+        }
+    }
 
+    fun navigateToRecord(){
+        viewModelScope.launch {
+            _event.emit(ShowAlcoholRecordEvent.NavigateToRecord)
         }
     }
 

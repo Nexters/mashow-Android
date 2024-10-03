@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
@@ -47,6 +49,15 @@ class ShowAlcoholRecordFragment :
     private fun initEventObserve() {
         repeatOnStarted {
             viewModel.event.collect {
+                when (it) {
+                    is ShowAlcoholRecordEvent.NavigateToBack -> findNavController()
+                    is ShowAlcoholRecordEvent.NavigateToDetail -> findNavController().toShowAlcoholRecordDetail(
+                        it.id
+                    )
+
+                    is ShowAlcoholRecordEvent.NavigateToRecord -> findNavController().toRecord()
+                }
+
             }
         }
     }
@@ -95,5 +106,19 @@ class ShowAlcoholRecordFragment :
             )
         }
         binding.tvAnnounce.text = spannable
+    }
+
+    private fun NavController.toShowAlcoholRecordDetail(id: Long) {
+        val action =
+            ShowAlcoholRecordFragmentDirections.actionShowAlcoholRecordFragmentToShowAlcoholRecordDetailFragment(
+                id
+            )
+        navigate(action)
+    }
+
+    private fun NavController.toRecord() {
+        val action =
+            ShowAlcoholRecordFragmentDirections.actionShowAlcoholRecordFragmentToAlcoholSelectFragment()
+        navigate(action)
     }
 }

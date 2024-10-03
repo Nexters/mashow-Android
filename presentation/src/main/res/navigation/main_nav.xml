@@ -92,11 +92,20 @@
         <action
             android:id="@+id/action_showAlcoholRecordFragment_to_showAlcoholRecordDetailFragment"
             app:destination="@id/showAlcoholRecordDetailFragment" />
+        <action
+            android:id="@+id/action_showAlcoholRecordFragment_to_alcoholSelectFragment"
+            app:destination="@id/alcoholSelectFragment" />
     </fragment>
     <fragment
         android:id="@+id/showAlcoholRecordDetailFragment"
         android:name="com.masshow.presentation.ui.main.show.ShowAlcoholRecordDetailFragment"
-        android:label="ShowAlcoholRecordDetailFragment" />
+        android:label="ShowAlcoholRecordDetailFragment" >
+
+        <argument
+            android:name="id"
+            app:argType="long"/>
+
+    </fragment>
     <argument
         android:name="alcohol"
         app:argType="com.masshow.presentation.util.Alcohol" />

@@ -130,6 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:onClick="@{() -> vm.navigateToRecord()}"
             android:src="@drawable/btn_record_in_show"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
