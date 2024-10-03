@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentShowAlcoholRecordBinding
@@ -43,6 +45,7 @@ class ShowAlcoholRecordFragment :
         setSpinner()
         initEventObserve()
         initStateObserve()
+        setRvListener()
 
     }
 
@@ -68,6 +71,22 @@ class ShowAlcoholRecordFragment :
                 setSpannableText(it)
             }
         }
+    }
+
+    private fun setRvListener(){
+        binding.rvRecord.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val lastVisibleItemPosition = (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                val itemTotalCount = recyclerView.adapter?.itemCount?.minus(1)
+
+                if(lastVisibleItemPosition == itemTotalCount){
+                    viewModel.getMonthlyRecord()
+                }
+            }
+        })
     }
 
     private fun setSpinner() {

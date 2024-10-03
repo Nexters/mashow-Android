@@ -101,7 +101,7 @@ class ShowAlcoholRecordViewModel @Inject constructor(
         }
     }
 
-    private fun getMonthlyRecord() {
+    fun getMonthlyRecord() {
         viewModelScope.launch {
             if (uiState.value.hasNext) {
                 repository.getRecordMonthly(
@@ -128,6 +128,7 @@ class ShowAlcoholRecordViewModel @Inject constructor(
                                                     UiRecordChip(
                                                         id = history.historyId,
                                                         date = formatDate(history.drankAt),
+                                                        color = selectedAlcohol.value.colorResource,
                                                         navigateToDetail = ::navigateToDetail
                                                     )
                                                 }
