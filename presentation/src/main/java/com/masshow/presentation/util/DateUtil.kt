@@ -1,6 +1,8 @@
 package com.masshow.presentation.util
 
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -14,5 +16,12 @@ fun getTodayDateWithDay(): String {
     val formattedDay = dayFormat.format(calendar.time)
 
     return "$formattedDate $formattedDay"
+}
+
+fun formatDate(input: String): String {
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    val dateTime = LocalDateTime.parse(input, formatter)
+    val outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+    return dateTime.format(outputFormatter)
 }
 

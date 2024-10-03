@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.masshow.presentation.ui.main.show.model.UiRecordItem" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/pretendard_medium"
+            android:text="@{item.date}"
             android:textColor="#CCFCFCFC"
             android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/pretendard_medium"
+            android:text="@{item.count}"
             android:textColor="#66FCFCFC"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +67,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line"
+            app:list="@{item.items}"
             tools:listitem="@layout/item_alcohol_record_preview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

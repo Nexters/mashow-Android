@@ -7,8 +7,11 @@ import com.masshow.data.model.request.MonthlyRecordRequest
 import com.masshow.data.model.request.PaginationData
 import com.masshow.data.repository.AuthRepository
 import com.masshow.data.repository.MainRepository
-import com.masshow.presentation.ui.main.show.model.UiAlcoholDetailItem
+import com.masshow.presentation.ui.main.show.model.UiRecordAlcoholDetailNameItem
+import com.masshow.presentation.ui.main.show.model.UiRecordChip
+import com.masshow.presentation.ui.main.show.model.UiRecordItem
 import com.masshow.presentation.util.Alcohol
+import com.masshow.presentation.util.formatDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,11 +27,13 @@ data class ShowAlcoholRecordUiState(
     val percent: String = "",
     val page: Int = 1,
     val hasNext: Boolean = true,
-    val alcoholDetailList: List<UiAlcoholDetailItem> = emptyList()
+    val recordAlcoholDetailList: List<UiRecordAlcoholDetailNameItem> = emptyList(),
+    val recordPreviewList: List<UiRecordItem> = emptyList()
 )
 
 sealed class ShowAlcoholRecordEvent {
-    data object NavigateToBack: ShowAlcoholRecordEvent()
+    data object NavigateToBack : ShowAlcoholRecordEvent()
+    data class NavigateToDetail(val id: Long) : ShowAlcoholRecordEvent()
 }
 
 @HiltViewModel
@@ -74,8 +79,8 @@ class ShowAlcoholRecordViewModel @Inject constructor(
                             _uiState.update { state ->
                                 state.copy(
                                     percent = data.frequencyPercentage.toString() + "%",
-                                    alcoholDetailList = data.names.map { item ->
-                                        UiAlcoholDetailItem(
+                                    recordAlcoholDetailList = data.names.map { item ->
+                                        UiRecordAlcoholDetailNameItem(
                                             item.name,
                                             item.count.toString(),
                                             selectedAlcohol.value.colorResource
@@ -113,7 +118,20 @@ class ShowAlcoholRecordViewModel @Inject constructor(
                                 _uiState.update { state ->
                                     state.copy(
                                         page = data.currentPageIndex + 1,
-                                        hasNext = !data.isLastPage
+                                        hasNext = !data.isLastPage,
+                                        recordPreviewList = data.contents.map { item ->
+                                            UiRecordItem(
+                                                date = "${item.year}년 ${item.month}월",
+                                                count = item.histories.size.toString(),
+                                                items = item.histories.map { history ->
+                                                    UiRecordChip(
+                                                        id = history.historyId,
+                                                        date = formatDate(history.drankAt),
+                                                        navigateToDetail = ::navigateToDetail
+                                                    )
+                                                }
+                                            )
+                                        }
                                     )
                                 }
                             }
@@ -128,9 +146,15 @@ class ShowAlcoholRecordViewModel @Inject constructor(
         }
     }
 
-    fun navigateToBack(){
+    fun navigateToBack() {
         viewModelScope.launch {
             _event.emit(ShowAlcoholRecordEvent.NavigateToBack)
+        }
+    }
+
+    fun navigateToDetail(id: Long) {
+        viewModelScope.launch {
+
         }
     }
 

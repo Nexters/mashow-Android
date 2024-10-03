@@ -13,8 +13,9 @@ import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentShowAlcoholRecordBinding
 import com.masshow.presentation.ui.main.home.HomeViewModel
-import com.masshow.presentation.ui.main.show.adapter.AlcoholDetailAdapter
+import com.masshow.presentation.ui.main.show.adapter.RecordAlcoholDetailNameAdapter
 import com.masshow.presentation.ui.main.show.adapter.AlcoholSpinnerAdapter
+import com.masshow.presentation.ui.main.show.adapter.RecordAdapter
 import com.masshow.presentation.util.Alcohol
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +35,9 @@ class ShowAlcoholRecordFragment :
 
         binding.vm = viewModel
         binding.rvAlcoholDetail.itemAnimator = null
-        binding.rvAlcoholDetail.adapter = AlcoholDetailAdapter()
+        binding.rvRecord.itemAnimator = null
+        binding.rvAlcoholDetail.adapter = RecordAlcoholDetailNameAdapter()
+        binding.rvRecord.adapter = RecordAdapter()
         setSpinner()
         initEventObserve()
         initStateObserve()
@@ -44,7 +47,6 @@ class ShowAlcoholRecordFragment :
     private fun initEventObserve() {
         repeatOnStarted {
             viewModel.event.collect {
-
             }
         }
     }

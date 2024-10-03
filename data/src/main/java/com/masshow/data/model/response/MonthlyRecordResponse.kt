@@ -11,7 +11,7 @@ data class MonthlyRecordResponse(
 
 data class History(
     val drankAt: String,
-    val historyId: Int,
+    val historyId: Long,
     val liquorDetailNames: List<String>
 )
 

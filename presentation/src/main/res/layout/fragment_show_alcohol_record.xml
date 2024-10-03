@@ -107,7 +107,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_announce"
-            app:list="@{vm.uiState.alcoholDetailList}"
+            app:list="@{vm.uiState.recordAlcoholDetailList}"
             tools:listitem="@layout/item_alcohol_chip" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -115,11 +115,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:clipToPadding="false"
             android:orientation="vertical"
+            android:paddingBottom="200dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_alcohol_detail"
+            app:list="@{vm.uiState.recordPreviewList}"
             tools:listitem="@layout/item_alcohol_record" />
 
         <ImageView
