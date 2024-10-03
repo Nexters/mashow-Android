@@ -63,13 +63,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 it.forEach { data ->
                     when (data) {
                         "SOJU" -> binding.btnSoju.alpha = 1F
-                        "LIQUOR" -> binding.btnYangju.alpha = 1F
-                        "SAKE" -> binding.btnSakae.alpha = 1F
+                        "LIQUOR" -> binding.btnLiquor.alpha = 1F
+                        "SAKE" -> binding.btnSake.alpha = 1F
                         "BEER" -> binding.btnBeer.alpha = 1F
-                        "HIGHBALL" -> binding.btnHighboll.alpha = 1F
+                        "HIGHBALL" -> binding.btnHighball.alpha = 1F
                         "COCKTAIL" -> binding.btnCocktail.alpha = 1F
                         "WINE" -> binding.btnWine.alpha = 1F
-                        "MAKGEOLLI" -> binding.btnMakguli.alpha = 1F
+                        "MAKGEOLLI" -> binding.btnMakgeolli.alpha = 1F
                     }
                 }
             }

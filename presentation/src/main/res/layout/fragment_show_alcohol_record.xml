@@ -32,20 +32,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_select_alcohol"
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:drawableEnd="@drawable/ic_arrow_down"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/pretendard_semi_bold"
-            android:textColor="#CCFFFFFF"
+            android:overlapAnchor="false"
             android:textSize="16dp"
+            android:popupBackground="@drawable/rect_spinner"
+            android:popupElevation="10dp"
+            android:textColor="#CCFFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="소주" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_nick"
