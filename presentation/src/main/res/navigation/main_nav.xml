@@ -86,7 +86,7 @@
         android:label="ShowAlcoholRecordFragment" >
 
         <argument
-            app:argType="string"
+            app:argType="com.masshow.presentation.util.Alcohol"
             android:name="alcohol"/>
 
         <action
@@ -97,4 +97,7 @@
         android:id="@+id/showAlcoholRecordDetailFragment"
         android:name="com.masshow.presentation.ui.main.show.ShowAlcoholRecordDetailFragment"
         android:label="ShowAlcoholRecordDetailFragment" />
+    <argument
+        android:name="alcohol"
+        app:argType="com.masshow.presentation.util.Alcohol" />
 </navigation>

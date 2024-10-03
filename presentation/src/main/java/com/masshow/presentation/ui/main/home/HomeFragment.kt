@@ -3,18 +3,19 @@ package com.masshow.presentation.ui.main.home
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.masshow.presentation.R
 import com.masshow.presentation.base.BaseFragment
 import com.masshow.presentation.databinding.FragmentHomeBinding
+import com.masshow.presentation.util.Alcohol
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,14 +63,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             viewModel.existRecordLiquor.collect {
                 it.forEach { data ->
                     when (data) {
-                        "SOJU" -> binding.btnSoju.alpha = 1F
-                        "LIQUOR" -> binding.btnLiquor.alpha = 1F
-                        "SAKE" -> binding.btnSake.alpha = 1F
-                        "BEER" -> binding.btnBeer.alpha = 1F
-                        "HIGHBALL" -> binding.btnHighball.alpha = 1F
-                        "COCKTAIL" -> binding.btnCocktail.alpha = 1F
-                        "WINE" -> binding.btnWine.alpha = 1F
-                        "MAKGEOLLI" -> binding.btnMakgeolli.alpha = 1F
+                        Alcohol.SOJU -> binding.btnSoju.alpha = 1F
+                        Alcohol.LIQUOR -> binding.btnLiquor.alpha = 1F
+                        Alcohol.SAKE -> binding.btnSake.alpha = 1F
+                        Alcohol.BEER -> binding.btnBeer.alpha = 1F
+                        Alcohol.HIGHBALL -> binding.btnHighball.alpha = 1F
+                        Alcohol.COCKTAIL -> binding.btnCocktail.alpha = 1F
+                        Alcohol.WINE -> binding.btnWine.alpha = 1F
+                        Alcohol.MAKGEOLLI -> binding.btnMakgeolli.alpha = 1F
                     }
                 }
             }
@@ -92,7 +93,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         navigate(action)
     }
 
-    private fun NavController.toShowAlcohol(alcohol: String){
+    private fun NavController.toShowAlcohol(alcohol: Alcohol) {
         val action = HomeFragmentDirections.actionHomeFragmentToShowAlcoholRecordFragment(alcohol)
         navigate(action)
     }

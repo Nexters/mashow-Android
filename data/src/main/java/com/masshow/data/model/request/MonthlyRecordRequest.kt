@@ -1,7 +1,7 @@
 package com.masshow.data.model.request
 
 data class MonthlyRecordRequest(
-    val filters: String,
+    val filters: List<String>,
     val userId: Long,
     val paginationRequest: PaginationData
 )

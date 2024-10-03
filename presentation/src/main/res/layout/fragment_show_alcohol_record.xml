@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.masshow.presentation.ui.main.show.ShowAlcoholRecordViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:onClick="@{() -> vm.navigateToBack()}"
             android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,10 +43,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:overlapAnchor="false"
-            android:textSize="16dp"
             android:popupBackground="@drawable/rect_spinner"
             android:popupElevation="10dp"
             android:textColor="#CCFFFFFF"
+            android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,6 +58,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/pretendard_medium"
+            android:text="@{vm.nick + `님의 이번달`}"
             android:textColor="#CCFFFFFF"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +82,9 @@
             android:id="@+id/tv_percent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:fontFamily="@font/pretendard_bold"
+            android:text="@{vm.uiState.percent}"
             android:textColor="@color/white"
             android:textSize="28dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_announce"
@@ -97,6 +105,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_announce"
+            app:list="@{vm.uiState.alcoholDetailList}"
             tools:listitem="@layout/item_alcohol_chip" />
 
         <androidx.recyclerview.widget.RecyclerView
