@@ -17,10 +17,16 @@ interface AuthRepository {
 
     suspend fun getAccessToken(): String?
     suspend fun getRefreshToken(): String?
+    suspend fun getUserId(): Long?
+    suspend fun getNick(): String?
 
     suspend fun putAccessToken(token: String)
     suspend fun putRefreshToken(token: String)
+    suspend fun putUserId(id: Long)
+    suspend fun putNick(nick: String)
 
     suspend fun deleteAccessToken()
     suspend fun deleteRefreshToken()
+    suspend fun deleteUserId()
+    suspend fun deleteNick()
 }

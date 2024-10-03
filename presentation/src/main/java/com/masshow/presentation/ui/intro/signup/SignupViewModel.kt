@@ -83,6 +83,8 @@ class SignupViewModel @Inject constructor(
                     is BaseState.Success -> {
                         it.data?.let{ data ->
                             repository.putAccessToken(data.accessToken)
+                            repository.putUserId(data.userId)
+                            repository.putNick(data.nickname)
                         }
                         _event.emit(SignUpEvent.NavigateToMain)
                     }
