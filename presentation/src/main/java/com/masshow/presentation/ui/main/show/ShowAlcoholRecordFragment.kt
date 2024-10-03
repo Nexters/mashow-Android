@@ -50,7 +50,7 @@ class ShowAlcoholRecordFragment :
         repeatOnStarted {
             viewModel.event.collect {
                 when (it) {
-                    is ShowAlcoholRecordEvent.NavigateToBack -> findNavController()
+                    is ShowAlcoholRecordEvent.NavigateToBack -> findNavController().navigateUp()
                     is ShowAlcoholRecordEvent.NavigateToDetail -> findNavController().toShowAlcoholRecordDetail(
                         it.id
                     )

@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.masshow.presentation.ui.main.show.ShowAlcoholRecordDetailViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +30,7 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> vm.navigateToBack()}"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/ic_back"
@@ -51,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:onClick="@{() -> vm.deleteRecord()}"
             android:fontFamily="@font/pretendard_semi_bold"
             android:text="삭제"
             android:textColor="#99FFFFFF"
@@ -101,6 +107,7 @@
                         android:fontFamily="@font/pretendard_medium"
                         android:lineSpacingExtra="8dp"
                         android:textColor="#CCFCFCFC"
+                        android:text="@{vm.uiState.memo}"
                         android:textSize="18dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -146,6 +153,7 @@
                         android:lineSpacingExtra="4dp"
                         android:textColor="@color/white"
                         android:textSize="18dp"
+                        android:text="@{vm.uiState.alcohols}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/guide"
                         app:layout_constraintTop_toTopOf="@id/tv_alcohol_label"
@@ -227,6 +235,7 @@
                         android:gravity="end"
                         android:lineSpacingExtra="4dp"
                         android:textColor="@color/white"
+                        android:text="@{vm.uiState.foods}"
                         android:textSize="18dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/guide"

@@ -25,3 +25,10 @@ fun formatDate(input: String): String {
     return dateTime.format(outputFormatter)
 }
 
+fun formatDateTime(input: String): String {
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    val dateTime = LocalDateTime.parse(input, formatter)
+    val outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd hh:mm a")
+    return dateTime.format(outputFormatter)
+}
+
