@@ -34,6 +34,9 @@ class AlcoholDetailViewModel @Inject constructor() : ViewModel() {
 
     val selectedAlcoholMap = hashMapOf<Alcohol, MutableList<AlcoholDetailPair>>()
 
+    fun addAlcoholCategory(alcohol: Alcohol){
+        selectedAlcoholMap[alcohol] = mutableListOf()
+    }
 
     fun addCustomAlcoholName(alcohol: Alcohol, id: Int) {
         selectedAlcoholMap[alcohol]?.add(AlcoholDetailPair(id, ""))
@@ -53,7 +56,7 @@ class AlcoholDetailViewModel @Inject constructor() : ViewModel() {
 
     fun navigateToEstimate() {
         viewModelScope.launch {
-            RecordFormData.selectedAlcoholList = selectedAlcoholMap.map {
+            RecordFormData.selectedAlcoholDetailList = selectedAlcoholMap.map {
                 Pair(it.key, it.value.map { data -> data.name }.toMutableList())
             }.toMutableList()
             _event.emit(AlcoholDetailEvent.NavigateToEstimate)
@@ -75,7 +78,7 @@ class AlcoholDetailViewModel @Inject constructor() : ViewModel() {
 
     fun finishRecord() {
         viewModelScope.launch {
-            RecordFormData.selectedAlcoholList = selectedAlcoholMap.map {
+            RecordFormData.selectedAlcoholDetailList = selectedAlcoholMap.map {
                 Pair(it.key, it.value.map { data -> data.name }.toMutableList())
             }.toMutableList()
             _event.emit(AlcoholDetailEvent.FinishRecord)

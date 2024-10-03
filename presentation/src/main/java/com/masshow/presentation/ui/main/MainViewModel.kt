@@ -19,6 +19,8 @@ import javax.inject.Inject
 sealed class MainEvent {
     data object HideKeyboard: MainEvent()
     data object ShowKeyboard: MainEvent()
+    data object ShowLoading: MainEvent()
+    data object DismissLoading: MainEvent()
 }
 
 @HiltViewModel
@@ -33,9 +35,10 @@ class MainViewModel @Inject constructor(
 
     fun record() {
         viewModelScope.launch {
+            _event.emit(MainEvent.ShowLoading)
             repository.record(
                 RecordRequest(
-                    liquors = RecordFormData.selectedAlcoholList.map {
+                    liquors = RecordFormData.selectedAlcoholDetailList.map {
                         LiquorItem(
                             it.first.toString(),
                             it.second.filter { data -> data.isNotBlank() }
@@ -57,6 +60,8 @@ class MainViewModel @Inject constructor(
 
                     }
                 }
+
+                _event.emit(MainEvent.DismissLoading)
             }
         }
     }

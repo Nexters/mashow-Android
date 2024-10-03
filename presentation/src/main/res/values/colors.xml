@@ -5,4 +5,13 @@
 
     <color name="lightgray">#FCFCFC</color>
     <color name="lightgray30">#66FCFCFC</color>
+
+    <color name="soju">#63FFD0</color>
+    <color name="liquor">#FF4531</color>
+    <color name="makgeolli">#BDFF00</color>
+    <color name="sake">#FF8EED</color>
+    <color name="beer">#3099FF</color>
+    <color name="wine">#EB00FF</color>
+    <color name="cocktail">#79FF96</color>
+    <color name="highball">#EBFF00</color>
 </resources>

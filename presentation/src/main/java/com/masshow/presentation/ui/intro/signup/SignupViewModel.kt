@@ -21,6 +21,8 @@ import javax.inject.Inject
 sealed class SignUpEvent {
     data object NavigateToMain : SignUpEvent()
     data class ShowToastMessage(val msg: String): SignUpEvent()
+    data object ShowLoading: SignUpEvent()
+    data object DismissLoading: SignUpEvent()
 }
 
 data class SignUpUiState(
@@ -72,6 +74,7 @@ class SignupViewModel @Inject constructor(
 
     fun signup() {
         viewModelScope.launch {
+            _event.emit(SignUpEvent.ShowLoading)
             repository.signup(
                 SignupRequest(
                     oAuthToken = authToken,
@@ -83,6 +86,8 @@ class SignupViewModel @Inject constructor(
                     is BaseState.Success -> {
                         it.data?.let{ data ->
                             repository.putAccessToken(data.accessToken)
+                            repository.putUserId(data.userId)
+                            repository.putNick(data.nickname)
                         }
                         _event.emit(SignUpEvent.NavigateToMain)
                     }
@@ -91,6 +96,7 @@ class SignupViewModel @Inject constructor(
                         _event.emit(SignUpEvent.ShowToastMessage(it.message))
                     }
                 }
+                _event.emit(SignUpEvent.DismissLoading)
             }
         }
     }

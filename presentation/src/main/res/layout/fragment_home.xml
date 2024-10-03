@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.masshow.presentation.util.Alcohol" />
+
         <import type="android.view.View" />
 
         <variable
@@ -135,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:alpha="0.3"
-                android:onClick="@{() -> vm.navigateToShowRecord(`SOJU`)}"
+                android:onClick="@{() -> vm.navigateToShowRecord(Alcohol.SOJU)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -148,20 +150,20 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_makguli"
+                android:id="@+id/btn_makgeolli"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:alpha="0.3"
-                android:onClick="@{() -> vm.navigateToShowRecord(`MAKGEOLLI`)}"
+                android:onClick="@{() -> vm.navigateToShowRecord(Alcohol.MAKGEOLLI)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/card_makguli" />
+                    android:src="@drawable/card_makgeolli" />
 
             </androidx.cardview.widget.CardView>
 
@@ -172,7 +174,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:alpha="0.3"
-                android:onClick="@{() -> vm.navigateToShowRecord(`BEER`)}"
+                android:onClick="@{() -> vm.navigateToShowRecord(Alcohol.BEER)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -190,7 +192,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:alpha="0.3"
-                android:onClick="@{() -> vm.navigateToShowRecord(`COCKTAIL`)}"
+                android:onClick="@{() -> vm.navigateToShowRecord(Alcohol.COCKTAIL)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -219,37 +221,37 @@
             app:layout_constraintTop_toBottomOf="@id/btn_card_view">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_yangju"
+                android:id="@+id/btn_liquor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:alpha="0.3"
-                android:onClick="@{() -> vm.navigateToShowRecord(`LIQUOR`)}"
+                android:onClick="@{() -> vm.navigateToShowRecord(Alcohol.LIQUOR)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/card_yangju" />
+                    android:src="@drawable/card_liquor" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_sakae"
+                android:id="@+id/btn_sake"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:alpha="0.3"
-                android:onClick="@{() -> vm.navigateToShowRecord(`SAKE`)}"
+                android:onClick="@{() -> vm.navigateToShowRecord(Alcohol.SAKE)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/card_sakae" />
+                    android:src="@drawable/card_sake" />
 
             </androidx.cardview.widget.CardView>
 
@@ -260,7 +262,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:alpha="0.3"
-                android:onClick="@{() -> vm.navigateToShowRecord(`WINE`)}"
+                android:onClick="@{() -> vm.navigateToShowRecord(Alcohol.WINE)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
@@ -272,20 +274,20 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_highboll"
+                android:id="@+id/btn_highball"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:alpha="0.3"
-                android:onClick="@{() -> vm.navigateToShowRecord(`HIGHBALL`)}"
+                android:onClick="@{() -> vm.navigateToShowRecord(Alcohol.HIGHBALL)}"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/card_highboll" />
+                    android:src="@drawable/card_highball" />
 
             </androidx.cardview.widget.CardView>
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.masshow.data.model.BaseState
 import com.masshow.data.repository.MainRepository
+import com.masshow.presentation.util.Alcohol
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +22,7 @@ data class HomeUiState(
 
 sealed class HomeEvent {
     data object NavigateToRecord : HomeEvent()
-    data class NavigateToShowRecord(val alcohol: String) : HomeEvent()
+    data class NavigateToShowRecord(val alcohol: Alcohol) : HomeEvent()
 }
 
 @HiltViewModel
@@ -32,7 +33,7 @@ class HomeViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
-    val existRecordLiquor = MutableStateFlow<List<String>>(emptyList())
+    val existRecordLiquor = MutableStateFlow<List<Alcohol>>(emptyList())
 
     private val _event = MutableSharedFlow<HomeEvent>()
     val event: SharedFlow<HomeEvent> = _event.asSharedFlow()
@@ -44,7 +45,9 @@ class HomeViewModel @Inject constructor(
                     is BaseState.Success -> {
                         it.data?.let { data ->
                             existRecordLiquor.update {
-                                data.liquorHistoryTypes
+                                data.liquorHistoryTypes.map{ item ->
+                                    Alcohol.nameToEnum(item)
+                                }
                             }
                         }
                     }
@@ -79,7 +82,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun navigateToShowRecord(alcohol: String) {
+    fun navigateToShowRecord(alcohol: Alcohol) {
         viewModelScope.launch {
             if (existRecordLiquor.value.contains(alcohol)) {
                 _event.emit(HomeEvent.NavigateToShowRecord(alcohol))

@@ -133,11 +133,11 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
             }
 
             var state = true
-            RecordFormData.selectedAlcoholList.forEach {
+            RecordFormData.selectedAlcoholDetailList.forEach {
                 if (it.first == item.alcohol) state = false
             }
             if (state) {
-                RecordFormData.selectedAlcoholList.add(
+                RecordFormData.selectedAlcoholDetailList.add(
                     Pair(
                         item.alcohol,
                         mutableListOf()
@@ -188,7 +188,8 @@ class AlcoholSelectViewModel @Inject constructor() : ViewModel() {
             }
         }
 
-        RecordFormData.selectedAlcoholList = RecordFormData.selectedAlcoholList.filter {
+
+        RecordFormData.selectedAlcoholDetailList = RecordFormData.selectedAlcoholDetailList.filter {
             it.first != Alcohol.displayNameToEnum(alcoholMap[position]!!)
         }.toMutableList()
 

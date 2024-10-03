@@ -1,13 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.masshow.presentation.ui.main.show.ShowAlcoholRecordDetailViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_record_detail"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> vm.navigateToBack()}"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:textColor="#CCFFFFFF"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2024.07.22" />
+
+        <TextView
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:onClick="@{() -> vm.deleteRecord()}"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="삭제"
+            android:textColor="#99FFFFFF"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_big_card"
+            android:layout_width="237dp"
+            android:layout_height="351dp"
+            android:layout_marginTop="20dp"
+            android:visibility="@{vm.uiState.showView ? View.VISIBLE : View.INVISIBLE}"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_date"
+            tools:src="@drawable/big_card_beer" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:visibility="@{vm.uiState.showView ? View.VISIBLE : View.INVISIBLE}"
+            android:background="@drawable/rect_151515fill_nostroke_top20radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_big_card">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="150dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_memo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:lineSpacingExtra="8dp"
+                        android:textColor="#CCFCFCFC"
+                        android:text="@{vm.uiState.memo}"
+                        android:textSize="18dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="오늘은 알중단 사람들과 맛있는 술을 마셨당 좋사좋사~ 다음에도 같이 술마시고 싶다!!" />
+
+                    <ImageView
+                        android:id="@+id/iv_line"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_line"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_memo" />
+
+                    <TextView
+                        android:id="@+id/tv_alcohol_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="주종"
+                        android:textColor="#AEAEB2"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_line" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.3" />
+
+                    <TextView
+                        android:id="@+id/tv_alcohol_detail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:gravity="end"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:text="@{vm.uiState.alcohols}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/guide"
+                        app:layout_constraintTop_toTopOf="@id/tv_alcohol_label"
+                        tools:text="소주_진로 막걸리_복순도가\n 하이볼" />
+
+                    <TextView
+                        android:id="@+id/tv_rating_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="평점"
+                        android:textColor="#AEAEB2"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_alcohol_detail" />
+
+                    <ImageView
+                        android:id="@+id/iv_raindrop_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_raindrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_rating_label" />
+
+                    <ImageView
+                        android:id="@+id/iv_raindrop_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_raindrop"
+                        app:layout_constraintEnd_toStartOf="@id/iv_raindrop_5"
+                        app:layout_constraintTop_toTopOf="@id/tv_rating_label" />
+
+                    <ImageView
+                        android:id="@+id/iv_raindrop_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_raindrop"
+                        app:layout_constraintEnd_toStartOf="@id/iv_raindrop_4"
+                        app:layout_constraintTop_toTopOf="@id/tv_rating_label" />
+
+                    <ImageView
+                        android:id="@+id/iv_raindrop_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_raindrop"
+                        app:layout_constraintEnd_toStartOf="@id/iv_raindrop_3"
+                        app:layout_constraintTop_toTopOf="@id/tv_rating_label" />
+
+                    <ImageView
+                        android:id="@+id/iv_raindrop_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_raindrop"
+                        app:layout_constraintEnd_toStartOf="@id/iv_raindrop_2"
+                        app:layout_constraintTop_toTopOf="@id/tv_rating_label" />
+
+                    <TextView
+                        android:id="@+id/tv_food_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="먹은 음식"
+                        android:textColor="#AEAEB2"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_rating_label" />
+
+                    <TextView
+                        android:id="@+id/tv_food"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:gravity="end"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/white"
+                        android:text="@{vm.uiState.foods}"
+                        android:textSize="18dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/guide"
+                        app:layout_constraintTop_toTopOf="@id/tv_food_label"
+                        tools:text="오징어 순대 해물 파전 방어회" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

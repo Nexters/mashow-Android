@@ -32,10 +32,11 @@ class AlcoholDetailFragment :
 
         binding.vm = viewModel
         initEventObserve()
-        RecordFormData.selectedAlcoholList.forEach {
+        RecordFormData.selectedAlcoholDetailList.forEach {
+            viewModel.addAlcoholCategory(it.first)
             addAlcoholForm(it.first)
         }
-        binding.layoutScroll.setOnClickListener{
+        binding.layoutScroll.setOnClickListener {
             parentViewModel.hideKeyboard()
         }
     }

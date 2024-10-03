@@ -45,6 +45,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(R.layout.fragment_sig
                     }
 
                     is SignUpEvent.ShowToastMessage -> showToastMessage(it.msg)
+
+                    is SignUpEvent.ShowLoading -> showLoading(requireContext())
+                    is SignUpEvent.DismissLoading -> dismissLoading()
                 }
             }
         }

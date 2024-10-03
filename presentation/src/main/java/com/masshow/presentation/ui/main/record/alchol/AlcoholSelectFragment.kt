@@ -101,8 +101,8 @@ class AlcoholSelectFragment :
 
             when (position) {
                 0 -> binding.ivBackground.setImageResource(R.drawable.background_soju)
-                1 -> binding.ivBackground.setImageResource(R.drawable.background_yangju)
-                2 -> binding.ivBackground.setImageResource(R.drawable.background_makguli)
+                1 -> binding.ivBackground.setImageResource(R.drawable.background_liquor)
+                2 -> binding.ivBackground.setImageResource(R.drawable.background_makgeolli)
                 3 -> binding.ivBackground.setImageResource(R.drawable.background_sake)
                 4 -> binding.ivBackground.setImageResource(R.drawable.background_beer)
                 5 -> binding.ivBackground.setImageResource(R.drawable.background_wine)

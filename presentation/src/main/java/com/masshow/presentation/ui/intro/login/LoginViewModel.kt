@@ -19,6 +19,8 @@ sealed class LoginEvent {
     data class NavigateToSignup(val token: String, val provider: String) : LoginEvent()
     data object NavigateToMain : LoginEvent()
     data class ShowToastMessage(val msg: String) : LoginEvent()
+    data object ShowLoading: LoginEvent()
+    data object DismissLoading: LoginEvent()
 }
 
 @HiltViewModel
@@ -44,6 +46,7 @@ class LoginViewModel @Inject constructor(
 
     fun login(token: String, provider: String) {
         viewModelScope.launch {
+            _event.emit(LoginEvent.ShowLoading)
             repository.login(
                 LoginRequest(provider, token)
             ).let {
@@ -51,6 +54,8 @@ class LoginViewModel @Inject constructor(
                     is BaseState.Success -> {
                         it.data?.let { data ->
                             repository.putAccessToken(data.accessToken)
+                            repository.putUserId(data.userId)
+                            repository.putNick(data.nickname)
                         }
                         if (it.code == 100) {
                             // 신규회원
@@ -62,9 +67,13 @@ class LoginViewModel @Inject constructor(
 
                     is BaseState.Error -> {
                         repository.deleteAccessToken()
-                        _event.emit(LoginEvent.ShowToastMessage("로그인 실패"))
+                        repository.deleteNick()
+                        repository.deleteUserId()
+                        _event.emit(LoginEvent.ShowToastMessage(it.message))
                     }
                 }
+
+                _event.emit(LoginEvent.DismissLoading)
             }
 
         }
