@@ -2,4 +2,5 @@
 <resources>
     <dimen name="edit_detail_padding">44dp</dimen>
     <dimen name="edit_detail_focus_padding">16dp</dimen>
+    <dimen name="estimate_text_half_height">10dp</dimen>
 </resources>

@@ -80,87 +80,110 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
-
         <ImageView
-            android:id="@+id/iv_estimate"
+            android:id="@+id/ruler_awesome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:src="@drawable/ic_estimate_ruler"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_ruler_onestick"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_announce" />
+
+        <ImageView
+            android:id="@+id/ruler_very_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/ic_ruler_onestick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ruler_awesome" />
+
+        <ImageView
+            android:id="@+id/ruler_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/ic_ruler_onestick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ruler_very_good" />
+
+        <ImageView
+            android:id="@+id/ruler_not_bad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/ic_ruler_onestick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ruler_good" />
+
+        <ImageView
+            android:id="@+id/ruler_umm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/ic_ruler_onestick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ruler_not_bad" />
 
         <TextView
             android:id="@+id/tv_awesome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="6dp"
             android:fontFamily="@font/pretendard_semi_bold"
             android:text="awesome"
             android:textColor="#909090"
-            app:layout_constraintBottom_toTopOf="@id/tv_very_good"
-            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
-            app:layout_constraintTop_toTopOf="@id/iv_estimate"
-            app:layout_constraintVertical_chainStyle="spread_inside" />
+            app:layout_constraintBottom_toTopOf="@id/ruler_awesome"
+            app:layout_constraintEnd_toStartOf="@id/ruler_awesome"
+            app:layout_constraintTop_toTopOf="@id/ruler_awesome" />
 
         <TextView
             android:id="@+id/tv_very_good"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="6dp"
             android:fontFamily="@font/pretendard_semi_bold"
             android:text="very good!"
             android:textColor="#909090"
-            app:layout_constraintBottom_toTopOf="@id/tv_good"
-            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
-            app:layout_constraintTop_toBottomOf="@id/tv_awesome" />
+            app:layout_constraintBottom_toTopOf="@id/ruler_very_good"
+            app:layout_constraintEnd_toStartOf="@id/ruler_very_good"
+            app:layout_constraintTop_toTopOf="@id/ruler_very_good" />
 
         <TextView
             android:id="@+id/tv_good"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="6dp"
             android:fontFamily="@font/pretendard_semi_bold"
             android:text="good"
             android:textColor="#909090"
-            app:layout_constraintBottom_toTopOf="@id/tv_not_bad"
-            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
-            app:layout_constraintTop_toBottomOf="@id/tv_very_good" />
+            app:layout_constraintBottom_toTopOf="@id/ruler_good"
+            app:layout_constraintEnd_toStartOf="@id/ruler_good"
+            app:layout_constraintTop_toTopOf="@id/ruler_good" />
 
         <TextView
             android:id="@+id/tv_not_bad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="6dp"
             android:fontFamily="@font/pretendard_semi_bold"
             android:text="Not bad"
             android:textColor="#909090"
-            app:layout_constraintBottom_toTopOf="@id/tv_umm"
-            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
-            app:layout_constraintTop_toBottomOf="@id/tv_good" />
+            app:layout_constraintBottom_toTopOf="@id/ruler_not_bad"
+            app:layout_constraintEnd_toStartOf="@id/ruler_not_bad"
+            app:layout_constraintTop_toTopOf="@id/ruler_not_bad" />
 
         <TextView
             android:id="@+id/tv_umm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="6dp"
             android:fontFamily="@font/pretendard_semi_bold"
             android:text="umm.."
             android:textColor="#909090"
-            app:layout_constraintBottom_toTopOf="@id/tv_empty"
-            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
-            app:layout_constraintTop_toBottomOf="@id/tv_not_bad" />
-
-        <TextView
-            android:id="@+id/tv_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text=""
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/iv_estimate"
-            app:layout_constraintTop_toBottomOf="@id/tv_umm" />
+            app:layout_constraintBottom_toTopOf="@id/ruler_umm"
+            app:layout_constraintEnd_toStartOf="@id/ruler_umm"
+            app:layout_constraintTop_toTopOf="@id/ruler_umm" />
 
         <ImageView
             android:id="@+id/iv_umm"
@@ -230,10 +253,10 @@
             android:id="@+id/view_swipable"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_estimate"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_estimate" />
+            app:layout_constraintTop_toTopOf="@id/ruler_awesome" />
 
         <ImageView
             android:id="@+id/btn_back"

@@ -6,7 +6,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup.LayoutParams
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -102,11 +101,16 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
     }
 
     private fun changeSwipeViewHeight() {
-        val ummPoint = binding.root.height - binding.tvUmm.y.toInt()
-        val notBadPoint = binding.root.height - binding.tvNotBad.y.toInt()
-        val goodPoint = binding.root.height - binding.tvGood.y.toInt()
-        val veryGoodPoint = binding.root.height - binding.tvVeryGood.y.toInt()
-        val awesomePoint = binding.root.height - binding.tvAwesome.y.toInt()
+        val ummPoint =
+            binding.root.height - binding.tvUmm.y.toInt() - resources.getDimensionPixelSize(R.dimen.estimate_text_half_height)
+        val notBadPoint =
+            binding.root.height - binding.tvNotBad.y.toInt() - resources.getDimensionPixelSize(R.dimen.estimate_text_half_height)
+        val goodPoint =
+            binding.root.height - binding.tvGood.y.toInt() - resources.getDimensionPixelSize(R.dimen.estimate_text_half_height)
+        val veryGoodPoint =
+            binding.root.height - binding.tvVeryGood.y.toInt() - resources.getDimensionPixelSize(R.dimen.estimate_text_half_height)
+        val awesomePoint =
+            binding.root.height - binding.tvAwesome.y.toInt() - resources.getDimensionPixelSize(R.dimen.estimate_text_half_height)
 
         val currentHeight = binding.swipeView.height
         val targetHeight = when (curRating) {
