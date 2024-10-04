@@ -19,8 +19,8 @@ sealed class LoginEvent {
     data class NavigateToSignup(val token: String, val provider: String) : LoginEvent()
     data object NavigateToMain : LoginEvent()
     data class ShowToastMessage(val msg: String) : LoginEvent()
-    data object ShowLoading: LoginEvent()
-    data object DismissLoading: LoginEvent()
+    data object ShowLoading : LoginEvent()
+    data object DismissLoading : LoginEvent()
 }
 
 @HiltViewModel

@@ -83,6 +83,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 when (it) {
                     is HomeEvent.NavigateToRecord -> findNavController().toAlcoholSelect()
                     is HomeEvent.NavigateToShowRecord -> findNavController().toShowAlcohol(it.alcohol)
+                    is HomeEvent.ShowToastMessage -> showToastMessage(it.msg)
+                    is HomeEvent.NavigateToMyPage -> findNavController().toMyPage()
                 }
             }
         }
@@ -95,6 +97,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun NavController.toShowAlcohol(alcohol: Alcohol) {
         val action = HomeFragmentDirections.actionHomeFragmentToShowAlcoholRecordFragment(alcohol)
+        navigate(action)
+    }
+
+    private fun NavController.toMyPage() {
+        val action = HomeFragmentDirections.actionHomeFragmentToMyPageFragment()
         navigate(action)
     }
 

@@ -109,4 +109,10 @@ class AuthRepositoryImpl @Inject constructor(
             prefs.remove(NICK)
         }
     }
+
+    override suspend fun clear() {
+        dataStore.edit{ prefs ->
+            prefs.clear()
+        }
+    }
 }

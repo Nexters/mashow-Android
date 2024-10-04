@@ -29,4 +29,6 @@ interface AuthRepository {
     suspend fun deleteRefreshToken()
     suspend fun deleteUserId()
     suspend fun deleteNick()
+
+    suspend fun clear()
 }

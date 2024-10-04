@@ -23,6 +23,8 @@ data class HomeUiState(
 sealed class HomeEvent {
     data object NavigateToRecord : HomeEvent()
     data class NavigateToShowRecord(val alcohol: Alcohol) : HomeEvent()
+    data object NavigateToMyPage : HomeEvent()
+    data class ShowToastMessage(val msg: String) : HomeEvent()
 }
 
 @HiltViewModel
@@ -45,7 +47,7 @@ class HomeViewModel @Inject constructor(
                     is BaseState.Success -> {
                         it.data?.let { data ->
                             existRecordLiquor.update {
-                                data.liquorHistoryTypes.map{ item ->
+                                data.liquorHistoryTypes.map { item ->
                                     Alcohol.nameToEnum(item)
                                 }
                             }
@@ -53,7 +55,7 @@ class HomeViewModel @Inject constructor(
                     }
 
                     is BaseState.Error -> {
-
+                        _event.emit(HomeEvent.ShowToastMessage(it.message))
                     }
                 }
             }
@@ -87,6 +89,12 @@ class HomeViewModel @Inject constructor(
             if (existRecordLiquor.value.contains(alcohol)) {
                 _event.emit(HomeEvent.NavigateToShowRecord(alcohol))
             }
+        }
+    }
+
+    fun navigateToMyPage() {
+        viewModelScope.launch {
+            _event.emit(HomeEvent.NavigateToMyPage)
         }
     }
 
