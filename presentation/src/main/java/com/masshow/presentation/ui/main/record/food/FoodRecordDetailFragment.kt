@@ -26,6 +26,7 @@ class FoodRecordDetailFragment :
     private val viewModel: FoodRecordDetailViewModel by viewModels()
 
     private var editTextId = -1
+    private var count = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,7 +41,11 @@ class FoodRecordDetailFragment :
             viewModel.event.collect {
                 when (it) {
                     is FoodRecordDetailEvent.NavigateBack -> findNavController().navigateUp()
-                    is FoodRecordDetailEvent.AddEditFood -> addEditFood()
+                    is FoodRecordDetailEvent.AddEditFood -> {
+                        if (count == 3) showToastMessage("음식입력은 최대 3개입니다")
+                        else addEditFood()
+                    }
+
                     is FoodRecordDetailEvent.CompleteEditFood -> {
                         RecordFormData.sideDishes = it.list
                         findNavController().navigateUp()
@@ -59,6 +64,7 @@ class FoodRecordDetailFragment :
         val newPadding = resources.getDimensionPixelSize(R.dimen.edit_detail_padding)
         val oldPadding = resources.getDimensionPixelSize(R.dimen.edit_detail_focus_padding)
 
+        count++
         editTextId++
         viewModel.createFoodItem(editTextId)
 
@@ -88,6 +94,7 @@ class FoodRecordDetailFragment :
         }
 
         deleteBtn.setOnClickListener {
+            count--
             binding.layoutEditFood.removeView(newEditFood)
             viewModel.deleteFoodItem(editTextId)
         }
