@@ -240,14 +240,18 @@
             app:layout_constraintEnd_toStartOf="@id/tv_awesome"
             app:layout_constraintTop_toTopOf="@id/tv_awesome" />
 
-        <View
+        <com.john.waveview.WaveView
             android:id="@+id/swipe_view"
             android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="#4DFFE3D4"
+            android:layout_height="100dp"
+            app:above_wave_color="#4DFFE3D4"
+            app:blow_wave_color="#4DFFE3D4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:wave_height="large"
+            app:wave_hz="normal"
+            app:wave_length="middle" />
 
         <View
             android:id="@+id/view_swipable"
