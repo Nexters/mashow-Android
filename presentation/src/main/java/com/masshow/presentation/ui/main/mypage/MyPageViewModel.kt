@@ -2,6 +2,8 @@ package com.masshow.presentation.ui.main.mypage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.masshow.data.model.BaseState
+import com.masshow.data.model.request.UserSimpleInfoQuery
 import com.masshow.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -33,7 +35,24 @@ class MyPageViewModel @Inject constructor(
     }
 
     fun withdrawal() {
+        viewModelScope.launch {
+            authRepository.getUserId()?.let { id ->
+                authRepository.getNick()?.let { nick ->
+                    authRepository.withdrawal(UserSimpleInfoQuery(id, nick)).let {
+                        when (it) {
+                            is BaseState.Success -> {
+                                _event.emit(MyPageEvent.ShowToastMessage("회원 탈퇴 성공"))
+                                _event.emit(MyPageEvent.NavigateToLogin)
+                            }
 
+                            is BaseState.Error -> {
+                                _event.emit(MyPageEvent.ShowToastMessage(it.message))
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     fun navigateToBack() {

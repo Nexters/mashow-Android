@@ -11,6 +11,7 @@ import com.masshow.data.Constants
 import com.masshow.data.model.BaseState
 import com.masshow.data.model.request.LoginRequest
 import com.masshow.data.model.request.SignupRequest
+import com.masshow.data.model.request.UserSimpleInfoQuery
 import com.masshow.data.model.response.LoginResponse
 import com.masshow.data.model.runRemote
 import com.masshow.data.remote.AuthApi
@@ -36,6 +37,10 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun signup(body: SignupRequest): BaseState<LoginResponse?> = runRemote {
         api.signup(body)
+    }
+
+    override suspend fun withdrawal(query: UserSimpleInfoQuery): BaseState<Unit?> = runRemote {
+        api.withdrawal(query)
     }
 
     override suspend fun getAccessToken(): String? {
@@ -111,7 +116,7 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun clear() {
-        dataStore.edit{ prefs ->
+        dataStore.edit { prefs ->
             prefs.clear()
         }
     }

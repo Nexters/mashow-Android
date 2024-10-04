@@ -3,6 +3,7 @@ package com.masshow.data.repository
 import com.masshow.data.model.BaseState
 import com.masshow.data.model.request.LoginRequest
 import com.masshow.data.model.request.SignupRequest
+import com.masshow.data.model.request.UserSimpleInfoQuery
 import com.masshow.data.model.response.LoginResponse
 
 interface AuthRepository {
@@ -14,6 +15,10 @@ interface AuthRepository {
     suspend fun signup(
         body: SignupRequest
     ): BaseState<LoginResponse?>
+
+    suspend fun withdrawal(
+        query: UserSimpleInfoQuery
+    ): BaseState<Unit?>
 
     suspend fun getAccessToken(): String?
     suspend fun getRefreshToken(): String?
