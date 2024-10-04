@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_homeFragment_to_showAlcoholRecordFragment"
             app:destination="@id/showAlcoholRecordFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/memoFragment"
@@ -109,4 +112,8 @@
     <argument
         android:name="alcohol"
         app:argType="com.masshow.presentation.util.Alcohol" />
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.masshow.presentation.ui.main.mypage.MyPageFragment"
+        android:label="MyPageFragment" />
 </navigation>
