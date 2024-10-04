@@ -1,10 +1,13 @@
 package com.masshow.presentation.ui.main.record.estimate
 
+import android.animation.Animator
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup.LayoutParams
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -23,6 +26,8 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
     private val viewModel: EstimateViewModel by viewModels()
 
     private var initialY = 0f
+    private var swipingAction = SwipingAction.NO_SWIPE
+    private var curRating = 0
     private var initialHeight = 0
 
 
@@ -59,61 +64,121 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
         binding.viewSwipable.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    initialY = event.rawY
-                    initialHeight = binding.swipeView.height
+                    initialY = event.y
                     true
                 }
 
                 MotionEvent.ACTION_MOVE -> {
+                    val deltaY = event.y - initialY
 
-                    binding.swipeView.layoutParams =
-                        (binding.swipeView.layoutParams as LayoutParams).apply {
-                            height = (v.height - event.rawY).toInt() + 400
+                    swipingAction = if (deltaY > 0) SwipingAction.SWIPE_DOWN
+                    else SwipingAction.SWIPE_UP
+
+                    true
+                }
+
+                MotionEvent.ACTION_UP -> {
+
+                    when (swipingAction) {
+                        SwipingAction.SWIPE_UP -> {
+                            if (curRating < 5) curRating++
                         }
 
-                    val ummPoint = binding.root.height - binding.tvUmm.y.toInt()
-                    val notBadPoint = binding.root.height - binding.tvNotBad.y.toInt()
-                    val goodPoint = binding.root.height - binding.tvGood.y.toInt()
-                    val veryGoodPoint = binding.root.height - binding.tvVeryGood.y.toInt()
-                    val awesomePoint = binding.root.height - binding.tvAwesome.y.toInt()
+                        SwipingAction.SWIPE_DOWN -> {
+                            if (curRating > 0) curRating--
+                        }
 
-                    val point = (v.height - event.rawY).toInt() + 400
+                        else -> {}
+                    }
 
-                    if (point in ummPoint..notBadPoint) {
+                    changeSwipeViewHeight()
+                    swipingAction = SwipingAction.NO_SWIPE
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun changeSwipeViewHeight() {
+        val ummPoint = binding.root.height - binding.tvUmm.y.toInt()
+        val notBadPoint = binding.root.height - binding.tvNotBad.y.toInt()
+        val goodPoint = binding.root.height - binding.tvGood.y.toInt()
+        val veryGoodPoint = binding.root.height - binding.tvVeryGood.y.toInt()
+        val awesomePoint = binding.root.height - binding.tvAwesome.y.toInt()
+
+        val currentHeight = binding.swipeView.height
+        val targetHeight = when (curRating) {
+            0 -> 0
+            1 -> ummPoint
+            2 -> notBadPoint
+            3 -> goodPoint
+            4 -> veryGoodPoint
+            5 -> awesomePoint
+            else -> 0
+        }
+
+        startViewHeightChangeAnimation(currentHeight, targetHeight)
+    }
+
+    private fun startViewHeightChangeAnimation(curHeight: Int, targetHeight: Int) {
+        val animator = ValueAnimator.ofInt(curHeight, targetHeight)
+        animator.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationEnd(animation: Animator) {
+                when (curRating) {
+                    0 -> {
+                        binding.ivUmm.visibility = View.INVISIBLE
+                        RecordFormData.rating = 3
+                    }
+
+                    1 -> {
                         binding.ivUmm.visibility = View.VISIBLE
                         binding.ivNotBad.visibility = View.INVISIBLE
                         RecordFormData.rating = 1
-                    } else if (point in notBadPoint..goodPoint) {
+                    }
+
+                    2 -> {
                         binding.ivUmm.visibility = View.INVISIBLE
                         binding.ivNotBad.visibility = View.VISIBLE
                         binding.ivGood.visibility = View.INVISIBLE
                         RecordFormData.rating = 2
-                    } else if (point in goodPoint..veryGoodPoint) {
+                    }
+
+                    3 -> {
                         binding.ivNotBad.visibility = View.INVISIBLE
                         binding.ivGood.visibility = View.VISIBLE
                         binding.ivVeryGood.visibility = View.INVISIBLE
                         RecordFormData.rating = 3
-                    } else if (point in veryGoodPoint..awesomePoint) {
+                    }
+
+                    4 -> {
                         binding.ivGood.visibility = View.INVISIBLE
                         binding.ivVeryGood.visibility = View.VISIBLE
                         binding.ivAwsome.visibility = View.INVISIBLE
-                        RecordFormData.rating = 4
-                    } else if (point >= awesomePoint) {
+                    }
+
+                    5 -> {
                         binding.ivVeryGood.visibility = View.INVISIBLE
                         binding.ivAwsome.visibility = View.VISIBLE
                         RecordFormData.rating = 5
-                    } else if (point < binding.root.height - binding.tvUmm.y.toInt()) {
-                        binding.ivUmm.visibility = View.INVISIBLE
                     }
-
-                    binding.swipeView.requestLayout()
-                    true
                 }
-
-                MotionEvent.ACTION_UP -> true
-                else -> false
             }
+
+            override fun onAnimationRepeat(animation: Animator) {}
+            override fun onAnimationStart(animation: Animator) {}
+            override fun onAnimationCancel(animation: Animator) {}
+        })
+
+        animator.duration = 150
+        animator.interpolator = AccelerateDecelerateInterpolator()
+        animator.addUpdateListener { animation ->
+            val animatedHeight = animation.animatedValue as Int
+            binding.swipeView.layoutParams.height = animatedHeight
+            binding.swipeView.requestLayout()
         }
+        animator.start()
     }
 
     private fun NavController.toFoodRecord() {
@@ -126,4 +191,10 @@ class EstimateFragment : BaseFragment<FragmentEstimateBinding>(R.layout.fragment
         navigate(action)
     }
 
+}
+
+enum class SwipingAction {
+    SWIPE_DOWN,
+    SWIPE_UP,
+    NO_SWIPE
 }
