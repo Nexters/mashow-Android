@@ -35,6 +35,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                     }
 
                     is MyPageEvent.ShowToastMessage -> showToastMessage(it.msg)
+
+                    is MyPageEvent.ShowLoading -> showLoading(requireContext())
+                    is MyPageEvent.DismissLoading -> dismissLoading()
                 }
             }
         }

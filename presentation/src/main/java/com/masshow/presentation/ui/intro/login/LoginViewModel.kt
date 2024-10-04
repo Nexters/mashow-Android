@@ -61,6 +61,7 @@ class LoginViewModel @Inject constructor(
                             // 신규회원
                             _event.emit(LoginEvent.NavigateToSignup(token, provider))
                         } else {
+                            _event.emit(LoginEvent.ShowToastMessage("로그인 성공"))
                             _event.emit(LoginEvent.NavigateToMain)
                         }
                     }

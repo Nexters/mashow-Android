@@ -16,6 +16,8 @@ sealed class MyPageEvent {
     data object NavigateToBack : MyPageEvent()
     data object NavigateToLogin : MyPageEvent()
     data class ShowToastMessage(val msg: String) : MyPageEvent()
+    data object ShowLoading : MyPageEvent()
+    data object DismissLoading : MyPageEvent()
 }
 
 @HiltViewModel
@@ -38,6 +40,7 @@ class MyPageViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.getUserId()?.let { id ->
                 authRepository.getNick()?.let { nick ->
+                    _event.emit(MyPageEvent.ShowLoading)
                     authRepository.withdrawal(UserSimpleInfoQuery(id, nick)).let {
                         when (it) {
                             is BaseState.Success -> {
@@ -49,6 +52,7 @@ class MyPageViewModel @Inject constructor(
                                 _event.emit(MyPageEvent.ShowToastMessage(it.message))
                             }
                         }
+                        _event.emit(MyPageEvent.DismissLoading)
                     }
                 }
             }

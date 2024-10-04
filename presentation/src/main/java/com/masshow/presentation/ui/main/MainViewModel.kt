@@ -57,7 +57,7 @@ class MainViewModel @Inject constructor(
                     }
 
                     is BaseState.Error -> {
-
+                        finishRecord.emit("기록하기 실패")
                     }
                 }
 

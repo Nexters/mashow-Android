@@ -20,13 +20,13 @@ import javax.inject.Inject
 
 sealed class SignUpEvent {
     data object NavigateToMain : SignUpEvent()
-    data class ShowToastMessage(val msg: String): SignUpEvent()
-    data object ShowLoading: SignUpEvent()
-    data object DismissLoading: SignUpEvent()
+    data class ShowToastMessage(val msg: String) : SignUpEvent()
+    data object ShowLoading : SignUpEvent()
+    data object DismissLoading : SignUpEvent()
 }
 
 data class SignUpUiState(
-    val warningState : Boolean = false
+    val warningState: Boolean = false
 )
 
 @HiltViewModel
@@ -56,7 +56,7 @@ class SignupViewModel @Inject constructor(
     private fun observeNick() {
         nickname.onEach {
             // 닉네임 검증 등등
-            if(it.matches("^[a-z0-9ㄱ-ㅣ가-힣]*\$".toRegex())){
+            if (it.matches("^[a-z0-9ㄱ-ㅣ가-힣]*\$".toRegex())) {
                 _uiState.update { state ->
                     state.copy(
                         warningState = false
@@ -84,11 +84,12 @@ class SignupViewModel @Inject constructor(
             ).let {
                 when (it) {
                     is BaseState.Success -> {
-                        it.data?.let{ data ->
+                        it.data?.let { data ->
                             repository.putAccessToken(data.accessToken)
                             repository.putUserId(data.userId)
                             repository.putNick(data.nickname)
                         }
+                        _event.emit(SignUpEvent.ShowToastMessage("회원가입 성공"))
                         _event.emit(SignUpEvent.NavigateToMain)
                     }
 
@@ -101,7 +102,7 @@ class SignupViewModel @Inject constructor(
         }
     }
 
-    fun deleteNick(){
+    fun deleteNick() {
         nickname.value = ""
     }
 
