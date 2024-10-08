@@ -36,12 +36,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                             R.color.lightgray
                         )
                     )
-                    binding.btnCardView.setTextColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.lightgray30
-                        )
-                    )
+//                    binding.btnCardView.setTextColor(
+//                        ContextCompat.getColor(
+//                            requireContext(),
+//                            R.color.lightgray30
+//                        )
+//                    )
                 } else {
                     binding.btnListView.setTextColor(
                         ContextCompat.getColor(
@@ -49,12 +49,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                             R.color.lightgray30
                         )
                     )
-                    binding.btnCardView.setTextColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.lightgray
-                        )
-                    )
+//                    binding.btnCardView.setTextColor(
+//                        ContextCompat.getColor(
+//                            requireContext(),
+//                            R.color.lightgray
+//                        )
+//                    )
                 }
             }
         }

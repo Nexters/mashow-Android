@@ -3,6 +3,7 @@ package com.masshow.presentation.ui.main.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.masshow.data.model.BaseState
+import com.masshow.data.repository.AuthRepository
 import com.masshow.data.repository.MainRepository
 import com.masshow.presentation.util.Alcohol
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +30,8 @@ sealed class HomeEvent {
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: MainRepository
+    private val repository: MainRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -39,6 +41,18 @@ class HomeViewModel @Inject constructor(
 
     private val _event = MutableSharedFlow<HomeEvent>()
     val event: SharedFlow<HomeEvent> = _event.asSharedFlow()
+
+    var nickName = MutableStateFlow("")
+
+    init {
+        getNick()
+    }
+
+    private fun getNick() {
+        viewModelScope.launch {
+            nickName.value = authRepository.getNick().toString()
+        }
+    }
 
     fun getExistRecord() {
         viewModelScope.launch {

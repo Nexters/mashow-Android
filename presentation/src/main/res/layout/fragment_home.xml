@@ -37,6 +37,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/blank_sans"
+            android:text="@{vm.nickName}"
             android:textColor="#B3FFFFFF"
             android:textSize="44dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,29 +65,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_nick" />
 
-        <TextView
-            android:id="@+id/btn_card_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="20dp"
-            android:background="@{vm.uiState.listView ? @drawable/rect_homebtn_off_50radius : @drawable/rect_homebtn_on_50radius}"
-            android:fontFamily="@font/pretendard_semi_bold"
-            android:onClick="@{() -> vm.selectCardView()}"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:text="Card view"
-            android:textColor="@color/lightgray30"
-            android:textSize="14dp"
-            app:layout_constraintEnd_toStartOf="@id/btn_list_view"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_show" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/btn_card_view"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="26dp"-->
+        <!--            android:layout_marginEnd="20dp"-->
+        <!--            android:background="@{vm.uiState.listView ? @drawable/rect_homebtn_off_50radius : @drawable/rect_homebtn_on_50radius}"-->
+        <!--            android:fontFamily="@font/pretendard_semi_bold"-->
+        <!--            android:onClick="@{() -> vm.selectCardView()}"-->
+        <!--            android:paddingHorizontal="16dp"-->
+        <!--            android:paddingVertical="8dp"-->
+        <!--            android:text="Card view"-->
+        <!--            android:textColor="@color/lightgray30"-->
+        <!--            android:textSize="14dp"-->
+        <!--            app:layout_constraintEnd_toStartOf="@id/btn_list_view"-->
+        <!--            app:layout_constraintHorizontal_chainStyle="packed"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tv_show" />-->
 
         <TextView
             android:id="@+id/btn_list_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
             android:background="@{vm.uiState.listView ? @drawable/rect_homebtn_on_50radius : @drawable/rect_homebtn_off_50radius}"
             android:fontFamily="@font/pretendard_semi_bold"
             android:onClick="@{() -> vm.selectListView()}"
@@ -96,8 +98,8 @@
             android:textColor="@color/lightgray"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_card_view"
-            app:layout_constraintTop_toTopOf="@id/btn_card_view" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_show" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide"
@@ -115,7 +117,7 @@
             app:layout_constraintBottom_toTopOf="@id/btn_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_card_view" />
+            app:layout_constraintTop_toBottomOf="@id/btn_list_view" />
 
         <LinearLayout
             android:id="@+id/layout_left_card"
@@ -130,7 +132,7 @@
             app:layout_constraintBottom_toTopOf="@id/btn_add"
             app:layout_constraintEnd_toEndOf="@id/guide"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_card_view">
+            app:layout_constraintTop_toBottomOf="@id/btn_list_view">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_soju"
@@ -219,7 +221,7 @@
             app:layout_constraintBottom_toTopOf="@id/btn_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guide"
-            app:layout_constraintTop_toBottomOf="@id/btn_card_view">
+            app:layout_constraintTop_toBottomOf="@id/btn_list_view">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_liquor"
