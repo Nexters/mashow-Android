@@ -19,15 +19,17 @@ fun getTodayDateWithDay(): String {
 }
 
 fun formatDate(input: String): String {
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
-    val dateTime = LocalDateTime.parse(input, formatter)
+    val (data, dum) = input.split(".")
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+    val dateTime = LocalDateTime.parse(data, formatter)
     val outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
     return dateTime.format(outputFormatter)
 }
 
 fun formatDateTime(input: String): String {
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
-    val dateTime = LocalDateTime.parse(input, formatter)
+    val (data, dum) = input.split(".")
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+    val dateTime = LocalDateTime.parse(data, formatter)
     val outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd hh:mm a")
     return dateTime.format(outputFormatter)
 }

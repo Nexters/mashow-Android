@@ -7,4 +7,5 @@ object Constants {
     const val NICK = "NICK"
     const val AUTHORIZATION = "authorization"
     const val BEARER = "Bearer"
+    const val LOGIN_TYPE = "LOGIN_TYPE"
 }

@@ -88,12 +88,17 @@ class SignupViewModel @Inject constructor(
                             repository.putAccessToken(data.accessToken)
                             repository.putUserId(data.userId)
                             repository.putNick(data.nickname)
+                            repository.putLoginType(authProvider)
                         }
                         _event.emit(SignUpEvent.ShowToastMessage("회원가입 성공"))
                         _event.emit(SignUpEvent.NavigateToMain)
                     }
 
                     is BaseState.Error -> {
+                        repository.deleteAccessToken()
+                        repository.deleteNick()
+                        repository.deleteUserId()
+                        repository.deleteLoginType()
                         _event.emit(SignUpEvent.ShowToastMessage(it.message))
                     }
                 }

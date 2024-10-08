@@ -1,10 +1,9 @@
 package com.masshow.data.repository
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.masshow.data.Constants
@@ -29,6 +28,7 @@ class AuthRepositoryImpl @Inject constructor(
         private val REFRESH_TOKEN_KEY = stringPreferencesKey(Constants.REFRESH_TOKEN)
         private val USER_ID = longPreferencesKey(Constants.USER_ID)
         private val NICK = stringPreferencesKey(Constants.NICK)
+        private val LOGIN_TYPE = stringPreferencesKey(Constants.LOGIN_TYPE)
     }
 
     override suspend fun login(body: LoginRequest): BaseState<LoginResponse?> = runRemote {
@@ -67,6 +67,12 @@ class AuthRepositoryImpl @Inject constructor(
         }.first()
     }
 
+    override suspend fun getLoginType(): String? {
+        return dataStore.data.map { prefs ->
+            prefs[LOGIN_TYPE]
+        }.first()
+    }
+
     override suspend fun putAccessToken(token: String) {
         dataStore.edit { prefs ->
             prefs[ACCESS_TOKEN_KEY] = token
@@ -91,6 +97,12 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun putLoginType(type: String) {
+        dataStore.edit { prefs ->
+            prefs[LOGIN_TYPE] = type
+        }
+    }
+
     override suspend fun deleteAccessToken() {
         dataStore.edit { prefs ->
             prefs.remove(ACCESS_TOKEN_KEY)
@@ -112,6 +124,12 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun deleteNick() {
         dataStore.edit { prefs ->
             prefs.remove(NICK)
+        }
+    }
+
+    override suspend fun deleteLoginType() {
+        dataStore.edit { prefs ->
+            prefs.remove(LOGIN_TYPE)
         }
     }
 

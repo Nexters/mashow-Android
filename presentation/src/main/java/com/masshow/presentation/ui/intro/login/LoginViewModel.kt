@@ -1,10 +1,12 @@
 package com.masshow.presentation.ui.intro.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.masshow.data.model.BaseState
 import com.masshow.data.model.request.LoginRequest
 import com.masshow.data.repository.AuthRepository
+import com.masshow.presentation.util.Constants.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -56,6 +58,7 @@ class LoginViewModel @Inject constructor(
                             repository.putAccessToken(data.accessToken)
                             repository.putUserId(data.userId)
                             repository.putNick(data.nickname)
+                            repository.putLoginType(provider)
                         }
                         if (it.code == 100) {
                             // 신규회원
@@ -70,6 +73,7 @@ class LoginViewModel @Inject constructor(
                         repository.deleteAccessToken()
                         repository.deleteNick()
                         repository.deleteUserId()
+                        repository.deleteLoginType()
                         _event.emit(LoginEvent.ShowToastMessage(it.message))
                     }
                 }
