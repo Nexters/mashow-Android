@@ -31,6 +31,7 @@ sealed class ShowAlcoholRecordDetailEvent {
     data class ShowToastMessage(val msg: String) : ShowAlcoholRecordDetailEvent()
     data object ShowLoading : ShowAlcoholRecordDetailEvent()
     data object DismissLoading : ShowAlcoholRecordDetailEvent()
+    data object NavigateToHome: ShowAlcoholRecordDetailEvent()
 }
 
 @HiltViewModel
@@ -105,7 +106,7 @@ class ShowAlcoholRecordDetailViewModel @Inject constructor(
                 when (it) {
                     is BaseState.Success -> {
                         _event.emit(ShowAlcoholRecordDetailEvent.ShowToastMessage("기록 삭제 성공"))
-                        _event.emit(ShowAlcoholRecordDetailEvent.NavigateToBack)
+                        _event.emit(ShowAlcoholRecordDetailEvent.NavigateToHome)
                     }
 
                     is BaseState.Error -> {

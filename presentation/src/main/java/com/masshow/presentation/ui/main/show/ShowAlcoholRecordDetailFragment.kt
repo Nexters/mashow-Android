@@ -3,6 +3,7 @@ package com.masshow.presentation.ui.main.show
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.masshow.presentation.R
@@ -36,6 +37,7 @@ class ShowAlcoholRecordDetailFragment :
                     is ShowAlcoholRecordDetailEvent.ShowToastMessage -> showToastMessage(it.msg)
                     is ShowAlcoholRecordDetailEvent.ShowLoading -> showLoading(requireContext())
                     is ShowAlcoholRecordDetailEvent.DismissLoading -> dismissLoading()
+                    is ShowAlcoholRecordDetailEvent.NavigateToHome -> findNavController().toHome()
                 }
             }
         }
@@ -68,6 +70,12 @@ class ShowAlcoholRecordDetailFragment :
                 binding.ivBigCard.setImageResource(Alcohol.nameToEnum(it).cardResource)
             }
         }
+    }
+
+    private fun NavController.toHome() {
+        val action =
+            ShowAlcoholRecordDetailFragmentDirections.actionShowAlcoholRecordDetailFragmentToHomeFragment()
+        navigate(action)
     }
 
 }
