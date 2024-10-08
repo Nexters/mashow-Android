@@ -53,10 +53,12 @@ class MainViewModel @Inject constructor(
             ).let {
                 when (it) {
                     is BaseState.Success -> {
+                        RecordFormData.clear()
                         finishRecord.emit("기록을 완료했습니다")
                     }
 
                     is BaseState.Error -> {
+                        RecordFormData.clear()
                         finishRecord.emit("기록하기 실패")
                     }
                 }

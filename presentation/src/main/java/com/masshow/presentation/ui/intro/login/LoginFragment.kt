@@ -106,8 +106,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     fun googleLogin() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestServerAuthCode(getString(R.string.default_web_client_id))
+            .requestIdToken("965624687141-imldabqm71g2e5j5f9buanjo4jaun1ie.apps.googleusercontent.com")
+            .requestServerAuthCode("965624687141-imldabqm71g2e5j5f9buanjo4jaun1ie.apps.googleusercontent.com")
             .requestEmail()
             .build()
         val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
