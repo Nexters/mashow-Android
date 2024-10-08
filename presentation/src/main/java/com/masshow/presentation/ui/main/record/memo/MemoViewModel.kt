@@ -2,6 +2,7 @@ package com.masshow.presentation.ui.main.record.memo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.masshow.presentation.ui.main.record.RecordFormData
 import com.masshow.presentation.util.getTodayDateWithDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -29,6 +30,7 @@ class MemoViewModel @Inject constructor(
 
     fun finishRecord() {
         viewModelScope.launch {
+            RecordFormData.memo = memo.value
             _events.emit(MemoEvents.FinishRecord)
         }
     }
