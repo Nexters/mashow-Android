@@ -54,7 +54,7 @@ class FoodRecordFragment : BaseFragment<FragmentFoodRecordBinding>(R.layout.frag
                     is FoodRecordEvent.NavigateToFoodRecordDetail -> findNavController().toFoodRecordDetail()
                     is FoodRecordEvent.NavigateToMemo -> findNavController().toMemo()
                     is FoodRecordEvent.NavigateToHome -> findNavController().toHome()
-                    is FoodRecordEvent.FinishRecord -> parentViewModel.finishRecord
+                    is FoodRecordEvent.FinishRecord -> parentViewModel.record()
                     is FoodRecordEvent.NavigateToBack -> findNavController().navigateUp()
                 }
             }
