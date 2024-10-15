@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/foodRecordFragment"
-        android:name="com.masshow.presentation.ui.main.record.food.FoodRecordFragment"
+        android:name="com.mashow.presentation.ui.main.record.food.FoodRecordFragment"
         android:label="FoodRecordFragment">
         <action
             android:id="@+id/action_foodRecordFragment_to_foodRecordDetailFragment"
@@ -22,11 +22,11 @@
     </fragment>
     <fragment
         android:id="@+id/foodRecordDetailFragment"
-        android:name="com.masshow.presentation.ui.main.record.food.FoodRecordDetailFragment"
+        android:name="com.mashow.presentation.ui.main.record.food.FoodRecordDetailFragment"
         android:label="FoodRecordDetailFragment" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.masshow.presentation.ui.main.home.HomeFragment"
+        android:name="com.mashow.presentation.ui.main.home.HomeFragment"
         android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_alcoholSelectFragment"
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/memoFragment"
-        android:name="com.masshow.presentation.ui.main.record.memo.MemoFragment"
+        android:name="com.mashow.presentation.ui.main.record.memo.MemoFragment"
         android:label="MemoFragment" >
         <action
             android:id="@+id/action_memoFragment_to_homeFragment"
@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/alcoholDetailFragment"
-        android:name="com.masshow.presentation.ui.main.record.alchol.AlcoholDetailFragment"
+        android:name="com.mashow.presentation.ui.main.record.alchol.AlcoholDetailFragment"
         android:label="AlcoholDetailFragment">
 
         <action
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/alcoholSelectFragment"
-        android:name="com.masshow.presentation.ui.main.record.alchol.AlcoholSelectFragment"
+        android:name="com.mashow.presentation.ui.main.record.alchol.AlcoholSelectFragment"
         android:label="AlcoholSelectFragment">
         <action
             android:id="@+id/action_alcoholSelectFragment_to_alcoholDetailFragment"
@@ -72,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/estimateFragment"
-        android:name="com.masshow.presentation.ui.main.record.estimate.EstimateFragment"
+        android:name="com.mashow.presentation.ui.main.record.estimate.EstimateFragment"
         android:label="EstimateFragment">
         <action
             android:id="@+id/action_estimateFragment_to_foodRecordFragment"
@@ -85,11 +85,11 @@
     </fragment>
     <fragment
         android:id="@+id/showAlcoholRecordFragment"
-        android:name="com.masshow.presentation.ui.main.show.ShowAlcoholRecordFragment"
+        android:name="com.mashow.presentation.ui.main.show.ShowAlcoholRecordFragment"
         android:label="ShowAlcoholRecordFragment" >
 
         <argument
-            app:argType="com.masshow.presentation.util.Alcohol"
+            app:argType="com.mashow.presentation.util.Alcohol"
             android:name="alcohol"/>
 
         <action
@@ -101,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/showAlcoholRecordDetailFragment"
-        android:name="com.masshow.presentation.ui.main.show.ShowAlcoholRecordDetailFragment"
+        android:name="com.mashow.presentation.ui.main.show.ShowAlcoholRecordDetailFragment"
         android:label="ShowAlcoholRecordDetailFragment" >
 
         <argument
@@ -114,9 +114,9 @@
     </fragment>
     <argument
         android:name="alcohol"
-        app:argType="com.masshow.presentation.util.Alcohol" />
+        app:argType="com.mashow.presentation.util.Alcohol" />
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="com.masshow.presentation.ui.main.mypage.MyPageFragment"
+        android:name="com.mashow.presentation.ui.main.mypage.MyPageFragment"
         android:label="MyPageFragment" />
 </navigation>

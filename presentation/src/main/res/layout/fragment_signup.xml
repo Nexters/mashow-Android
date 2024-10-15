@@ -10,7 +10,7 @@
 
         <variable
             name="vm"
-            type="com.masshow.presentation.ui.intro.signup.SignupViewModel" />
+            type="com.mashow.presentation.ui.intro.signup.SignupViewModel" />
 
     </data>
 

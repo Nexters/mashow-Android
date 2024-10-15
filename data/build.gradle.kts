@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.masshow.data"
+    namespace = "com.mashow.data"
     compileSdk = 34
 
     defaultConfig {

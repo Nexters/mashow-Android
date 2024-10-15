@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.masshow.presentation.ui.main.show.model.UiRecordItem" />
+            type="com.mashow.presentation.ui.main.show.model.UiRecordItem" />
 
     </data>
 

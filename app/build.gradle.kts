@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.masshow.alchol"
+    namespace = "com.mashow.alchol"
     compileSdk = 34
 
     Properties().apply {
@@ -18,7 +18,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.masshow.alchol"
+        applicationId = "com.mashow.alchol"
         minSdk = 28
         targetSdk = 34
         versionCode = 6

@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.masshow.presentation.ui.main.record.food.FoodRecordDetailViewModel" />
+            type="com.mashow.presentation.ui.main.record.food.FoodRecordDetailViewModel" />
 
     </data>
 

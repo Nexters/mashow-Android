@@ -5,13 +5,13 @@
 
     <data>
 
-        <import type="com.masshow.presentation.util.Alcohol" />
+        <import type="com.mashow.presentation.util.Alcohol" />
 
         <import type="android.view.View" />
 
         <variable
             name="vm"
-            type="com.masshow.presentation.ui.main.home.HomeViewModel" />
+            type="com.mashow.presentation.ui.main.home.HomeViewModel" />
 
     </data>
 

@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.masshow.presentation.ui.main.show.ShowAlcoholRecordViewModel" />
+            type="com.mashow.presentation.ui.main.show.ShowAlcoholRecordViewModel" />
 
     </data>
 
